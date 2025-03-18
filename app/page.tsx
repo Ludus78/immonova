@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 export default function Home() {
-  const [choix, setChoix] = useState(null);
+  const [choix, setChoix] = useState<null | 'achat' | 'vente'>(null);
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#1a1a2e] to-[#16213e] text-white">
