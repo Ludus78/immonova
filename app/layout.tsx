@@ -13,8 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
-      <body className="antialiased">
+    <html lang="fr" className="scroll-smooth">
+      <body className="antialiased overflow-y-auto">
         <SharedLayout>
           {children}
         </SharedLayout>

@@ -9,9 +9,9 @@ interface SharedLayoutProps {
 
 export default function SharedLayout({ children }: SharedLayoutProps) {
   return (
-    <main className="min-h-screen bg-[#eef6ff] text-black">
+    <div className="flex flex-col min-h-screen overflow-y-auto bg-[#eef6ff] text-black">
       {/* Header/Navigation */}
-      <header className="bg-white py-4 px-6 shadow-sm">
+      <header className="sticky top-0 z-50 bg-white py-4 px-6 shadow-sm">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex flex-col">
             <Link href="/" className="hover:opacity-80">
@@ -35,62 +35,64 @@ export default function SharedLayout({ children }: SharedLayoutProps) {
       </header>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto p-6">
-        {children}
-      </div>
+      <main className="flex-grow">
+        <div className="max-w-7xl mx-auto p-6">
+          {children}
+        </div>
       
-      {/* Search Section - Shown on all pages */}
-      <div className="max-w-7xl mx-auto px-6 pb-16">
-        <div className="bg-white rounded-xl shadow-lg p-8 flex flex-wrap md:flex-nowrap gap-8 items-center">
-          <div className="w-full md:w-auto">
-            <div className="flex items-center gap-2 bg-indigo-800 rounded-lg p-4 text-white">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-              </svg>
-              <span className="text-xl font-medium">Recherche</span>
-            </div>
-          </div>
-          
-          <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="flex items-start gap-4">
-              <div className="h-10 w-10 rounded-full bg-[#e1fae8] flex items-center justify-center text-[#42b983]">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+        {/* Search Section - Shown on all pages */}
+        <div className="max-w-7xl mx-auto px-6 pb-16">
+          <div className="bg-white rounded-xl shadow-lg p-8 flex flex-wrap md:flex-nowrap gap-8 items-center">
+            <div className="w-full md:w-auto">
+              <div className="flex items-center gap-2 bg-indigo-800 rounded-lg p-4 text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                 </svg>
-              </div>
-              <div>
-                <p className="text-gray-500">Localisation</p>
-                <p className="font-medium">Monaco, Italie</p>
+                <span className="text-xl font-medium">Recherche</span>
               </div>
             </div>
             
-            <div className="flex items-start gap-4">
-              <div className="h-10 w-10 rounded-full bg-[#fff4e8] flex items-center justify-center text-[#ffc47d]">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                </svg>
+            <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="flex items-start gap-4">
+                <div className="h-10 w-10 rounded-full bg-[#e1fae8] flex items-center justify-center text-[#42b983]">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-gray-500">Localisation</p>
+                  <p className="font-medium">Alès, France</p>
+                </div>
               </div>
-              <div>
-                <p className="text-gray-500">Prix moyen</p>
-                <p className="font-medium">300€ - 650€</p>
+              
+              <div className="flex items-start gap-4">
+                <div className="h-10 w-10 rounded-full bg-[#fff4e8] flex items-center justify-center text-[#ffc47d]">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-gray-500">Prix moyen</p>
+                  <p className="font-medium">300€ - 650€</p>
+                </div>
               </div>
-            </div>
-            
-            <div className="flex items-start gap-4">
-              <div className="h-10 w-10 rounded-full bg-[#e8f1ff] flex items-center justify-center text-[#7da9ff]">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z" />
-                </svg>
-              </div>
-              <div>
-                <p className="text-gray-500">Type de bien</p>
-                <p className="font-medium">Duplex</p>
+              
+              <div className="flex items-start gap-4">
+                <div className="h-10 w-10 rounded-full bg-[#e8f1ff] flex items-center justify-center text-[#7da9ff]">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-gray-500">Type de bien</p>
+                  <p className="font-medium">Studio</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </main>
       
       {/* Footer */}
       <footer className="bg-white border-t border-gray-200 py-8 px-6">
@@ -146,6 +148,6 @@ export default function SharedLayout({ children }: SharedLayoutProps) {
           © 2024 ImmoNova. Tous droits réservés.
         </div>
       </footer>
-    </main>
+    </div>
   );
 } 
