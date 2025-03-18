@@ -192,7 +192,13 @@ export default function Home() {
   );
 }
 
-function MenuButton({ title, desc, href, icon, color }) {
+function MenuButton({ title, desc, href, icon, color }: { 
+  title: string; 
+  desc?: string; 
+  href: string; 
+  icon: React.ReactNode; 
+  color: string;
+}) {
   return (
     <Link 
       href={href}
