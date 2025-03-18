@@ -22,7 +22,10 @@ export default function Home() {
               </p>
               
               <div className="grid grid-cols-1 gap-6 mb-12">
-                <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-500 hover:shadow-lg transition-all">
+                <button 
+                  onClick={() => setChoix('achat')}
+                  className="bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-500 hover:shadow-lg transition-all text-left w-full cursor-pointer"
+                >
                   <div className="flex items-center gap-4 mb-3">
                     <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-2xl">
                       🏠
@@ -30,18 +33,18 @@ export default function Home() {
                     <h3 className="text-xl font-semibold">Acheter un bien</h3>
                   </div>
                   <p className="text-gray-600 mb-4">Trouvez le logement idéal qui répond à vos besoins et vos envies</p>
-                  <button 
-                    onClick={() => setChoix('achat')}
-                    className="flex items-center gap-2 text-blue-600 font-medium"
-                  >
+                  <div className="flex items-center gap-2 text-blue-600 font-medium">
                     Explorer
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                     </svg>
-                  </button>
-                </div>
+                  </div>
+                </button>
                 
-                <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500 hover:shadow-lg transition-all">
+                <button 
+                  onClick={() => setChoix('vente')}
+                  className="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500 hover:shadow-lg transition-all text-left w-full cursor-pointer"
+                >
                   <div className="flex items-center gap-4 mb-3">
                     <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-2xl">
                       💰
@@ -49,16 +52,13 @@ export default function Home() {
                     <h3 className="text-xl font-semibold">Vendre un bien</h3>
                   </div>
                   <p className="text-gray-600 mb-4">Valorisez et commercialisez votre propriété au meilleur prix</p>
-                  <button 
-                    onClick={() => setChoix('vente')}
-                    className="flex items-center gap-2 text-green-600 font-medium"
-                  >
+                  <div className="flex items-center gap-2 text-green-600 font-medium">
                     Explorer
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                     </svg>
-                  </button>
-                </div>
+                  </div>
+                </button>
               </div>
               
               {/* Stats */}
