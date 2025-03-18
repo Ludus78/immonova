@@ -60,22 +60,6 @@ export default function Home() {
                   </div>
                 </button>
               </div>
-              
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-8">
-                <div>
-                  <p className="text-2xl font-bold text-indigo-800">5000+</p>
-                  <p className="text-gray-600">Happy customer</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-[#42b983]">6000+</p>
-                  <p className="text-gray-600">Property sales</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-pink-500">200+</p>
-                  <p className="text-gray-600">Award Winning</p>
-                </div>
-              </div>
             </div>
             
             {/* Right Column - Image */}
@@ -83,48 +67,7 @@ export default function Home() {
               {/* Main house image with circular border */}
               <div className="relative h-[500px] w-full rounded-full overflow-hidden">
                 <div className="absolute inset-0 border-[20px] border-[#e1fae8] rounded-full z-10"></div>
-                <div className="absolute inset-0 bg-[url('/hero-image.jpg')] bg-cover bg-center rounded-full"></div>
-                
-                {/* Pro House card */}
-                <div className="absolute top-12 right-0 bg-white p-3 rounded-lg shadow-xl z-20">
-                  <div className="flex items-center gap-2">
-                    <div className="h-8 w-8 bg-[#e1fae8] rounded-lg flex items-center justify-center text-[#42b983]">
-                      🏠
-                    </div>
-                    <div>
-                      <p className="font-medium text-sm">Pro House</p>
-                      <p className="text-gray-500 text-xs">San francisco,USA</p>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Progress indicators */}
-                <div className="absolute top-1/4 left-0 bg-white p-3 rounded-lg shadow-xl z-20 flex items-center gap-2">
-                  <div className="text-green-500">✓</div>
-                  <div className="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                    <div className="w-3/4 h-full bg-indigo-600"></div>
-                  </div>
-                </div>
-                
-                <div className="absolute bottom-1/4 left-0 bg-white p-3 rounded-lg shadow-xl z-20 flex items-center gap-2">
-                  <div className="text-green-500">✓</div>
-                  <div className="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                    <div className="w-1/2 h-full bg-indigo-600"></div>
-                  </div>
-                </div>
-                
-                {/* Play reel button */}
-                <div className="absolute -bottom-6 right-0 z-20">
-                  <div className="relative">
-                    <div className="h-24 w-24 rounded-full border-2 border-indigo-700 flex items-center justify-center bg-white text-indigo-800">
-                      <div className="flex flex-col items-center">
-                        <p className="text-xs">Play the</p>
-                        <p className="font-medium">reel</p>
-                      </div>
-                    </div>
-                    <div className="absolute inset-0 rounded-full border-2 border-indigo-200 animate-ping"></div>
-                  </div>
-                </div>
+                <div className="absolute inset-0 bg-cover bg-center rounded-full" style={{ backgroundImage: 'url("/img/famille-heureuse.jpg")' }}></div>
               </div>
             </div>
           </div>
@@ -142,49 +85,11 @@ export default function Home() {
               </button>
               <h2 className="text-2xl font-bold ml-4 text-gray-800">Services pour les acheteurs</h2>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              <MenuButton
-                title="Diagnostic"
-                desc="Analysez l'état des biens"
-                href="/diagnostic"
-                icon="📊"
-                color="#3498db"
-              />
-              <MenuButton
-                title="Professionnels"
-                desc="Agents et notaires recommandés"
-                href="/professionnels"
-                icon="👥"
-                color="#9b59b6"
-              />
-              <MenuButton
-                title="Espaces Verts"
-                desc="Parcs et loisirs à proximité"
-                href="/espaces-verts"
-                icon="🌳"
-                color="#27ae60"
-              />
-              <MenuButton
-                title="Écoles"
-                desc="Établissements scolaires"
-                href="/ecoles"
-                icon="🏫"
-                color="#e84393"
-              />
-              <MenuButton
-                title="Frais Annexes"
-                desc="Calculez votre budget total"
-                href="/frais-annexes"
-                icon="🧮"
-                color="#e67e22"
-              />
-              <MenuButton
-                title="Visites Virtuelles"
-                desc="Explorez sans vous déplacer"
-                href="/visites"
-                icon="🔍"
-                color="#2c3e50"
-              />
+            <div className="p-8 text-center">
+              <p className="text-xl text-gray-600">
+                Vous avez choisi d'acheter un bien immobilier.<br />
+                Notre équipe est à votre disposition pour vous accompagner dans votre projet.
+              </p>
             </div>
           </div>
         )}
@@ -201,49 +106,11 @@ export default function Home() {
               </button>
               <h2 className="text-2xl font-bold ml-4 text-gray-800">Services pour les vendeurs</h2>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              <MenuButton
-                title="Estimation"
-                desc="Évaluez la valeur de votre bien"
-                href="/estimation"
-                icon="💰"
-                color="#2ecc71"
-              />
-              <MenuButton
-                title="Diagnostic"
-                desc="Préparez vos documents légaux"
-                href="/diagnostic"
-                icon="📊"
-                color="#3498db"
-              />
-              <MenuButton
-                title="Professionnels"
-                desc="Agents et photographes"
-                href="/professionnels"
-                icon="👥"
-                color="#9b59b6"
-              />
-              <MenuButton
-                title="Mise en valeur"
-                desc="Optimisez l'attractivité"
-                href="/amelioration"
-                icon="✨"
-                color="#f1c40f"
-              />
-              <MenuButton
-                title="Frais Annexes"
-                desc="Calculez votre gain net"
-                href="/frais-annexes"
-                icon="🧮"
-                color="#e67e22"
-              />
-              <MenuButton
-                title="Documents"
-                desc="Gérez vos papiers administratifs"
-                href="/documents"
-                icon="📋"
-                color="#16a085"
-              />
+            <div className="p-8 text-center">
+              <p className="text-xl text-gray-600">
+                Vous avez choisi de vendre un bien immobilier.<br />
+                Notre équipe est à votre disposition pour vous accompagner dans votre projet.
+              </p>
             </div>
           </div>
         )}

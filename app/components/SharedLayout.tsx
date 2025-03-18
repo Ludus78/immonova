@@ -22,10 +22,6 @@ export default function SharedLayout({ children }: SharedLayoutProps) {
           
           <nav className="hidden md:flex items-center gap-8">
             <Link href="/" className="hover:text-indigo-700">Accueil</Link>
-            <Link href="/estimation" className="hover:text-indigo-700">Estimation</Link>
-            <Link href="/diagnostics" className="hover:text-indigo-700">Diagnostics</Link>
-            <Link href="/professionnels" className="hover:text-indigo-700">Professionnels</Link>
-            <Link href="/documents" className="hover:text-indigo-700">Documents</Link>
           </nav>
           
           <button className="border-2 border-indigo-700 text-indigo-700 px-6 py-2 rounded-full font-medium hover:bg-indigo-50 transition-all duration-300">
