@@ -267,7 +267,7 @@ export default function AchatPage() {
                 <tbody>
                   <tr>
                     <td className="border p-2">DPE</td>
-                    <td className="border p-2">Tous les logements >50m²</td>
+                    <td className="border p-2">Tous les logements &gt;50m²</td>
                     <td className="border p-2">10 ans</td>
                   </tr>
                   <tr>
@@ -287,12 +287,12 @@ export default function AchatPage() {
                   </tr>
                   <tr>
                     <td className="border p-2">Électricité</td>
-                    <td className="border p-2">Installation > 15 ans</td>
+                    <td className="border p-2">Installation &gt; 15 ans</td>
                     <td className="border p-2">3 ans</td>
                   </tr>
                   <tr>
                     <td className="border p-2">Gaz</td>
-                    <td className="border p-2">Installation > 15 ans</td>
+                    <td className="border p-2">Installation &gt; 15 ans</td>
                     <td className="border p-2">3 ans</td>
                   </tr>
                   <tr>
