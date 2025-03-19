@@ -23,7 +23,7 @@ export default function Home() {
               
               <div className="grid grid-cols-1 gap-6 mb-12">
                 <button 
-                  onClick={() => setChoix('achat')}
+                  onClick={() => window.location.href = '/achat'}
                   className="bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-500 hover:shadow-lg transition-all text-left w-full cursor-pointer"
                 >
                   <div className="flex items-center gap-4 mb-3">

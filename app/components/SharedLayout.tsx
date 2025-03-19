@@ -120,15 +120,12 @@ export default function SharedLayout({ children }: SharedLayoutProps) {
               <li><Link href="/estimation" className="text-gray-600 hover:text-indigo-700">Estimation</Link></li>
               <li><Link href="/diagnostics" className="text-gray-600 hover:text-indigo-700">Diagnostics</Link></li>
               <li><Link href="/mise-en-valeur" className="text-gray-600 hover:text-indigo-700">Mise en valeur</Link></li>
-              <li><Link href="/professionnels" className="text-gray-600 hover:text-indigo-700">Professionnels</Link></li>
             </ul>
           </div>
           <div>
             <h4 className="font-semibold mb-4 text-gray-800">Outils</h4>
             <ul className="space-y-2">
               <li><Link href="/frais-annexes" className="text-gray-600 hover:text-indigo-700">Frais annexes</Link></li>
-              <li><Link href="/ecoles" className="text-gray-600 hover:text-indigo-700">Écoles à proximité</Link></li>
-              <li><Link href="/espaces-verts" className="text-gray-600 hover:text-indigo-700">Espaces verts</Link></li>
               <li><Link href="/documents" className="text-gray-600 hover:text-indigo-700">Documents</Link></li>
             </ul>
           </div>
