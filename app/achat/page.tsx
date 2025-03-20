@@ -24,7 +24,7 @@ export default function AchatPage() {
       color: 'bg-red-100 text-red-600',
       content: (
         <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-gray-800">Comparatif détaillé : Neuf vs Ancien</h2>
+          <h2 className="text-lg text-gray-800">Opter pour un bien neuf permet de bénéficier d’un logement aux normes actuelles, avec une meilleure performance énergétique et des frais de notaire réduits. De plus, certains dispositifs fiscaux comme le PTZ (Prêt à Taux Zéro) peuvent faciliter l’achat. En revanche, les prix sont plus élevés et les délais de livraison peuvent s’étendre sur plusieurs mois. À l’inverse, l’achat dans l’ancien offr un prix au mètre carré plus attractif et un charme architectural, avec la possibilité d’emménager rapidement. Toutefois, il peut impliquer des travaux de rénovation et une isolation moins performante.(base de calcul : 100k €)</h2>
           
           <div className="grid md:grid-cols-2 gap-6">
             {/* Tableau Ancien */}
@@ -33,7 +33,7 @@ export default function AchatPage() {
               <div className="space-y-3">
                 <div className="flex justify-between border-b pb-2">
                   <span>Prix d'achat</span>
-                  <span className="font-medium">Variable selon l'état</span>
+                  <span className="font-medium">100 000 €</span>
                 </div>
                 <div className="flex justify-between border-b pb-2">
                   <span>Frais de notaire</span>
@@ -41,15 +41,19 @@ export default function AchatPage() {
                 </div>
                 <div className="flex justify-between border-b pb-2">
                   <span>Travaux potentiels</span>
-                  <span className="font-medium">À prévoir</span>
+                  <span className="font-medium">En moyenne 15 000€</span>
                 </div>
                 <div className="flex justify-between border-b pb-2">
                   <span>DPE</span>
-                  <span className="font-medium">Variable</span>
+                  <span className="font-medium">de A à G</span>
                 </div>
                 <div className="flex justify-between border-b pb-2">
                   <span>Charges de copropriété</span>
-                  <span className="font-medium">Variables</span>
+                  <span className="font-medium">En moyenne 250€/mois</span>
+                </div>
+                <div className="flex justify-between border-b pb-2">
+                  <span>Total</span>
+                  <span className="font-medium">123 000 €</span>
                 </div>
               </div>
             </div>
@@ -60,7 +64,7 @@ export default function AchatPage() {
               <div className="space-y-3">
                 <div className="flex justify-between border-b pb-2">
                   <span>Prix d'achat</span>
-                  <span className="font-medium">Prix fixe</span>
+                  <span className="font-medium">100 000 €</span>
                 </div>
                 <div className="flex justify-between border-b pb-2">
                   <span>Frais de notaire</span>
@@ -72,11 +76,15 @@ export default function AchatPage() {
                 </div>
                 <div className="flex justify-between border-b pb-2">
                   <span>DPE</span>
-                  <span className="font-medium">A</span>
+                  <span className="font-medium">A ou B</span>
                 </div>
                 <div className="flex justify-between border-b pb-2">
                   <span>Charges de copropriété</span>
-                  <span className="font-medium">Modérées</span>
+                  <span className="font-medium">En moyenne 100€/mois</span>
+                </div>
+                <div className="flex justify-between border-b pb-2">
+                  <span>Total</span>
+                  <span className="font-medium">103 000 €</span>
                 </div>
               </div>
             </div>
@@ -84,7 +92,7 @@ export default function AchatPage() {
 
           <div className="mt-8 text-center">
             <a 
-              href="https://www.service-public.fr/particuliers/vosdroits/F32112" 
+              href="https://www.service-public.fr/particuliers/vosdroits/F10871" 
               target="_blank" 
               rel="noopener noreferrer"
               className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
