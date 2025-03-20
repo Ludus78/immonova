@@ -378,39 +378,38 @@ export default function AchatPage() {
       </div>
 
       {/* Section Premium */}
-      <div className="mt-16 bg-gradient-to-r from-indigo-500 to-blue-600 rounded-xl shadow-xl p-8 text-white">
-        <div className="flex items-center justify-between flex-wrap gap-6">
-          <div>
-            <h2 className="text-2xl font-bold mb-3">Formule Premium ImmoNova</h2>
-            <p className="text-white/80 mb-6">Accédez à des documents et des informations exclusifs pour réussir votre projet immobilier</p>
-            <ul className="space-y-2">
-              <li className="flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-green-300">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>Modèles de documents personnalisables</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-green-300">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>Analyses de marché détaillées par quartier</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-green-300">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>Accès illimité à notre base documentaire</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-green-300">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>Accompagnement personnalisé par un expert</span>
-              </li>
-            </ul>
-          </div>
-          <div className="flex flex-col items-center justify-center">
+      <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Formule Premium */}
+        <div className="bg-gradient-to-r from-indigo-500 to-blue-600 rounded-xl shadow-xl p-8 text-white">
+          <h2 className="text-2xl font-bold mb-3">Formule Premium ImmoNova</h2>
+          <p className="text-white/80 mb-6">Accédez à des documents et des informations exclusifs pour réussir votre projet immobilier</p>
+          <ul className="space-y-2 mb-8">
+            <li className="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-green-300">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>Modèles de documents personnalisables</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-green-300">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>Analyses de marché détaillées par quartier</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-green-300">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>Accès illimité à notre base documentaire</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-green-300">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>Accompagnement personnalisé par un expert</span>
+            </li>
+          </ul>
+          <div className="flex flex-col items-center">
             <div className="text-center mb-4">
               <p className="text-white/80 text-sm">À partir de</p>
               <div className="flex items-end">
@@ -420,6 +419,51 @@ export default function AchatPage() {
             </div>
             <button className="bg-white text-indigo-600 font-medium py-3 px-6 rounded-full hover:bg-indigo-50 transition-colors">
               Découvrir notre offre
+            </button>
+          </div>
+        </div>
+        
+        {/* Offre Illimitée */}
+        <div className="bg-gradient-to-r from-red-500 to-orange-500 rounded-xl shadow-xl p-8 text-white">
+          <h2 className="text-2xl font-bold mb-3">Offre Illimitée</h2>
+          <p className="text-white/80 mb-6">Profitez d'un accès complet à tous nos services premium sans restriction de durée</p>
+          <ul className="space-y-2 mb-8">
+            <li className="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-yellow-300">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>Accès illimité à notre base documentaire</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-yellow-300">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>Assistance prioritaire 7j/7</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-yellow-300">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>Alertes personnalisées sur le marché</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-yellow-300">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>Consultations illimitées avec nos experts</span>
+            </li>
+          </ul>
+          <div className="flex flex-col items-center">
+            <div className="text-center mb-4">
+              <p className="text-white/80 text-sm">Offre exclusive</p>
+              <div className="flex items-end">
+                <span className="text-4xl font-bold">299</span>
+                <span className="text-xl">€</span>
+                <span className="text-sm ml-1">/an</span>
+              </div>
+            </div>
+            <button className="bg-white text-orange-600 font-medium py-3 px-6 rounded-full hover:bg-orange-50 transition-colors">
+              Accéder à l'offre illimitée
             </button>
           </div>
         </div>
