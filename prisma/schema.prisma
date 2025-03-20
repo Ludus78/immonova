@@ -21,6 +21,7 @@ model User {
   isPremium Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  accounts  Account[]
 }
 
 model Account {
