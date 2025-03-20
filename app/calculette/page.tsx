@@ -11,6 +11,7 @@ export default function Calculette() {
   const [fraisNotaire, setFraisNotaire] = useState<number>(8);
   const [fraisAgence, setFraisAgence] = useState<number>(5);
   const [fraisDossier, setFraisDossier] = useState<number>(1000);
+  const [fraisTravaux, setFraisTravaux] = useState<number>(0);
   
   // Calculer le montant empruntable
   const capaciteEmprunt = () => {
@@ -37,7 +38,7 @@ export default function Calculette() {
   // Calculer le prix d'achat maximum (hors frais)
   const prixAchatMax = () => {
     const fraisTotauxPourcentage = fraisNotaire + fraisAgence;
-    const fraisTotaux = (budgetTotal * fraisTotauxPourcentage / 100) + fraisDossier;
+    const fraisTotaux = (budgetTotal * fraisTotauxPourcentage / 100) + fraisDossier + fraisTravaux;
     return Math.round(budgetTotal - fraisTotaux);
   };
   
@@ -50,7 +51,8 @@ export default function Calculette() {
       notaire: Math.round(fraisNotaireValeur),
       agence: Math.round(fraisAgenceValeur),
       dossier: fraisDossier,
-      total: Math.round(fraisNotaireValeur + fraisAgenceValeur + fraisDossier)
+      travaux: fraisTravaux,
+      total: Math.round(fraisNotaireValeur + fraisAgenceValeur + fraisDossier + fraisTravaux)
     };
   };
   
@@ -193,6 +195,18 @@ export default function Calculette() {
                 className="w-full p-2 border border-gray-300 rounded focus:ring focus:ring-indigo-200 focus:border-indigo-500"
               />
             </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Budget travaux (€)
+              </label>
+              <input
+                type="number"
+                value={fraisTravaux}
+                onChange={(e) => setFraisTravaux(Number(e.target.value))}
+                className="w-full p-2 border border-gray-300 rounded focus:ring focus:ring-indigo-200 focus:border-indigo-500"
+              />
+            </div>
           </div>
         </div>
         
@@ -244,6 +258,10 @@ export default function Calculette() {
                 <div className="flex justify-between">
                   <span className="text-gray-600">Frais de dossier</span>
                   <span>{new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(frais.dossier)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Budget travaux</span>
+                  <span>{new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(frais.travaux)}</span>
                 </div>
                 <div className="flex justify-between font-semibold pt-2 border-t border-gray-200">
                   <span>Total des frais</span>
