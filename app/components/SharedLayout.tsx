@@ -2,12 +2,15 @@
 
 import Link from 'next/link';
 import { ReactNode } from 'react';
+import { useSession, signOut } from 'next-auth/react';
 
 interface SharedLayoutProps {
   children: ReactNode;
 }
 
 export default function SharedLayout({ children }: SharedLayoutProps) {
+  const { data: session } = useSession();
+
   return (
     <div className="flex flex-col min-h-screen overflow-y-auto bg-[#eef6ff] text-black">
       {/* Header/Navigation */}
@@ -24,9 +27,29 @@ export default function SharedLayout({ children }: SharedLayoutProps) {
             <Link href="/" className="hover:text-indigo-700">Accueil</Link>
           </nav>
           
-          <button className="border-2 border-indigo-700 text-indigo-700 px-6 py-2 rounded-full font-medium hover:bg-indigo-50 transition-all duration-300">
-            Connexion
-          </button>
+          {session ? (
+            <div className="flex items-center gap-4">
+              <Link 
+                href="/profil"
+                className="text-gray-700 hover:text-indigo-700"
+              >
+                {session.user?.name}
+              </Link>
+              <button 
+                onClick={() => signOut()}
+                className="border-2 border-indigo-700 text-indigo-700 px-6 py-2 rounded-full font-medium hover:bg-indigo-50 transition-all duration-300"
+              >
+                Déconnexion
+              </button>
+            </div>
+          ) : (
+            <Link 
+              href="/connexion"
+              className="border-2 border-indigo-700 text-indigo-700 px-6 py-2 rounded-full font-medium hover:bg-indigo-50 transition-all duration-300"
+            >
+              Connexion
+            </Link>
+          )}
         </div>
       </header>
 

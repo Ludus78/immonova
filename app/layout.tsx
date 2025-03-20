@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import SharedLayout from "./components/SharedLayout";
+import { AuthProvider } from "./providers/AuthProvider";
 
 export const metadata: Metadata = {
-  title: "ImmoNova",
-  description: "Votre assistant immobilier intelligent",
+  title: "ImmoNova - Votre partenaire immobilier",
+  description: "ImmoNova vous accompagne dans tous vos projets immobiliers",
 };
 
 export default function RootLayout({
@@ -15,9 +16,11 @@ export default function RootLayout({
   return (
     <html lang="fr" className="scroll-smooth">
       <body className="antialiased overflow-y-auto">
-        <SharedLayout>
-          {children}
-        </SharedLayout>
+        <AuthProvider>
+          <SharedLayout>
+            {children}
+          </SharedLayout>
+        </AuthProvider>
       </body>
     </html>
   );
