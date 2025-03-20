@@ -24,7 +24,7 @@ export default function AchatPage() {
       color: 'bg-red-100 text-red-600',
       content: (
         <div className="space-y-6">
-          <h2 className="text-lg text-gray-800">Opter pour un bien neuf permet de bénéficier d’un logement aux normes actuelles, avec une meilleure performance énergétique et des frais de notaire réduits. De plus, certains dispositifs fiscaux comme le PTZ (Prêt à Taux Zéro) peuvent faciliter l’achat. En revanche, les prix sont plus élevés et les délais de livraison peuvent s’étendre sur plusieurs mois. À l’inverse, l’achat dans l’ancien offr un prix au mètre carré plus attractif et un charme architectural, avec la possibilité d’emménager rapidement. Toutefois, il peut impliquer des travaux de rénovation et une isolation moins performante.(base de calcul : 100k €)</h2>
+          <h2 className="text-lg text-gray-800">Opter pour un bien neuf permet de bénéficier d'un logement aux normes actuelles, avec une meilleure performance énergétique et des frais de notaire réduits. De plus, certains dispositifs fiscaux comme le PTZ (Prêt à Taux Zéro) peuvent faciliter l'achat. En revanche, les prix sont plus élevés et les délais de livraison peuvent s'étendre sur plusieurs mois. À l'inverse, l'achat dans l'ancien offr un prix au mètre carré plus attractif et un charme architectural, avec la possibilité d'emménager rapidement. Toutefois, il peut impliquer des travaux de rénovation et une isolation moins performante.(base de calcul : 100k €)</h2>
           
           <div className="grid md:grid-cols-2 gap-6">
             {/* Tableau Ancien */}
@@ -358,7 +358,19 @@ export default function AchatPage() {
         <Link href="/" className="flex items-center text-indigo-700 hover:underline mb-4">
           <span className="mr-1">←</span> Retour à l'accueil
         </Link>
-        <h1 className="text-3xl font-bold text-gray-800">Guide de l'achat immobilier</h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-3xl font-bold text-gray-800">Guide de l'achat immobilier</h1>
+          <Link 
+            href="/calculette" 
+            className="flex items-center gap-2 text-indigo-700 hover:text-indigo-900"
+            title="Calculette d'achat immobilier"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0 0 12 2.25Z" />
+            </svg>
+            <span>Calculer votre budget</span>
+          </Link>
+        </div>
         <p className="text-gray-600 mt-2">Découvrez nos conseils et guides pour réussir votre projet d'achat immobilier</p>
       </div>
 
