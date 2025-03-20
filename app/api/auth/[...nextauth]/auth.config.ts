@@ -1,9 +1,28 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcryptjs";
+import crypto from "crypto";
 
 const prisma = new PrismaClient();
+
+// Utility functions for password handling with crypto
+const hashPassword = (password: string): string => {
+  // Generate a random salt
+  const salt = crypto.randomBytes(16).toString('hex');
+  // Hash the password with the salt using scrypt
+  const hash = crypto.scryptSync(password, salt, 64).toString('hex');
+  // Store both salt and hash together
+  return `${salt}:${hash}`;
+};
+
+const verifyPassword = (storedPassword: string, suppliedPassword: string): boolean => {
+  // Split the stored password into salt and hash
+  const [salt, hash] = storedPassword.split(':');
+  // Hash the supplied password with the same salt
+  const suppliedHash = crypto.scryptSync(suppliedPassword, salt, 64).toString('hex');
+  // Compare the hashes
+  return crypto.timingSafeEqual(Buffer.from(hash, 'hex'), Buffer.from(suppliedHash, 'hex'));
+};
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -28,10 +47,7 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Utilisateur non trouvé");
         }
 
-        const isPasswordValid = await bcrypt.compare(
-          credentials.password,
-          user.password
-        );
+        const isPasswordValid = verifyPassword(user.password, credentials.password);
 
         if (!isPasswordValid) {
           throw new Error("Mot de passe incorrect");
