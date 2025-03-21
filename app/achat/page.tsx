@@ -169,8 +169,8 @@ export default function AchatPage() {
     },
     {
       id: 'estimation',
-      title: 'L\'estimation un vrai sujet',
-      description: 'Comprenez l\'importance d\'une bonne estimation et les facteurs qui influencent la valeur de votre bien.',
+      title: 'Quelles sont les conditions pour acheter un bien immobilier ?',
+      description: 'Acheter un bien immobilier nécessite de remplir plusieurs conditions essentielles.',
       icon: '💰',
       color: 'bg-green-100 text-green-600',
       content: (
