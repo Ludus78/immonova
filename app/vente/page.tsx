@@ -71,6 +71,7 @@ export default function VentePage() {
         </div>
       ),
     },
+    
     {
       id: "estimation",
       title: "L'estimation un vrai sujet",
@@ -324,6 +325,26 @@ export default function VentePage() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Affichage du contenu des articles directement sur la page */}
+        <div className="mt-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Nos articles détaillés</h2>
+          <div className="space-y-12">
+            {articles.map((article) => (
+              <div key={`content-${article.id}`} className="bg-white rounded-lg shadow-md overflow-hidden">
+                <div className={`p-4 ${article.color} text-white`}>
+                  <div className="flex items-center">
+                    {article.icon}
+                    <h2 className="text-xl font-semibold ml-3">{article.title}</h2>
+                  </div>
+                </div>
+                <div className="p-6">
+                  {article.content}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         {selectedArticle && (

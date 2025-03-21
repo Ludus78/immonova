@@ -105,41 +105,58 @@ export default function AchatPage() {
     },
     {
       id: 'comment-bien-vendre',
-      title: 'Comment bien vendre',
-      description: 'Découvrez les meilleures pratiques pour mettre en valeur votre bien et maximiser vos chances de vente.',
+      title: 'Bien définir son secteur géographique',
+      description: 'Le choix du secteur géographique est une étape clé dans un projet d\'achat immobilier.',
       icon: '📈',
       color: 'bg-blue-100 text-blue-600',
       content: (
         <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-gray-800">Guide complet pour vendre votre bien</h2>
+          <h2 className="text-2xl font-bold text-gray-800">Comment bien définir son secteur géographique pour un achat immobilier ?</h2>
           
           <div className="prose max-w-none">
-            <h3>1. Fixez le juste prix de votre bien</h3>
-            <p>Comme pour l'achat, vous pouvez procéder à la vente de votre bien seul ou avec un professionnel :</p>
+            <h3><strong>1. Définir ses besoins et priorités</strong></h3>
+            <p>{'\u00A0'}</p>
+            <p>Avant de choisir un secteur, il est important d'identifier vos critères essentiels :</p>
             <ul>
-              <li>Demandez plusieurs évaluations gratuites à des professionnels</li>
-              <li>Attention à ne pas surévaluer votre bien (risque de déconsidération)</li>
-              <li>Consultez les prix pratiqués dans votre quartier</li>
-              <li>Utilisez les outils d'estimation en ligne en complément</li>
+                <li><strong>Cadre de vie :</strong> Préférez-vous un environnement urbain, périurbain ou rural ?</li>
+                <li><strong>Proximité des commodités :</strong> Écoles, commerces, transports en commun, espaces verts, services médicaux…</li>
+                <li><strong>Temps de trajet :</strong> Quelle distance êtes-vous prêt à parcourir pour aller au travail ou aux activités ?</li>
+                <li><strong>Budget :</strong> Certains quartiers sont plus accessibles que d'autres selon votre budget d'achat.</li>
             </ul>
-
-            <h3>2. Soignez la présentation de votre bien</h3>
-            <p>La présentation est cruciale pour séduire les acheteurs potentiels :</p>
+            <p>{'\u00A0'}</p>
+            <h3><strong>2. Étudier le marché immobilier local</strong></h3>
+            <p>{'\u00A0'}</p>
+            <p>Une fois vos priorités définies, il est crucial d'analyser le marché du secteur qui vous intéresse :</p>
             <ul>
-              <li>Nettoyage approfondi et désencombrement des pièces</li>
-              <li>Petits travaux de rafraîchissement (peintures, moquettes)</li>
-              <li>Optimisation de la luminosité</li>
-              <li>Dépersonnalisation des espaces (home staging)</li>
+                <li><strong>Prix au m² :</strong> Comparez les prix entre différents quartiers et villes.</li>
+                <li><strong>Évolution du marché :</strong> Certains secteurs sont en pleine expansion et peuvent offrir un bon potentiel d'investissement.</li>
+                <li><strong>Taux de demande :</strong> Un quartier très recherché peut signifier une plus-value à long terme, mais aussi une concurrence plus forte.</li>
             </ul>
-
-            <h3>3. Constituez un dossier de vente complet</h3>
-            <p>Anticipez les demandes des acheteurs et préparez :</p>
+            <p>{'\u00A0'}</p>
+            <h3><strong>3. Explorer le quartier sur le terrain</strong></h3>
+            <p>{'\u00A0'}</p>
+            <p>Une visite sur place permet de se faire une idée réelle du cadre de vie :</p>
             <ul>
-              <li>Tous les diagnostics obligatoires (DPE, amiante, plomb, etc.)</li>
-              <li>Les dernières factures énergétiques</li>
-              <li>Les documents concernant la copropriété si applicable</li>
-              <li>Des photos professionnelles et/ou une visite virtuelle</li>
+                <li><strong>Tester les trajets :</strong> Essayez le parcours domicile-travail aux heures de pointe.</li>
+                <li><strong>Observer l'ambiance :</strong> Le quartier est-il calme, dynamique, familial ?</li>
+                <li><strong>Vérifier les infrastructures :</strong> Écoles, transports, commerces, loisirs…</li>
             </ul>
+            <p>{'\u00A0'}</p>
+            <h3><strong>4. Anticiper l'avenir du quartier</strong></h3>
+            <p>{'\u00A0'}</p>
+            <p>Consultez les projets d'urbanisme :</p>
+            <ul>
+                <li>Nouvelles infrastructures de transport.</li>
+                <li>Développements immobiliers et urbains.</li>
+                <li>Évolutions des équipements publics.</li>
+            </ul>
+            <p>{'\u00A0'}</p>
+            <h3><strong>5. Comparer plusieurs secteurs</strong></h3>
+            <p>{'\u00A0'}</p>
+            <p>Avoir plusieurs options permet de faire le meilleur choix. Comparez les avantages et inconvénients de chaque zone avant de vous engager.</p>
+            
+            <h2>Conclusion</h2>
+            <p>Choisir un bon secteur géographique est une étape clé dans votre projet immobilier. Prenez le temps d'analyser vos besoins, de visiter les quartiers et d'étudier le marché pour faire un choix éclairé.</p>
 
             <div className="bg-blue-50 p-4 rounded-lg mt-6">
               <p className="text-sm text-blue-800">
