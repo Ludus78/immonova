@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { FaHome, FaChartLine, FaTools, FaClipboardCheck, FaMoneyBillWave } from "react-icons/fa";
+import { FaHome, FaChartLine, FaTools, FaClipboardCheck, FaMoneyBillWave, FaCalculator } from "react-icons/fa";
 
 interface Article {
   id: string;
@@ -71,7 +71,6 @@ export default function VentePage() {
         </div>
       ),
     },
-    
     {
       id: "estimation",
       title: "L'estimation un vrai sujet",
@@ -294,133 +293,161 @@ export default function VentePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Guide de la vente immobilière</h1>
-          <Link
-            href="/"
-            className="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+    <div className="max-w-4xl mx-auto py-12">
+      <div className="mb-8">
+        <Link href="/" className="flex items-center text-indigo-700 hover:underline mb-4">
+          <span className="mr-1">←</span> Retour à l'accueil
+        </Link>
+        <div className="flex items-center justify-between">
+          <h1 className="text-3xl font-bold text-gray-800">Guide de la vente immobilière</h1>
+          <Link 
+            href="/calculette" 
+            className="flex items-center gap-2 text-indigo-700 hover:text-indigo-900"
+            title="Calculette immobilière"
           >
-            <FaHome className="w-5 h-5 mr-2" />
-            Retour à l'accueil
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0 0 12 2.25Z" />
+            </svg>
+            <span>Calculer votre budget</span>
           </Link>
         </div>
+        <p className="text-gray-600 mt-2">Découvrez nos conseils et guides pour réussir votre projet de vente immobilière</p>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-          {articles.map((article) => (
-            <div
-              key={article.id}
-              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
-              onClick={() => setSelectedArticle(article)}
-            >
-              <div className={`p-4 ${article.color} text-white`}>
-                <div className="flex items-center">
-                  {article.icon}
-                  <h2 className="text-xl font-semibold ml-3">{article.title}</h2>
-                </div>
+      <div className="grid gap-6">
+        {articles.map((article) => (
+          <div 
+            key={article.id}
+            onClick={() => setSelectedArticle(article)}
+            className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow cursor-pointer"
+          >
+            <div className="flex items-start gap-4">
+              <div className={`w-12 h-12 bg-${article.color.split('-')[1]}-100 rounded-full flex items-center justify-center text-2xl`}>
+                {article.icon}
               </div>
-              <div className="p-4">
-                <p className="text-gray-600">{article.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Affichage du contenu des articles directement sur la page */}
-        <div className="mt-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Nos articles détaillés</h2>
-          <div className="space-y-12">
-            {articles.map((article) => (
-              <div key={`content-${article.id}`} className="bg-white rounded-lg shadow-md overflow-hidden">
-                <div className={`p-4 ${article.color} text-white`}>
-                  <div className="flex items-center">
-                    {article.icon}
-                    <h2 className="text-xl font-semibold ml-3">{article.title}</h2>
-                  </div>
-                </div>
-                <div className="p-6">
-                  {article.content}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {selectedArticle && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-            <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-              <div className={`p-6 ${selectedArticle.color} text-white`}>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    {selectedArticle.icon}
-                    <h2 className="text-2xl font-bold ml-3">{selectedArticle.title}</h2>
-                  </div>
-                  <button
-                    onClick={() => setSelectedArticle(null)}
-                    className="text-white hover:text-gray-200"
-                  >
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-              <div className="p-6">
-                {selectedArticle.content}
+              <div>
+                <h2 className="text-xl font-semibold text-gray-800 mb-2">{article.title}</h2>
+                <p className="text-gray-600 mb-4">{article.description}</p>
+                <span className="text-indigo-600 hover:underline font-medium">
+                  Lire l'article →
+                </span>
               </div>
             </div>
           </div>
-        )}
+        ))}
+      </div>
 
-        {/* Section Premium */}
-        <div className="mt-16 bg-gradient-to-r from-indigo-500 to-blue-600 rounded-xl shadow-xl p-8 text-white">
-          <div className="flex items-center justify-between flex-wrap gap-6">
-            <div>
-              <h2 className="text-2xl font-bold mb-3">Formule Premium ImmoNova</h2>
-              <p className="text-white/80 mb-6">Accédez à des documents et des informations exclusifs pour réussir votre projet immobilier</p>
-              <ul className="space-y-2">
-                <li className="flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-green-300">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span>Modèles de documents personnalisables</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-green-300">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span>Analyses de marché détaillées par quartier</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-green-300">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span>Accès illimité à notre base documentaire</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-green-300">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span>Accompagnement personnalisé par un expert</span>
-                </li>
-              </ul>
-            </div>
-            <div className="flex flex-col items-center justify-center">
-              <div className="text-center mb-4">
-                <p className="text-white/80 text-sm">À partir de</p>
-                <div className="flex items-end">
-                  <span className="text-4xl font-bold">149</span>
-                  <span className="text-xl">€</span>
-                </div>
+      {/* Section Premium */}
+      <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Formule Premium */}
+        <div className="bg-gradient-to-r from-indigo-500 to-blue-600 rounded-xl shadow-xl p-8 text-white">
+          <h2 className="text-2xl font-bold mb-3">Formule Premium ImmoNova</h2>
+          <p className="text-white/80 mb-6">Accédez à des documents et des informations exclusifs pour réussir votre projet immobilier</p>
+          <ul className="space-y-2 mb-8">
+            <li className="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-green-300">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>Modèles de documents personnalisables</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-green-300">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>Analyses de marché détaillées par quartier</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-green-300">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>Accès illimité à notre base documentaire</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-green-300">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>Accompagnement personnalisé par un expert</span>
+            </li>
+          </ul>
+          <div className="flex flex-col items-center">
+            <div className="text-center mb-4">
+              <p className="text-white/80 text-sm">À partir de</p>
+              <div className="flex items-end">
+                <span className="text-4xl font-bold">149</span>
+                <span className="text-xl">€</span>
               </div>
-              <button className="bg-white text-indigo-600 font-medium py-3 px-6 rounded-full hover:bg-indigo-50 transition-colors">
-                Découvrir notre offre
-              </button>
             </div>
+            <button className="bg-white text-indigo-600 font-medium py-3 px-6 rounded-full hover:bg-indigo-50 transition-colors">
+              Découvrir notre offre
+            </button>
+          </div>
+        </div>
+        
+        {/* Offre Illimitée */}
+        <div className="bg-gradient-to-r from-red-500 to-orange-500 rounded-xl shadow-xl p-8 text-white">
+          <h2 className="text-2xl font-bold mb-3">Offre Illimitée</h2>
+          <p className="text-white/80 mb-6">Profitez d'un accès complet à tous nos services premium sans restriction de durée</p>
+          <ul className="space-y-2 mb-8">
+            <li className="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-yellow-300">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>Accès illimité à notre base documentaire</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-yellow-300">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>Assistance prioritaire 7j/7</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-yellow-300">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>Alertes personnalisées sur le marché</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-yellow-300">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>Consultations illimitées avec nos experts</span>
+            </li>
+          </ul>
+          <div className="flex flex-col items-center">
+            <div className="text-center mb-4">
+              <p className="text-white/80 text-sm">Offre exclusive</p>
+              <div className="flex items-end">
+                <span className="text-4xl font-bold">299</span>
+                <span className="text-xl">€</span>
+                <span className="text-sm ml-1">/an</span>
+              </div>
+            </div>
+            <button className="bg-white text-orange-600 font-medium py-3 px-6 rounded-full hover:bg-orange-50 transition-colors">
+              Accéder à l'offre illimitée
+            </button>
           </div>
         </div>
       </div>
+
+      {/* Modal pour afficher l'article */}
+      {selectedArticle && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-8">
+            <div className="flex justify-between items-start mb-6">
+              <h2 className="text-2xl font-bold text-gray-800">{selectedArticle.title}</h2>
+              <button 
+                onClick={() => setSelectedArticle(null)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            {selectedArticle.content}
+          </div>
+        </div>
+      )}
     </div>
   );
 } 

@@ -42,7 +42,7 @@ export default function Home() {
                 </button>
                 
                 <button 
-                  onClick={() => setChoix('vente')}
+                  onClick={() => window.location.href = '/vente'}
                   className="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500 hover:shadow-lg transition-all text-left w-full cursor-pointer"
                 >
                   <div className="flex items-center gap-4 mb-3">
