@@ -226,39 +226,24 @@ export default function AchatPage() {
       color: 'bg-yellow-100 text-yellow-600',
       content: (
         <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-gray-800">Guide des travaux avant vente</h2>
-          
-          <div className="prose max-w-none">
-            <h3>Travaux à fort retour sur investissement</h3>
-            <p>Certains travaux peuvent significativement valoriser votre bien :</p>
-            <ul>
-              <li><strong>Rafraîchissement des peintures</strong> (coût modéré pour un impact visuel important)</li>
-              <li><strong>Rénovation énergétique</strong> (isolation, fenêtres double vitrage)</li>
-              <li><strong>Mise aux normes électriques</strong> (sécurité et conformité)</li>
-              <li><strong>Rénovation légère de la cuisine ou salle de bain</strong> (pièces décisives)</li>
-              <li><strong>Optimisation des espaces</strong> (abattage de cloisons non porteuses)</li>
-            </ul>
+  <h2 className="text-2xl font-bold text-gray-800">Comment bien se comporter lors de la visite d’un bien immobilier ?</h2>
 
-            <h3>Analyse coût-bénéfice essentielle</h3>
-            <p>Avant de lancer des travaux, évaluez soigneusement :</p>
-            <ul>
-              <li>Le coût total des travaux (devis détaillés)</li>
-              <li>La plus-value potentielle (consultation d'agents immobiliers)</li>
-              <li>Le délai de réalisation (impact sur votre calendrier de vente)</li>
-              <li>Les aides financières disponibles (MaPrimeRénov', etc.)</li>
-              <li>La demande locale (attentes des acheteurs dans votre secteur)</li>
-            </ul>
+  <div className="prose max-w-none">
+    <h3>1. Se préparer avant la visite</h3>
+    <p>Avant même de visiter un bien, il est important d’arriver bien préparé :</p>
+    <ul>
+      <li><strong>Analyser l’annonce en détail :</strong> Vérifiez la surface, l’emplacement, les charges et les éventuels travaux mentionnés.</li>
+      <li><strong>Lister les critères essentiels :</strong> Définissez vos besoins en termes de nombre de pièces, exposition, transports à proximité, etc.</li>
+      <li><strong>Prévoir les bonnes questions :</strong> Renseignez-vous sur l’état du bien, le voisinage, la copropriété et les frais annexes.</li>
+    </ul>
 
-            <h3>Travaux généralement déconseillés</h3>
-            <p>Certains investissements risquent de ne pas être rentabilisés :</p>
-            <ul>
-              <li>Rénovations complètes coûteuses</li>
-              <li>Aménagements très personnalisés (goûts spécifiques)</li>
-              <li>Extensions complexes (permis, délais importants)</li>
-              <li>Équipements haut de gamme dans un quartier moyen</li>
-              <li>Travaux purement esthétiques sans amélioration fonctionnelle</li>
+    <h3>2. Adopter une attitude observatrice</h3>
+    <p>Lors de la visite, il est essentiel d’être attentif aux moindres détails :</p>
+    <ul>
+      <li><strong>Vérifier l’état général :</strong> Examinez les murs, sols, plafonds et installations électriques.</li>
+      <li><strong>Tester les équipements :</strong> Ouvrez les robinets, allumez les lumières et vérifiez les fenêtres.</li>
+      <li><strong>Évaluer l’isolation :</strong> Vérifiez l’état des murs, des fenêtres et des portes.</li>
             </ul>
-
             <div className="bg-yellow-50 p-4 rounded-lg mt-6">
               <p className="text-sm text-yellow-800">
                 <strong>Conseil pratique :</strong> Dans le contexte actuel, les travaux d'amélioration énergétique sont souvent les plus rentables. Un bien avec un bon DPE se vend plus rapidement et à un meilleur prix, d'autant plus avec les nouvelles restrictions pour la location des logements énergivores (classes F et G).
