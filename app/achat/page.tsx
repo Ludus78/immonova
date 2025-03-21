@@ -175,51 +175,53 @@ export default function AchatPage() {
       color: 'bg-green-100 text-green-600',
       content: (
         <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-gray-800">Guide de l'estimation immobilière</h2>
-          
-          <div className="prose max-w-none">
-            <h3>Les facteurs clés de l'estimation</h3>
-            <p>Plusieurs éléments influencent la valeur d'un bien immobilier :</p>
-            <ul>
-              <li>Localisation et accessibilité (proximité des commerces, transports)</li>
-              <li>Surface habitable et configuration des pièces</li>
-              <li>État général du bien et travaux nécessaires</li>
-              <li>Caractéristiques spécifiques (balcon, jardin, stationnement)</li>
-              <li>DPE et performance énergétique (critère devenu essentiel)</li>
-              <li>Tendances du marché local (offre et demande)</li>
-            </ul>
+  <div className="prose max-w-none">
+    <h3>1. Avoir une capacité financière suffisante</h3>
+    <p>Pour acheter un bien immobilier, il est essentiel d'avoir une bonne situation financière :</p>
+    <ul>
+      <li><strong>Apport personnel :</strong> Généralement entre 10 et 20 % du prix du bien.</li>
+      <li><strong>Capacité d'endettement :</strong> Le taux d'endettement ne doit pas dépasser 35 % des revenus.</li>
+      <li><strong>Situation stable :</strong> Un CDI ou une activité pérenne est souvent requis.</li>
+    </ul>
 
-            <h3>Méthodes d'estimation professionnelles</h3>
-            <p>Les professionnels utilisent différentes approches complémentaires :</p>
-            <ul>
-              <li><strong>Méthode comparative :</strong> analyse des prix de vente récents de biens similaires</li>
-              <li><strong>Méthode du revenu :</strong> valeur basée sur les loyers potentiels</li>
-              <li><strong>Méthode du coût :</strong> prix du terrain + coût de construction - vétusté</li>
-              <li><strong>Analyse prospective :</strong> prise en compte des projets d'aménagement locaux</li>
-            </ul>
+    <h3>2. Obtenir un financement</h3>
+    <p>Un prêt immobilier est souvent nécessaire pour finaliser l'achat :</p>
+    <ul>
+      <li>Comparer les offres de crédit pour trouver les meilleures conditions.</li>
+      <li>Préparer un dossier solide avec justificatifs de revenus et relevés bancaires.</li>
+      <li>Anticiper les frais annexes : notaire, agence, travaux éventuels.</li>
+    </ul>
 
-            <h3>Conseils pour une estimation précise</h3>
-            <ul>
-              <li>Faites appel à plusieurs professionnels (agents, notaires)</li>
-              <li>Comparez avec les ventes récentes similaires</li>
-              <li>Prenez en compte les tendances actuelles du marché</li>
-              <li>Soyez objectif sur l'état de votre bien et ses points faibles</li>
-              <li>Anticipez l'impact des nouvelles réglementations énergétiques</li>
-            </ul>
+    <h3>3. Choisir un bien adapté</h3>
+    <p>Le choix du bien doit répondre à plusieurs critères :</p>
+    <ul>
+      <li>Définir ses besoins : type de bien, localisation, superficie.</li>
+      <li>Visiter plusieurs biens pour comparer les options.</li>
+      <li>Vérifier l’état du bien : DPE, amiante, travaux nécessaires.</li>
+    </ul>
 
-            <div className="bg-green-50 p-4 rounded-lg mt-6">
-              <p className="text-sm text-green-800">
-                <strong>À savoir :</strong> Depuis les réformes du DPE en 2021 et 2024, la performance énergétique d'un logement est devenue un facteur déterminant dans sa valeur. Les "passoires thermiques" (classes F et G) subissent une décote importante, tandis que les logements économes en énergie bénéficient d'une prime à la valeur.
-              </p>
-            </div>
-          </div>
-        </div>
+    <h3>4. Passer par les étapes administratives</h3>
+    <p>Plusieurs démarches légales sont nécessaires :</p>
+    <ul>
+      <li>Signer un compromis ou une promesse de vente.</li>
+      <li>Obtenir un accord bancaire et respecter le délai de réflexion de 10 jours.</li>
+      <li>Signer l’acte authentique chez le notaire pour officialiser l’achat.</li>
+    </ul>
+
+    <div className="bg-blue-50 p-4 rounded-lg mt-6">
+      <p className="text-sm text-blue-800">
+        <strong>Bon à savoir :</strong> Il est recommandé de se faire accompagner par un professionnel de l’immobilier pour sécuriser son achat et éviter les erreurs.
+      </p>
+    </div>
+  </div>
+</div>
+
       )
     },
     {
       id: 'travaux-avant-vente',
-      title: 'Les travaux avant la vente sont-ils pertinents ?',
-      description: 'Analysez si les travaux de rénovation sont rentables avant de mettre votre bien en vente.',
+      title: 'Comment bien se comporter lors de la visite d’un bien immobilier ?',
+      description: 'La visite d’un bien immobilier est une étape clé dans le processus d’achat.',
       icon: '🔨',
       color: 'bg-yellow-100 text-yellow-600',
       content: (
@@ -269,12 +271,12 @@ export default function AchatPage() {
     {
       id: 'diagnostics',
       title: 'Diagnostics immobilier, que faire !',
-      description: 'Guide complet sur les diagnostics obligatoires et leur importance dans la vente d\'un bien.',
+      description: 'Guide complet sur les diagnostics, commment lire un diagnostic.',
       icon: '📋',
       color: 'bg-purple-100 text-purple-600',
       content: (
         <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-gray-800">Guide des diagnostics immobiliers 2024</h2>
+          <h2 className="text-2xl font-bold text-gray-800">Guide des diagnostics immobiliers 2025</h2>
           
           <div className="prose max-w-none">
             <h3>Le Dossier de Diagnostic Technique (DDT) obligatoire</h3>
