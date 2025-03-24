@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { ReactNode } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 import Footer from './Footer';
+import ChatWidget from './ChatWidget';
 
 interface SharedLayoutProps {
   children: ReactNode;
@@ -71,6 +72,9 @@ export default function SharedLayout({ children }: SharedLayoutProps) {
       
       {/* Footer */}
       <Footer />
+      
+      {/* Chat Widget */}
+      <ChatWidget />
     </div>
   );
 } 

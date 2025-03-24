@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function Calculette() {
   const [revenuMensuel, setRevenuMensuel] = useState<number>(0);
@@ -276,6 +277,12 @@ export default function Calculette() {
             <p className="text-sm text-blue-600">
               Avec vos revenus actuels, vous pouvez envisager l'achat d'un bien jusqu'à {new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(prixAchatMax())}. N'hésitez pas à consulter nos experts pour optimiser votre recherche immobilière.
             </p>
+          </div>
+
+          <div className="mt-8 text-center">
+            <Link href="/calculette-locative" className="text-indigo-600 hover:text-indigo-800 font-medium">
+              Essayez notre calculette d'investissement locatif →
+            </Link>
           </div>
         </div>
       </div>
