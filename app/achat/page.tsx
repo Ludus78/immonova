@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import EmailPopup from '../components/EmailPopup';
 
 interface Article {
   id: string;
@@ -14,6 +15,7 @@ interface Article {
 
 export default function AchatPage() {
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
+  const [isEmailPopupOpen, setIsEmailPopupOpen] = useState(false);
 
   const articles: Article[] = [
     {
@@ -197,7 +199,7 @@ export default function AchatPage() {
     <ul>
       <li>Définir ses besoins : type de bien, localisation, superficie.</li>
       <li>Visiter plusieurs biens pour comparer les options.</li>
-      <li>Vérifier l’état du bien : DPE, amiante, travaux nécessaires.</li>
+      <li>Vérifier l'état du bien : DPE, amiante, travaux nécessaires.</li>
     </ul>
 
     <h3>4. Passer par les étapes administratives</h3>
@@ -205,12 +207,12 @@ export default function AchatPage() {
     <ul>
       <li>Signer un compromis ou une promesse de vente.</li>
       <li>Obtenir un accord bancaire et respecter le délai de réflexion de 10 jours.</li>
-      <li>Signer l’acte authentique chez le notaire pour officialiser l’achat.</li>
+      <li>Signer l'acte authentique chez le notaire pour officialiser l'achat.</li>
     </ul>
 
     <div className="bg-blue-50 p-4 rounded-lg mt-6">
       <p className="text-sm text-blue-800">
-        <strong>Bon à savoir :</strong> Il est recommandé de se faire accompagner par un professionnel de l’immobilier pour sécuriser son achat et éviter les erreurs.
+        <strong>Bon à savoir :</strong> Il est recommandé de se faire accompagner par un professionnel de l'immobilier pour sécuriser son achat et éviter les erreurs.
       </p>
     </div>
   </div>
@@ -220,29 +222,29 @@ export default function AchatPage() {
     },
     {
       id: 'travaux-avant-vente',
-      title: 'Comment bien se comporter lors de la visite d’un bien immobilier ?',
-      description: 'La visite d’un bien immobilier est une étape clé dans le processus d’achat.',
+      title: "Comment bien se comporter lors de la visite d'un bien immobilier ?",
+      description: "La visite d'un bien immobilier est une étape clé dans le processus d'achat.",
       icon: '🔨',
       color: 'bg-yellow-100 text-yellow-600',
       content: (
         <div className="space-y-6">
-  <h2 className="text-2xl font-bold text-gray-800">Comment bien se comporter lors de la visite d’un bien immobilier ?</h2>
+  <h2 className="text-2xl font-bold text-gray-800">Comment bien se comporter lors de la visite d'un bien immobilier ?</h2>
 
   <div className="prose max-w-none">
     <h3>1. Se préparer avant la visite</h3>
-    <p>Avant même de visiter un bien, il est important d’arriver bien préparé :</p>
+    <p>Avant même de visiter un bien, il est important d'arriver bien préparé :</p>
     <ul>
-      <li><strong>Analyser l’annonce en détail :</strong> Vérifiez la surface, l’emplacement, les charges et les éventuels travaux mentionnés.</li>
+      <li><strong>Analyser l'annonce en détail :</strong> Vérifiez la surface, l'emplacement, les charges et les éventuels travaux mentionnés.</li>
       <li><strong>Lister les critères essentiels :</strong> Définissez vos besoins en termes de nombre de pièces, exposition, transports à proximité, etc.</li>
-      <li><strong>Prévoir les bonnes questions :</strong> Renseignez-vous sur l’état du bien, le voisinage, la copropriété et les frais annexes.</li>
+      <li><strong>Prévoir les bonnes questions :</strong> Renseignez-vous sur l'état du bien, le voisinage, la copropriété et les frais annexes.</li>
     </ul>
 
     <h3>2. Adopter une attitude observatrice</h3>
-    <p>Lors de la visite, il est essentiel d’être attentif aux moindres détails :</p>
+    <p>Lors de la visite, il est essentiel d'être attentif aux moindres détails :</p>
     <ul>
-      <li><strong>Vérifier l’état général :</strong> Examinez les murs, sols, plafonds et installations électriques.</li>
+      <li><strong>Vérifier l'état général :</strong> Examinez les murs, sols, plafonds et installations électriques.</li>
       <li><strong>Tester les équipements :</strong> Ouvrez les robinets, allumez les lumières et vérifiez les fenêtres.</li>
-      <li><strong>Évaluer l’isolation :</strong> Vérifiez l’état des murs, des fenêtres et des portes.</li>
+      <li><strong>Évaluer l'isolation :</strong> Vérifiez l'état des murs, des fenêtres et des portes.</li>
             </ul>
             <div className="bg-yellow-50 p-4 rounded-lg mt-6">
               <p className="text-sm text-yellow-800">
@@ -356,6 +358,34 @@ export default function AchatPage() {
     }
   ];
 
+  // Fonction pour gérer la soumission du formulaire email
+  const handleEmailSubmit = async (email: string, acceptNewsletter: boolean) => {
+    // Enregistrer le lead
+    try {
+      const response = await fetch('/api/leads', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          source: 'calculette_achat',
+          acceptNewsletter
+        }),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to submit lead');
+      }
+      
+      // Rediriger vers la calculette après soumission réussie
+      window.location.href = '/calculette';
+    } catch (error) {
+      console.error('Error submitting lead:', error);
+      throw error;
+    }
+  };
+
   return (
     <div className="max-w-4xl mx-auto py-12">
       <div className="mb-8">
@@ -364,8 +394,8 @@ export default function AchatPage() {
         </Link>
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold text-gray-800">Guide de l'achat immobilier</h1>
-          <Link 
-            href="/calculette" 
+          <button 
+            onClick={() => setIsEmailPopupOpen(true)}
             className="flex items-center gap-3 bg-indigo-600 text-white px-5 py-3 rounded-lg shadow-md hover:bg-indigo-700 transition-all transform hover:scale-105 border-2 border-indigo-700"
             title="Calculette d'achat immobilier"
           >
@@ -380,7 +410,7 @@ export default function AchatPage() {
               <rect x="15" y="15" width="3" height="3" rx="0.5" fill="#F39C4F" />
             </svg>
             <span className="font-semibold text-lg">Calculer votre budget</span>
-          </Link>
+          </button>
         </div>
         <p className="text-gray-600 mt-2">Découvrez nos conseils et guides pour réussir votre projet d'achat immobilier</p>
       </div>
@@ -519,6 +549,14 @@ export default function AchatPage() {
           </div>
         </div>
       )}
+
+      {/* Popup de demande d'email */}
+      <EmailPopup 
+        isOpen={isEmailPopupOpen} 
+        onClose={() => setIsEmailPopupOpen(false)} 
+        onSubmit={handleEmailSubmit}
+        targetCalculator="estimer votre budget d'achat"
+      />
     </div>
   );
 } 
