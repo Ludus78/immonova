@@ -27,7 +27,7 @@ export default function Home() {
     }
   };
 
-  const handleEmailSubmit = async (email: string) => {
+  const handleEmailSubmit = async (email: string, acceptNewsletter: boolean) => {
     try {
       const response = await fetch('/api/leads', {
         method: 'POST',
@@ -37,6 +37,7 @@ export default function Home() {
         body: JSON.stringify({
           email,
           calculatorType: targetCalculator.name,
+          acceptNewsletter,
         }),
       });
 

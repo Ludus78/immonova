@@ -47,6 +47,7 @@ model Lead {
   id              String    @id @default(cuid())
   email           String    @unique
   calculatorsUsed String    // Stored as JSON string
+  acceptNewsletter Boolean  @default(true)
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
 }

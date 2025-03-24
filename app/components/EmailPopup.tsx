@@ -1,9 +1,10 @@
 import { useState } from 'react';
+import { XMarkIcon } from '@heroicons/react/24/solid';
 
 interface EmailPopupProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (email: string) => Promise<void>;
+  onSubmit: (email: string, acceptNewsletter: boolean) => Promise<void>;
   targetCalculator: string;
 }
 
@@ -11,6 +12,7 @@ export default function EmailPopup({ isOpen, onClose, onSubmit, targetCalculator
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [acceptNewsletter, setAcceptNewsletter] = useState(true);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,7 +20,7 @@ export default function EmailPopup({ isOpen, onClose, onSubmit, targetCalculator
     setError('');
 
     try {
-      await onSubmit(email);
+      await onSubmit(email, acceptNewsletter);
       onClose();
     } catch (err) {
       setError('Une erreur est survenue. Veuillez réessayer.');
@@ -30,48 +32,89 @@ export default function EmailPopup({ isOpen, onClose, onSubmit, targetCalculator
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
-      <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
-        <div className="mt-3 text-center">
-          <h3 className="text-lg leading-6 font-medium text-gray-900">
+    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 backdrop-blur-sm">
+      <div className="relative top-20 mx-auto p-8 border w-[450px] shadow-2xl rounded-xl bg-white">
+        {/* Bouton de fermeture */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-500 focus:outline-none"
+        >
+          <XMarkIcon className="h-6 w-6" />
+        </button>
+
+        <div className="text-center">
+          {/* Icône de la calculette */}
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 mb-4">
+            <svg className="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+            </svg>
+          </div>
+
+          <h3 className="text-xl font-semibold text-gray-900 mb-2">
             Accédez à la calculette {targetCalculator}
           </h3>
-          <div className="mt-2 px-7 py-3">
-            <p className="text-sm text-gray-500">
-              Entrez votre email pour accéder à nos outils de calcul gratuits
-            </p>
-            {error && (
-              <p className="text-sm text-red-600 mt-2">
+          <p className="text-sm text-gray-500 mb-6">
+            Entrez votre email pour accéder gratuitement à nos outils de calcul et recevoir des conseils personnalisés pour votre projet immobilier
+          </p>
+
+          {error && (
+            <div className="mb-4 p-3 bg-red-50 rounded-lg">
+              <p className="text-sm text-red-600">
                 {error}
               </p>
-            )}
-            <form onSubmit={handleSubmit} className="mt-4">
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Votre email"
+                placeholder="Votre email professionnel"
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
               />
-              <div className="flex justify-end mt-4 gap-4">
-                <button
-                  type="button"
-                  onClick={onClose}
-                  className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-transparent rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-                >
-                  Annuler
-                </button>
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-indigo-500 to-indigo-600 border border-transparent rounded-md hover:from-indigo-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                  {isLoading ? 'Chargement...' : 'Continuer'}
-                </button>
+            </div>
+
+            <div className="flex items-start">
+              <div className="flex items-center h-5">
+                <input
+                  id="newsletter"
+                  type="checkbox"
+                  checked={acceptNewsletter}
+                  onChange={(e) => setAcceptNewsletter(e.target.checked)}
+                  className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded cursor-pointer"
+                />
               </div>
-            </form>
-          </div>
+              <div className="ml-3">
+                <label htmlFor="newsletter" className="text-sm text-gray-500 cursor-pointer">
+                  Je souhaite recevoir des conseils personnalisés et les actualités immobilières
+                </label>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full px-4 py-3 text-sm font-medium text-white bg-gradient-to-r from-indigo-500 to-indigo-600 border border-transparent rounded-lg shadow-sm hover:from-indigo-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isLoading ? 'Chargement...' : 'Accéder à la calculette'}
+              </button>
+              <button
+                type="button"
+                onClick={onClose}
+                className="text-sm text-gray-500 hover:text-gray-700 transition-colors"
+              >
+                Non merci
+              </button>
+            </div>
+          </form>
+
+          <p className="mt-4 text-xs text-gray-400">
+            En utilisant nos services, vous acceptez notre politique de confidentialité et nos conditions d'utilisation.
+          </p>
         </div>
       </div>
     </div>

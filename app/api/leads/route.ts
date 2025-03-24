@@ -3,7 +3,7 @@ import prisma from '@/lib/prisma';
 
 export async function POST(request: Request) {
   try {
-    const { email, calculatorType } = await request.json();
+    const { email, calculatorType, acceptNewsletter } = await request.json();
 
     if (!email || !calculatorType) {
       return NextResponse.json(
@@ -24,11 +24,12 @@ export async function POST(request: Request) {
         calculatorsUsed.push(calculatorType);
       }
 
-      // Mettre à jour les calculettes utilisées
+      // Mettre à jour les calculettes utilisées et le statut newsletter
       await prisma.lead.update({
         where: { email },
         data: {
           calculatorsUsed: JSON.stringify(calculatorsUsed),
+          acceptNewsletter: acceptNewsletter ?? existingLead.acceptNewsletter,
           updatedAt: new Date(),
         },
       });
@@ -38,6 +39,7 @@ export async function POST(request: Request) {
         data: {
           email,
           calculatorsUsed: JSON.stringify([calculatorType]),
+          acceptNewsletter: acceptNewsletter ?? true,
         },
       });
     }
