@@ -57,7 +57,7 @@ export default function CalculetteViager() {
         85: 7.0,
         90: 4.5
       }
-    };
+    } as const;
     
     // Trouver la valeur la plus proche dans la table
     const ages = Object.keys(tableEsperanceVie[sexe]).map(Number);
@@ -65,7 +65,8 @@ export default function CalculetteViager() {
       Math.abs(curr - age) < Math.abs(prev - age) ? curr : prev
     );
     
-    return tableEsperanceVie[sexe][ageReference];
+    // Utiliser une assertion de type pour indiquer que ageReference est une clé valide
+    return tableEsperanceVie[sexe][ageReference as keyof typeof tableEsperanceVie[typeof sexe]];
   };
   
   const esperanceVieVendeur = calculerEsperanceVie(ageVendeur, sexeVendeur);
