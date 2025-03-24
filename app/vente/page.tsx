@@ -300,23 +300,6 @@ export default function VentePage() {
         </Link>
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold text-gray-800">Guide de la vente immobilière</h1>
-          <Link 
-            href="/calculette" 
-            className="flex items-center gap-3 bg-indigo-600 text-white px-5 py-3 rounded-lg shadow-md hover:bg-indigo-700 transition-all transform hover:scale-105 border-2 border-indigo-700"
-            title="Calculette immobilière"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-12 h-12 text-white">
-              <rect x="3" y="2" width="18" height="20" rx="2" fill="#333" />
-              <rect x="5" y="4" width="14" height="4" rx="1" fill="#9DE0BC" />
-              <rect x="5" y="10" width="3" height="3" rx="0.5" fill="#F6B266" />
-              <rect x="10" y="10" width="3" height="3" rx="0.5" fill="#F6B266" />
-              <rect x="15" y="10" width="3" height="3" rx="0.5" fill="#F6B266" />
-              <rect x="5" y="15" width="3" height="3" rx="0.5" fill="#F6B266" />
-              <rect x="10" y="15" width="3" height="3" rx="0.5" fill="#F6B266" />
-              <rect x="15" y="15" width="3" height="3" rx="0.5" fill="#F39C4F" />
-            </svg>
-            <span className="font-semibold text-lg">Calculer votre budget</span>
-          </Link>
         </div>
         <p className="text-gray-600 mt-2">Découvrez nos conseils et guides pour réussir votre projet de vente immobilière</p>
       </div>
