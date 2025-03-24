@@ -1,9 +1,57 @@
 "use client";
 
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import EmailPopup from './components/EmailPopup';
 
 export default function Home() {
+  const { data: session } = useSession();
+  const router = useRouter();
+  const [showEmailPopup, setShowEmailPopup] = useState(false);
+  const [targetCalculator, setTargetCalculator] = useState<{
+    name: string;
+    path: string;
+  }>({ name: '', path: '' });
+
+  const handleCalculatorClick = (calculatorName: string, path: string) => {
+    if (session?.user) {
+      // Si l'utilisateur est connecté, redirection directe
+      router.push(path);
+    } else {
+      // Sinon, afficher le popup
+      setTargetCalculator({ name: calculatorName, path });
+      setShowEmailPopup(true);
+    }
+  };
+
+  const handleEmailSubmit = async (email: string) => {
+    try {
+      const response = await fetch('/api/leads', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          calculatorType: targetCalculator.name,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to save email');
+      }
+
+      // Rediriger vers la calculette après la sauvegarde de l'email
+      router.push(targetCalculator.path);
+    } catch (error) {
+      console.error('Error saving email:', error);
+      throw error;
+    }
+  };
+
   return (
     <>
       {/* Hero Section */}
@@ -64,9 +112,12 @@ export default function Home() {
                 </div>
               </div>
               <div className="mt-6">
-                <Link href="/calculette" className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <button
+                  onClick={() => handleCalculatorClick("Achat", "/calculette")}
+                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
                   Utiliser la calculette
-                </Link>
+                </button>
               </div>
             </div>
           </div>
@@ -88,9 +139,12 @@ export default function Home() {
                 </div>
               </div>
               <div className="mt-6">
-                <Link href="/calculette-locative" className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <button
+                  onClick={() => handleCalculatorClick("Locatif", "/calculette-locative")}
+                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
                   Utiliser la calculette
-                </Link>
+                </button>
               </div>
             </div>
           </div>
@@ -112,9 +166,12 @@ export default function Home() {
                 </div>
               </div>
               <div className="mt-6">
-                <Link href="/calculette-viager" className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <button
+                  onClick={() => handleCalculatorClick("Viager", "/calculette-viager")}
+                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
                   Utiliser la calculette
-                </Link>
+                </button>
               </div>
             </div>
           </div>
@@ -206,6 +263,14 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* Email Popup */}
+      <EmailPopup
+        isOpen={showEmailPopup}
+        onClose={() => setShowEmailPopup(false)}
+        onSubmit={handleEmailSubmit}
+        targetCalculator={targetCalculator.name}
+      />
     </>
   );
 } 
