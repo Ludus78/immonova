@@ -20,20 +20,8 @@ export default function Footer() {
             </a>
           </div>
         </div>
-        <div>
-          <h4 className="font-semibold mb-4 text-gray-800">Services</h4>
-          <ul className="space-y-2">
-            <li><Link href="/estimation" className="text-gray-600 hover:text-indigo-700">Estimation</Link></li>
-            <li><Link href="/diagnostics" className="text-gray-600 hover:text-indigo-700">Diagnostics</Link></li>
-            <li><Link href="/mise-en-valeur" className="text-gray-600 hover:text-indigo-700">Mise en valeur</Link></li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-semibold mb-4 text-gray-800">Outils</h4>
-          <ul className="space-y-2">
-            <li><Link href="/frais-annexes" className="text-gray-600 hover:text-indigo-700">Frais annexes</Link></li>
-            <li><Link href="/documents" className="text-gray-600 hover:text-indigo-700">Documents</Link></li>
-          </ul>
+        <div className="md:col-span-2">
+          {/* Les sections Services et Outils ont été supprimées */}
         </div>
         <div>
           <h4 className="font-semibold mb-4 text-gray-800">Contact</h4>

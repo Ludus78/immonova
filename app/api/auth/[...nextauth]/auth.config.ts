@@ -16,8 +16,19 @@ const hashPassword = (password: string): string => {
 };
 
 const verifyPassword = (storedPassword: string, suppliedPassword: string): boolean => {
+  // Vérifier que le storedPassword est valide et contient un format correct
+  if (!storedPassword || !storedPassword.includes(':')) {
+    return false;
+  }
+  
   // Split the stored password into salt and hash
   const [salt, hash] = storedPassword.split(':');
+  
+  // Vérifier que le salt et le hash existent
+  if (!salt || !hash) {
+    return false;
+  }
+  
   // Hash the supplied password with the same salt
   const suppliedHash = crypto.scryptSync(suppliedPassword, salt, 64).toString('hex');
   // Compare the hashes
