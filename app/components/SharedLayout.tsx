@@ -34,7 +34,7 @@ export default function SharedLayout({ children }: SharedLayoutProps) {
           </div>
           
           <nav className="hidden md:flex items-center gap-8">
-            {/* Le lien Accueil a été supprimé */}
+            {/* Le lien Contact a été supprimé */}
           </nav>
           
           {session ? (

@@ -27,6 +27,9 @@ export default function Footer() {
           <h4 className="font-semibold mb-4 text-gray-800">Contact</h4>
           <p className="text-gray-600 mb-2">Ludovic DENIS</p>
           <p className="text-gray-600 mb-2">ludv.denis@gmail.com</p>
+          <Link href="/contact" className="text-indigo-600 hover:text-indigo-800 inline-block mt-2">
+            Nous contacter
+          </Link>
         </div>
       </div>
       <div className="max-w-7xl mx-auto pt-8 mt-8 border-t border-gray-200 text-center text-gray-500 text-sm">
