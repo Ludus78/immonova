@@ -26,7 +26,6 @@ export default function Footer() {
             <li><Link href="/estimation" className="text-gray-600 hover:text-indigo-700">Estimation</Link></li>
             <li><Link href="/diagnostics" className="text-gray-600 hover:text-indigo-700">Diagnostics</Link></li>
             <li><Link href="/mise-en-valeur" className="text-gray-600 hover:text-indigo-700">Mise en valeur</Link></li>
-            <li><Link href="/calculette" className="text-gray-600 hover:text-indigo-700">Calculette d'achat</Link></li>
           </ul>
         </div>
         <div>
