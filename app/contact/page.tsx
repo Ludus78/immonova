@@ -171,7 +171,7 @@ export default function ContactPage() {
                     value={formData.name}
                     onChange={handleChange}
                     autoComplete="name"
-                    className={`block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm ${errors.name ? 'border-red-300' : ''}`}
+                    className={`block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm ${errors.name ? 'border-red-300' : ''}`}
                     required
                   />
                   {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
@@ -191,7 +191,7 @@ export default function ContactPage() {
                     value={formData.email}
                     onChange={handleChange}
                     autoComplete="email"
-                    className={`block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm ${errors.email ? 'border-red-300' : ''}`}
+                    className={`block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm ${errors.email ? 'border-red-300' : ''}`}
                     required
                   />
                   {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
@@ -211,7 +211,7 @@ export default function ContactPage() {
                     value={formData.phone}
                     onChange={handleChange}
                     autoComplete="tel"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
                   />
                 </div>
               </div>
@@ -228,7 +228,7 @@ export default function ContactPage() {
                     id="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
                   />
                 </div>
               </div>
@@ -249,7 +249,7 @@ export default function ContactPage() {
                     name="propertyType"
                     value={formData.propertyType}
                     onChange={handleChange}
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
                   >
                     {propertyTypes.map(type => (
                       <option key={type.value} value={type.value}>
@@ -273,7 +273,7 @@ export default function ContactPage() {
                     value={formData.budget}
                     onChange={handleChange}
                     placeholder="ex: 250000"
-                    className={`block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm ${errors.budget ? 'border-red-300' : ''}`}
+                    className={`block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm ${errors.budget ? 'border-red-300' : ''}`}
                   />
                   {errors.budget && <p className="mt-1 text-sm text-red-600">{errors.budget}</p>}
                 </div>
@@ -291,7 +291,7 @@ export default function ContactPage() {
                     rows={6}
                     value={formData.message}
                     onChange={handleChange}
-                    className={`block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm ${errors.message ? 'border-red-300' : ''}`}
+                    className={`block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm ${errors.message ? 'border-red-300' : ''}`}
                     required
                   />
                   {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message}</p>}
@@ -323,7 +323,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
+                  className="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50"
                 >
                   {isSubmitting ? (
                     <>
