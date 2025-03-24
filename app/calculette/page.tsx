@@ -279,9 +279,12 @@ export default function Calculette() {
             </p>
           </div>
 
-          <div className="mt-8 text-center">
-            <Link href="/calculette-locative" className="text-indigo-600 hover:text-indigo-800 font-medium">
+          <div className="mt-8 text-center space-y-4">
+            <Link href="/calculette-locative" className="block text-indigo-600 hover:text-indigo-800 font-medium">
               Essayez notre calculette d'investissement locatif →
+            </Link>
+            <Link href="/calculette-viager" className="block text-indigo-600 hover:text-indigo-800 font-medium">
+              Découvrez notre calculette d'investissement en viager →
             </Link>
           </div>
         </div>

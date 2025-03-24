@@ -423,9 +423,12 @@ export default function CalculetteLocative() {
             </p>
           </div>
           
-          <div className="mt-8 text-center">
-            <Link href="/calculette" className="text-indigo-600 hover:text-indigo-800 font-medium">
+          <div className="mt-8 text-center space-y-4">
+            <Link href="/calculette" className="block text-indigo-600 hover:text-indigo-800 font-medium">
               Voir aussi notre calculette d'achat immobilier →
+            </Link>
+            <Link href="/calculette-viager" className="block text-indigo-600 hover:text-indigo-800 font-medium">
+              Découvrez notre calculette d'investissement en viager →
             </Link>
           </div>
         </div>
