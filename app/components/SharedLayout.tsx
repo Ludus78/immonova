@@ -65,9 +65,7 @@ export default function SharedLayout({ children }: SharedLayoutProps) {
 
       {/* Main Content */}
       <main className="flex-grow">
-        <div className="max-w-7xl mx-auto p-6">
-          {children}
-        </div>
+        {children}
       </main>
       
       {/* Footer */}
