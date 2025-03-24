@@ -24,6 +24,7 @@ model User {
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
   accounts        Account[]
+  chatSessions    ChatSession[]
 }
 
 model Account {
@@ -52,4 +53,25 @@ model Lead {
   acceptNewsletter Boolean  @default(true)
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
+}
+
+model ChatSession {
+  id        String        @id @default(cuid())
+  userId    String?       // Peut être null pour les utilisateurs non connectés
+  sessionId String        @unique // ID de session pour les utilisateurs non connectés
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  messages  ChatMessage[]
+  
+  user      User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model ChatMessage {
+  id            String      @id @default(cuid())
+  content       String
+  sender        String      // "user" ou "bot"
+  timestamp     DateTime    @default(now())
+  chatSessionId String
+  
+  chatSession   ChatSession @relation(fields: [chatSessionId], references: [id], onDelete: Cascade)
 }

@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useLocalStorage } from "react-use";
+import { useSession } from "next-auth/react";
 
 type Message = {
   id: string;
@@ -12,14 +13,51 @@ type Message = {
 
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useLocalStorage<Message[]>("chat-messages", []);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [isHistoryLoaded, setIsHistoryLoaded] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const chatRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const { data: session } = useSession();
   
   // Référence au champ de saisie
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // Charger l'historique de conversation quand le widget s'ouvre
+  useEffect(() => {
+    if (isOpen && !isHistoryLoaded) {
+      fetchChatHistory();
+    }
+  }, [isOpen, isHistoryLoaded]);
+
+  // Récupérer l'historique de conversation
+  const fetchChatHistory = async () => {
+    try {
+      const response = await fetch("/api/chat/history");
+      
+      if (response.ok) {
+        const data = await response.json();
+        
+        // Convertir les messages du format BDD au format local
+        if (data.messages && Array.isArray(data.messages)) {
+          const formattedMessages = data.messages.map((msg: any) => ({
+            id: msg.id,
+            content: msg.content,
+            sender: msg.sender as "user" | "bot",
+            timestamp: new Date(msg.timestamp).getTime()
+          }));
+          
+          setMessages(formattedMessages);
+        }
+      }
+      
+      setIsHistoryLoaded(true);
+    } catch (error) {
+      console.error("Erreur lors de la récupération de l'historique:", error);
+      setIsHistoryLoaded(true); // Marquer comme chargé même en cas d'erreur
+    }
+  };
 
   // Gérer les clics en dehors du chat
   useEffect(() => {
@@ -62,9 +100,7 @@ export default function ChatWidget() {
     };
     
     // Mettre à jour les messages avec le message de l'utilisateur
-    const currentMessages = [...(messages || [])];
-    currentMessages.push(userMessage);
-    setMessages(currentMessages);
+    setMessages(currentMessages => [...currentMessages, userMessage]);
     
     const sentMessage = inputValue;
     setInputValue("");
@@ -99,11 +135,7 @@ export default function ChatWidget() {
       };
       
       // Mettre à jour les messages avec la réponse du bot
-      setMessages(prev => {
-        const updatedMessages = [...(prev || [])];
-        updatedMessages.push(botMessage);
-        return updatedMessages;
-      });
+      setMessages(prev => [...prev, botMessage]);
     } catch (error) {
       console.error("Erreur lors de l'envoi du message:", error);
       
@@ -116,11 +148,7 @@ export default function ChatWidget() {
       };
       
       // Mettre à jour les messages avec le message d'erreur
-      setMessages(prev => {
-        const updatedMessages = [...(prev || [])];
-        updatedMessages.push(errorMessage);
-        return updatedMessages;
-      });
+      setMessages(prev => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);
     }
@@ -144,7 +172,7 @@ export default function ChatWidget() {
       {/* Bouton de chat */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-16 h-16 bg-indigo-600 rounded-full shadow-lg flex items-center justify-center text-white hover:bg-indigo-700 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+        className="w-16 h-16 bg-primary-600 rounded-full shadow-lg flex items-center justify-center text-white hover:bg-primary-700 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
       >
         {isOpen ? (
           <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -161,14 +189,14 @@ export default function ChatWidget() {
       {isOpen && (
         <div className="absolute bottom-20 right-0 w-96 max-h-[500px] bg-white rounded-lg shadow-xl flex flex-col overflow-hidden border border-gray-200">
           {/* Header du chat */}
-          <div className="bg-indigo-600 text-white p-4 flex items-center justify-between">
+          <div className="bg-primary-600 text-white p-4 flex items-center justify-between">
             <div className="flex items-center">
-              <div className="h-10 w-10 bg-indigo-700 rounded-full flex items-center justify-center mr-3">
+              <div className="h-10 w-10 bg-primary-700 rounded-full flex items-center justify-center mr-3">
                 <span className="text-lg font-bold">F</span>
               </div>
               <div>
                 <h3 className="font-semibold">Fabi</h3>
-                <p className="text-xs text-indigo-200">Assistant immobilier ImmoNova</p>
+                <p className="text-xs text-primary-200">Assistant immobilier ImmoNova</p>
               </div>
             </div>
           </div>
@@ -183,12 +211,12 @@ export default function ChatWidget() {
                 >
                   <div className={`max-w-[80%] rounded-lg p-3 ${
                     message.sender === "user" 
-                      ? "bg-indigo-600 text-white" 
+                      ? "bg-primary-600 text-white" 
                       : "bg-white text-gray-800 border border-gray-200"
                   }`}>
                     <div className="text-sm">{message.content}</div>
                     <div className={`text-xs mt-1 text-right ${
-                      message.sender === "user" ? "text-indigo-200" : "text-gray-500"
+                      message.sender === "user" ? "text-primary-200" : "text-gray-500"
                     }`}>
                       {formatTime(message.timestamp)}
                     </div>
@@ -228,7 +256,7 @@ export default function ChatWidget() {
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Écrivez votre message..."
-                className="flex-grow px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                className="flex-grow px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
                 disabled={isLoading}
               />
               <button
@@ -237,7 +265,7 @@ export default function ChatWidget() {
                 className={`px-4 py-2 rounded-r-md ${
                   isLoading || !inputValue.trim()
                     ? "bg-gray-300 text-gray-500"
-                    : "bg-indigo-600 text-white hover:bg-indigo-700"
+                    : "bg-primary-600 text-white hover:bg-primary-700"
                 } transition-colors focus:outline-none`}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
