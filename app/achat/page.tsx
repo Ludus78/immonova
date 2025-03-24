@@ -369,7 +369,7 @@ export default function AchatPage() {
         },
         body: JSON.stringify({
           email,
-          source: 'calculette_achat',
+          calculatorType: 'calculette_achat',
           acceptNewsletter
         }),
       });
