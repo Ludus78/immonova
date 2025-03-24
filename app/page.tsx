@@ -26,7 +26,7 @@ export default function Home() {
           <div className="text-center">
             <h1 className="text-4xl font-extrabold text-white sm:text-5xl md:text-6xl">
               <span className="block">ImmoNova</span>
-              <span className="block text-indigo-400">Votre partenaire immobilier</span>
+              <span className="block text-blue-300">Votre partenaire immobilier</span>
             </h1>
             <p className="mt-3 max-w-md mx-auto text-base text-gray-300 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
               Découvrez nos outils et services pour vous accompagner dans tous vos projets immobiliers.
