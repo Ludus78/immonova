@@ -51,7 +51,7 @@ export default function EmailPopup({ isOpen, onClose, onSubmit, targetCalculator
           </div>
 
           <h3 className="text-xl font-semibold text-gray-900 mb-2">
-            Accédez à la calculette {targetCalculator}
+            Accédez à la calculette pour {targetCalculator}
           </h3>
           <p className="text-sm text-gray-500 mb-6">
             Entrez votre email pour accéder gratuitement à nos outils de calcul et recevoir des conseils personnalisés pour votre projet immobilier
