@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useDefaultRate } from '../hooks/useMarketRates';
 
 export default function CalculetteViager() {
   // Paramètres du bien
@@ -20,8 +21,15 @@ export default function CalculetteViager() {
   const [typeViager, setTypeViager] = useState<'libre' | 'occupé'>('libre');
   
   // Paramètres financiers
-  const [tauxRendement, setTauxRendement] = useState<number>(4);
+  // Récupérer le taux du marché via le hook, avec une valeur par défaut de 4%
+  const tauxMarche = useDefaultRate('viager', 15, 4);
+  const [tauxRendement, setTauxRendement] = useState<number>(tauxMarche);
   const [inflation, setInflation] = useState<number>(2);
+  
+  // Mettre à jour le taux de rendement quand le taux du marché change
+  useEffect(() => {
+    setTauxRendement(tauxMarche);
+  }, [tauxMarche]);
   
   // Calculs des coûts totaux de l'investissement
   const calculerInvestissementTotal = () => {
@@ -273,14 +281,29 @@ export default function CalculetteViager() {
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Taux de rendement attendu (%)
               </label>
-              <input
-                type="number"
-                step="0.1"
-                min="0"
-                value={tauxRendement}
-                onChange={(e) => setTauxRendement(Number(e.target.value))}
-                className="w-full p-2 border border-gray-300 rounded focus:ring focus:ring-indigo-200 focus:border-indigo-500"
-              />
+              <div className="flex flex-col space-y-2">
+                <div className="bg-gray-50 p-2 rounded border border-gray-200 text-sm text-gray-600">
+                  Taux du marché actuel: {tauxMarche.toFixed(2)}%
+                </div>
+                <div className="flex items-center space-x-2">
+                  <input
+                    type="number"
+                    step="0.01"
+                    min="0.1"
+                    max="15"
+                    value={tauxRendement}
+                    onChange={(e) => setTauxRendement(Number(e.target.value))}
+                    className="flex-1 p-2 border border-gray-300 rounded focus:ring focus:ring-indigo-200 focus:border-indigo-500"
+                  />
+                  <button 
+                    type="button" 
+                    onClick={() => setTauxRendement(tauxMarche)}
+                    className="p-2 bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200 text-sm"
+                  >
+                    Réinitialiser
+                  </button>
+                </div>
+              </div>
             </div>
             
             <div>
@@ -388,8 +411,8 @@ export default function CalculetteViager() {
             <h3 className="font-medium text-blue-700 mb-2">Conseil ImmoNova</h3>
             <p className="text-sm text-blue-600">
               {rentabiliteNette >= tauxRendement 
-                ? `Votre investissement en viager semble intéressant avec une rentabilité nette de ${rentabiliteNette.toFixed(2)}%, supérieure à votre taux de rendement attendu. Contactez nos experts pour optimiser davantage votre investissement.`
-                : `Attention, votre investissement en viager génère une rentabilité nette de ${rentabiliteNette.toFixed(2)}%, inférieure à votre taux de rendement attendu. Nos experts peuvent vous aider à optimiser votre stratégie d'investissement.`
+                ? `Votre investissement en viager semble intéressant avec une rentabilité nette de ${rentabiliteNette.toFixed(2)}%, supérieure à votre taux de rendement personnalisé de ${tauxRendement.toFixed(2)}%. Contactez nos experts pour optimiser davantage votre investissement.`
+                : `Attention, votre investissement en viager génère une rentabilité nette de ${rentabiliteNette.toFixed(2)}%, inférieure à votre taux de rendement personnalisé de ${tauxRendement.toFixed(2)}%. Nos experts peuvent vous aider à optimiser votre stratégie d'investissement.`
               }
             </p>
           </div>

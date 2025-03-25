@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useDefaultRate } from '../hooks/useMarketRates';
 
 export default function CalculetteLocative() {
   // Paramètres d'entrée de l'investissement
@@ -13,8 +14,15 @@ export default function CalculetteLocative() {
   
   // Paramètres du financement
   const [duree, setDuree] = useState<number>(20);
-  const [tauxInteret, setTauxInteret] = useState<number>(3.5);
+  // Récupérer le taux du marché via le hook, avec une valeur par défaut de 3.5%
+  const tauxMarche = useDefaultRate('locatif', duree, 3.5);
+  const [tauxInteret, setTauxInteret] = useState<number>(tauxMarche);
   const [fraisDossier, setFraisDossier] = useState<number>(1000);
+  
+  // Mettre à jour le taux d'intérêt quand la durée change
+  useEffect(() => {
+    setTauxInteret(tauxMarche);
+  }, [tauxMarche]);
   
   // Paramètres locatifs
   const [loyerMensuel, setLoyerMensuel] = useState<number>(800);
@@ -202,15 +210,29 @@ export default function CalculetteLocative() {
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Taux d'intérêt (%)
               </label>
-              <input
-                type="number"
-                step="0.1"
-                min="0.1"
-                max="10"
-                value={tauxInteret}
-                onChange={(e) => setTauxInteret(Number(e.target.value))}
-                className="w-full p-2 border border-gray-300 rounded focus:ring focus:ring-indigo-200 focus:border-indigo-500"
-              />
+              <div className="flex flex-col space-y-2">
+                <div className="bg-gray-50 p-2 rounded border border-gray-200 text-sm text-gray-600">
+                  Taux du marché actuel: {tauxMarche.toFixed(2)}%
+                </div>
+                <div className="flex items-center space-x-2">
+                  <input
+                    type="number"
+                    step="0.01"
+                    min="0.1"
+                    max="15"
+                    value={tauxInteret}
+                    onChange={(e) => setTauxInteret(Number(e.target.value))}
+                    className="flex-1 p-2 border border-gray-300 rounded focus:ring focus:ring-indigo-200 focus:border-indigo-500"
+                  />
+                  <button 
+                    type="button" 
+                    onClick={() => setTauxInteret(tauxMarche)}
+                    className="p-2 bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200 text-sm"
+                  >
+                    Réinitialiser
+                  </button>
+                </div>
+              </div>
             </div>
             
             <div>
@@ -338,7 +360,7 @@ export default function CalculetteLocative() {
                 {new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(mensualitePret)}
               </div>
               <p className="text-sm text-gray-500 mt-1">
-                Sur {duree} ans à {tauxInteret}%
+                Sur {duree} ans à {tauxInteret.toFixed(2)}%
               </p>
             </div>
             
