@@ -40,15 +40,26 @@ export default function SharedLayout({ children }: SharedLayoutProps) {
           </nav>
           
            {isAuthenticated ? (
-           <>
-            <Link href="/dashboard">Dashboard</Link>
-            <LogoutLink>Déconnexion</LogoutLink>
-           </>
+           <div className="flex items-center space-x-4">
+            <Link 
+              href="/dashboard" 
+              className="px-4 py-2 font-medium text-primary-700 hover:text-primary-800 transition-colors"
+            >
+              Dashboard
+            </Link>
+            <LogoutLink className="px-4 py-2 border border-primary-600 rounded-lg font-medium text-primary-700 hover:bg-primary-50 transition-all">
+              Déconnexion
+            </LogoutLink>
+           </div>
           ) : (
-         <>
-         <LoginLink>Connexion</LoginLink>
-         <RegisterLink>Inscription</RegisterLink>
-         </>   
+         <div className="flex items-center space-x-3">
+           <LoginLink className="px-4 py-2 font-medium text-primary-700 hover:text-primary-800 transition-colors">
+             Connexion
+           </LoginLink>
+           <RegisterLink className="px-4 py-2 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 transition-colors">
+             Inscription
+           </RegisterLink>
+         </div>   
           )}
         </div>
       </header>
