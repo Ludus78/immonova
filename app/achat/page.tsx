@@ -109,7 +109,7 @@ export default function AchatPage() {
       id: 'comment-bien-vendre',
       title: 'Bien définir son secteur géographique',
       description: 'Le choix du secteur géographique est une étape clé dans un projet d\'achat immobilier.',
-      icon: '📈',
+      icon: '🗺️',
       color: 'bg-blue-100 text-blue-600',
       content: (
         <div className="space-y-6">
