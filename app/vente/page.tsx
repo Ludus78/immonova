@@ -328,8 +328,8 @@ export default function VentePage() {
       </div>
 
       {/* Section Premium */}
+      {/* Temporairement masqué
       <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Formule Premium */}
         <div className="bg-gradient-to-r from-indigo-500 to-blue-600 rounded-xl shadow-xl p-8 text-white">
           <h2 className="text-2xl font-bold mb-3">Formule Premium ImmoNova</h2>
           <p className="text-white/80 mb-6">Accédez à des documents et des informations exclusifs pour réussir votre projet immobilier</p>
@@ -373,7 +373,6 @@ export default function VentePage() {
           </div>
         </div>
         
-        {/* Offre Illimitée */}
         <div className="bg-gradient-to-r from-red-500 to-orange-500 rounded-xl shadow-xl p-8 text-white">
           <h2 className="text-2xl font-bold mb-3">Offre Illimitée</h2>
           <p className="text-white/80 mb-6">Profitez d'un accès complet à tous nos services premium sans restriction de durée</p>
@@ -418,6 +417,7 @@ export default function VentePage() {
           </div>
         </div>
       </div>
+      */}
 
       {/* Modal pour afficher l'article */}
       {selectedArticle && (

@@ -9,29 +9,16 @@ import {
   ChartBarIcon, 
   DocumentTextIcon, 
   BellAlertIcon,
-  NewspaperIcon,
   LightBulbIcon,
   CheckCircleIcon,
   ExclamationCircleIcon,
   ChatBubbleLeftRightIcon
 } from '@heroicons/react/24/outline';
-import useNews from '../hooks/useNews';
-import NewsCard from '../components/dashboard/NewsCard';
 
 export default function Dashboard() {
   const { user } = useKindeBrowserClient();
-  const { news, isLoading, error, fetchNews, addNews, updateNews, deleteNews } = useNews();
   const [greeting, setGreeting] = useState('');
   const [activeTab, setActiveTab] = useState('apercu');
-  const [showNewsEditor, setShowNewsEditor] = useState(false);
-  const [newArticle, setNewArticle] = useState({
-    title: '',
-    excerpt: '',
-    category: 'Financement',
-    content: '',
-    imageUrl: ''
-  });
-  const [editingArticle, setEditingArticle] = useState<string | null>(null);
 
   // Déterminer le message de salutation en fonction de l'heure
   useEffect(() => {
@@ -63,64 +50,6 @@ export default function Dashboard() {
     { id: 3, title: 'Simuler viager', href: '/calculette-viager', icon: <CalculatorIcon className="h-6 w-6 text-white" />, color: 'bg-amber-600' },
     { id: 4, title: 'Documents', href: '/documents', icon: <DocumentTextIcon className="h-6 w-6 text-white" />, color: 'bg-purple-600' },
   ];
-
-  // Créer une fonction pour formater la date actuelle au format JJ/MM/AAAA
-  const formatDate = (date: Date): string => {
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
-  };
-
-  // Détermine si l'utilisateur est admin
-  const isAdmin = user?.email === "admin@immonova.fr";
-
-  // Fonction pour éditer une actualité
-  const handleEditNews = (id: string) => {
-    const article = news.find(item => item.id === id);
-    if (article) {
-      setNewArticle({
-        title: article.title,
-        excerpt: article.excerpt,
-        category: article.category,
-        content: article.content || '',
-        imageUrl: article.imageUrl || ''
-      });
-      setEditingArticle(id);
-      setShowNewsEditor(true);
-    }
-  };
-
-  // Fonction pour supprimer une actualité
-  const handleDeleteNews = async (id: string) => {
-    if (window.confirm('Êtes-vous sûr de vouloir supprimer cette actualité ?')) {
-      await deleteNews(id);
-    }
-  };
-
-  // Fonction pour ajouter ou mettre à jour une actualité
-  const handleSaveNews = async () => {
-    if (!newArticle.title || !newArticle.excerpt) return;
-    
-    if (editingArticle) {
-      // Mettre à jour une actualité existante
-      await updateNews(editingArticle, newArticle);
-      setEditingArticle(null);
-    } else {
-      // Ajouter une nouvelle actualité
-      await addNews(newArticle);
-    }
-    
-    // Réinitialiser le formulaire
-    setNewArticle({ 
-      title: '', 
-      excerpt: '', 
-      category: 'Financement',
-      content: '',
-      imageUrl: ''
-    });
-    setShowNewsEditor(false);
-  };
 
   const personalTips = [
     {
@@ -217,16 +146,6 @@ export default function Dashboard() {
               Aperçu
             </button>
             <button
-              onClick={() => setActiveTab('actualites')}
-              className={`py-4 px-6 whitespace-nowrap font-medium text-sm border-b-2 ${
-                activeTab === 'actualites' 
-                  ? 'border-primary-600 text-primary-700' 
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-              }`}
-            >
-              Actualités
-            </button>
-            <button
               onClick={() => setActiveTab('conseils')}
               className={`py-4 px-6 whitespace-nowrap font-medium text-sm border-b-2 ${
                 activeTab === 'conseils' 
@@ -306,45 +225,6 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              {/* Section Actualités résumé */}
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-xl font-semibold text-gray-800">Actualités immobilières</h2>
-                  <button 
-                    onClick={() => setActiveTab('actualites')}
-                    className="text-primary-600 hover:text-primary-800 text-sm font-medium"
-                  >
-                    Voir toutes les actualités
-                  </button>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {isLoading ? (
-                    <div className="col-span-2 bg-white rounded-lg shadow p-6 text-center">
-                      <p className="text-gray-500">Chargement des actualités...</p>
-                    </div>
-                  ) : error ? (
-                    <div className="col-span-2 bg-white rounded-lg shadow p-6 text-center">
-                      <p className="text-red-500">{error}</p>
-                    </div>
-                  ) : news.length === 0 ? (
-                    <div className="col-span-2 bg-white rounded-lg shadow p-6 text-center">
-                      <p className="text-gray-500">Aucune actualité disponible pour le moment.</p>
-                    </div>
-                  ) : (
-                    news.slice(0, 2).map((article) => (
-                      <NewsCard 
-                        key={article.id}
-                        article={article}
-                        isAdmin={isAdmin}
-                        onEdit={handleEditNews}
-                        onDelete={handleDeleteNews}
-                      />
-                    ))
-                  )}
-                </div>
-              </div>
-
               {/* Section "Derniers calculs" résumé */}
               <div>
                 <div className="flex items-center justify-between mb-4">
@@ -377,177 +257,6 @@ export default function Dashboard() {
                   ))}
                 </div>
               </div>
-            </div>
-          )}
-
-          {activeTab === 'actualites' && (
-            <div>
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">Actualités immobilières</h2>
-                {isAdmin && (
-                  <button 
-                    onClick={() => {
-                      if (!showNewsEditor) {
-                        setNewArticle({ 
-                          title: '', 
-                          excerpt: '', 
-                          category: 'Financement',
-                          content: '',
-                          imageUrl: ''
-                        });
-                        setEditingArticle(null);
-                      }
-                      setShowNewsEditor(!showNewsEditor);
-                    }}
-                    className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
-                  >
-                    {showNewsEditor ? "Masquer l'éditeur" : "Ajouter une actualité"}
-                  </button>
-                )}
-              </div>
-              
-              {showNewsEditor && (
-                <div className="bg-white rounded-lg shadow p-6 mb-8 border border-primary-200">
-                  <h3 className="text-lg font-medium text-gray-900 mb-4">
-                    {editingArticle ? "Modifier l'actualité" : "Ajouter une nouvelle actualité"}
-                  </h3>
-                  <div className="space-y-4">
-                    <div>
-                      <label htmlFor="newsTitle" className="block text-sm font-medium text-gray-700 mb-1">
-                        Titre
-                      </label>
-                      <input
-                        type="text"
-                        id="newsTitle"
-                        value={newArticle.title}
-                        onChange={(e) => setNewArticle({...newArticle, title: e.target.value})}
-                        className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500"
-                        placeholder="Titre de l'actualité"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="newsCategory" className="block text-sm font-medium text-gray-700 mb-1">
-                        Catégorie
-                      </label>
-                      <select
-                        id="newsCategory"
-                        value={newArticle.category}
-                        onChange={(e) => setNewArticle({...newArticle, category: e.target.value})}
-                        className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500"
-                      >
-                        <option value="Financement">Financement</option>
-                        <option value="Réglementation">Réglementation</option>
-                        <option value="Investissement">Investissement</option>
-                        <option value="Marché">Marché</option>
-                        <option value="Conseils">Conseils</option>
-                      </select>
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="newsImageUrl" className="block text-sm font-medium text-gray-700 mb-1">
-                        URL de l'image (optionnel)
-                      </label>
-                      <input
-                        type="text"
-                        id="newsImageUrl"
-                        value={newArticle.imageUrl}
-                        onChange={(e) => setNewArticle({...newArticle, imageUrl: e.target.value})}
-                        className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500"
-                        placeholder="https://exemple.com/image.jpg"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="newsExcerpt" className="block text-sm font-medium text-gray-700 mb-1">
-                        Résumé
-                      </label>
-                      <textarea
-                        id="newsExcerpt"
-                        rows={2}
-                        value={newArticle.excerpt}
-                        onChange={(e) => setNewArticle({...newArticle, excerpt: e.target.value})}
-                        className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500"
-                        placeholder="Résumé court de l'actualité..."
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="newsContent" className="block text-sm font-medium text-gray-700 mb-1">
-                        Contenu complet
-                      </label>
-                      <textarea
-                        id="newsContent"
-                        rows={6}
-                        value={newArticle.content}
-                        onChange={(e) => setNewArticle({...newArticle, content: e.target.value})}
-                        className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500"
-                        placeholder="Contenu détaillé de l'actualité..."
-                      />
-                    </div>
-                    
-                    <div className="flex justify-end space-x-3">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setNewArticle({ 
-                            title: '', 
-                            excerpt: '', 
-                            category: 'Financement',
-                            content: '',
-                            imageUrl: ''
-                          });
-                          setEditingArticle(null);
-                          setShowNewsEditor(false);
-                        }}
-                        className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
-                      >
-                        Annuler
-                      </button>
-                      <button
-                        type="button"
-                        onClick={handleSaveNews}
-                        disabled={!newArticle.title || !newArticle.excerpt}
-                        className={`px-4 py-2 rounded-md text-white ${
-                          !newArticle.title || !newArticle.excerpt 
-                            ? 'bg-gray-400 cursor-not-allowed' 
-                            : 'bg-primary-600 hover:bg-primary-700'
-                        }`}
-                      >
-                        {editingArticle ? "Mettre à jour" : "Publier"}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
-              
-              <p className="text-gray-500 mb-6">Restez informé des dernières tendances et actualités du marché immobilier français.</p>
-              
-              {isLoading ? (
-                <div className="bg-white rounded-lg shadow p-8 text-center">
-                  <p className="text-gray-500">Chargement des actualités...</p>
-                </div>
-              ) : error ? (
-                <div className="bg-white rounded-lg shadow p-8 text-center">
-                  <p className="text-red-500">{error}</p>
-                </div>
-              ) : news.length === 0 ? (
-                <div className="bg-white rounded-lg shadow p-8 text-center">
-                  <p className="text-gray-500">Aucune actualité disponible pour le moment.</p>
-                </div>
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {news.map((article) => (
-                    <NewsCard 
-                      key={article.id}
-                      article={article}
-                      isAdmin={isAdmin}
-                      onEdit={handleEditNews}
-                      onDelete={handleDeleteNews}
-                    />
-                  ))}
-                </div>
-              )}
             </div>
           )}
 
