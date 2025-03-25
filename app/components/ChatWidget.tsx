@@ -121,15 +121,10 @@ export default function ChatWidget() {
         throw new Error(data.error || "Une erreur est survenue");
       }
       
-      // Vérifier si la réponse contient un texte de réponse
-      if (!data.response) {
-        throw new Error("Réponse vide du serveur");
-      }
-      
-      // Ajouter la réponse du bot
+      // Ajouter la réponse du bot avec une valeur par défaut si la réponse est vide
       const botMessage: Message = {
         id: Date.now().toString(),
-        content: data.response,
+        content: data.response || "Je suis désolé, je n'ai pas pu comprendre votre demande. Pourriez-vous reformuler votre question ?",
         sender: "bot",
         timestamp: Date.now()
       };
