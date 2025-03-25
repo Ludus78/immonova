@@ -4,6 +4,7 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { validateEmail } from "../utils/validateEmail";
 
 export default function ConnexionPage() {
   const router = useRouter();
@@ -22,6 +23,14 @@ export default function ConnexionPage() {
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
+
+    // Validation de l'email
+    const emailValidation = validateEmail(email);
+    if (!emailValidation.isValid) {
+      setError(emailValidation.message || "Adresse email invalide");
+      setIsLoading(false);
+      return;
+    }
 
     try {
       const result = await signIn("credentials", {
@@ -47,6 +56,14 @@ export default function ConnexionPage() {
     e.preventDefault();
     setForgotPasswordLoading(true);
     setError(null);
+    
+    // Validation de l'email
+    const emailValidation = validateEmail(forgotPasswordEmail);
+    if (!emailValidation.isValid) {
+      setError(emailValidation.message || "Adresse email invalide");
+      setForgotPasswordLoading(false);
+      return;
+    }
     
     try {
       const response = await fetch('/api/auth/reset-password', {

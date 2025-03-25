@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/solid';
+import { validateEmail } from '../utils/validateEmail';
 
 interface EmailPopupProps {
   isOpen: boolean;
@@ -18,6 +19,14 @@ export default function EmailPopup({ isOpen, onClose, onSubmit, targetCalculator
     e.preventDefault();
     setIsLoading(true);
     setError('');
+
+    // Validation de l'email
+    const emailValidation = validateEmail(email);
+    if (!emailValidation.isValid) {
+      setError(emailValidation.message || "Adresse email invalide");
+      setIsLoading(false);
+      return;
+    }
 
     try {
       await onSubmit(email, acceptNewsletter);

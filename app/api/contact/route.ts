@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { validateEmail } from '@/app/utils/validateEmail';
 
 // Configuration du transporteur d'email
 // Pour production, utilisez vos propres informations SMTP
@@ -27,11 +28,11 @@ export async function POST(request: Request) {
       );
     }
 
-    // Vérification de format d'email basique
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    // Validation avancée de l'email
+    const emailValidation = validateEmail(email);
+    if (!emailValidation.isValid) {
       return NextResponse.json(
-        { error: 'Format d\'email invalide' },
+        { error: emailValidation.message || 'Format d\'email invalide' },
         { status: 400 }
       );
     }

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
+import { validateEmail } from '@/app/utils/validateEmail';
 
 export async function POST(request: Request) {
   try {
@@ -8,6 +9,15 @@ export async function POST(request: Request) {
     if (!email || !calculatorType) {
       return NextResponse.json(
         { error: 'Email et type de calculette requis' },
+        { status: 400 }
+      );
+    }
+
+    // Validation de l'email côté serveur
+    const emailValidation = validateEmail(email);
+    if (!emailValidation.isValid) {
+      return NextResponse.json(
+        { error: emailValidation.message || 'Adresse email invalide' },
         { status: 400 }
       );
     }

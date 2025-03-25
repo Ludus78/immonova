@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import crypto from "crypto";
+import { validateEmail } from "@/app/utils/validateEmail";
 
 const prisma = new PrismaClient();
 
@@ -22,6 +23,15 @@ export async function POST(request: Request) {
     if (!email || !password || !name) {
       return NextResponse.json(
         { message: "Tous les champs sont requis" },
+        { status: 400 }
+      );
+    }
+
+    // Validation de l'email côté serveur
+    const emailValidation = validateEmail(email);
+    if (!emailValidation.isValid) {
+      return NextResponse.json(
+        { message: emailValidation.message || "Adresse email invalide" },
         { status: 400 }
       );
     }
