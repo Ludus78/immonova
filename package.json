@@ -17,6 +17,8 @@
     "next-auth": "^4.24.5",
     "nodemailer": "^6.10.0",
     "openai": "^4.89.0",
+    "posthog-js": "^1.232.6",
+    "posthog-node": "^4.10.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.0.1",
