@@ -13,65 +13,15 @@ datasource db {
   url      = "file:./dev.db"
 }
 
-model User {
-  id              String    @id @default(cuid())
-  email           String    @unique
-  password        String
-  name            String?
-  isPremium       Boolean   @default(false)
-  resetToken      String?
-  resetTokenExpiry DateTime?
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-  accounts        Account[]
-  chatSessions    ChatSession[]
-}
-
-model Account {
-  id                String  @id @default(cuid())
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String?
-  access_token      String?
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String?
-  session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
-}
-
-model Lead {
-  id              String    @id @default(cuid())
-  email           String    @unique
-  calculatorsUsed String    // Stored as JSON string
-  acceptNewsletter Boolean  @default(true)
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-}
-
-model ChatSession {
-  id        String        @id @default(cuid())
-  userId    String?       // Peut être null pour les utilisateurs non connectés
-  sessionId String        @unique // ID de session pour les utilisateurs non connectés
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @updatedAt
-  messages  ChatMessage[]
-  
-  user      User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model ChatMessage {
-  id            String      @id @default(cuid())
-  content       String
-  sender        String      // "user" ou "bot"
-  timestamp     DateTime    @default(now())
-  chatSessionId String
-  
-  chatSession   ChatSession @relation(fields: [chatSessionId], references: [id], onDelete: Cascade)
+model Contact {
+    id          String    @id @default(cuid())
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime? @updatedAt
+    name        String?   @unique
+    email       String?   @unique
+    phone       String?
+    subject     String?
+    projectType String?
+    budget      Int?
+    message     String?
 }
