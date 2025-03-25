@@ -187,10 +187,10 @@ export default function ChatWidget() {
           <div className="bg-primary-600 text-white p-4 flex items-center justify-between">
             <div className="flex items-center">
               <div className="h-10 w-10 bg-primary-700 rounded-full flex items-center justify-center mr-3">
-                <span className="text-lg font-bold">F</span>
+                <span className="text-lg font-bold">C</span>
               </div>
               <div>
-                <h3 className="font-semibold">Fabi</h3>
+                <h3 className="font-semibold">Claude</h3>
                 <p className="text-xs text-primary-200">Assistant immobilier ImmoNova</p>
               </div>
             </div>
@@ -220,7 +220,7 @@ export default function ChatWidget() {
               ))
             ) : (
               <div className="text-center text-gray-500 py-8">
-                <p>Bonjour, je suis Fabi, votre assistant immobilier.</p>
+                <p>Bonjour, je suis Claude, votre assistant immobilier.</p>
                 <p className="mt-2">Comment puis-je vous aider aujourd'hui ?</p>
               </div>
             )}
@@ -269,7 +269,7 @@ export default function ChatWidget() {
               </button>
             </div>
             <div className="mt-2 text-xs text-gray-500 text-center">
-              <p>Fabi recherche les informations sur le web pour vous apporter les meilleures réponses.</p>
+              <p>Claude recherche les informations sur le web pour vous apporter les meilleures réponses.</p>
             </div>
           </div>
         </div>
