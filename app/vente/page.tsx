@@ -26,7 +26,6 @@ export default function VentePage() {
       content: (
         <div className="space-y-6">
           <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-xl font-semibold mb-4">Guide complet pour vendre votre bien</h3>
             <div className="space-y-4 text-gray-600">
               <div>
                 <h4 className="font-medium mb-2">1. Fixez le juste prix de votre bien</h4>
@@ -80,7 +79,6 @@ export default function VentePage() {
       content: (
         <div className="space-y-6">
           <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-xl font-semibold mb-4">Guide de l'estimation immobilière</h3>
             <div className="space-y-4 text-gray-600">
               <div>
                 <h4 className="font-medium mb-2">Les facteurs clés de l'estimation</h4>
@@ -136,7 +134,6 @@ export default function VentePage() {
       content: (
         <div className="space-y-6">
           <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-xl font-semibold mb-4">Guide des travaux avant vente</h3>
             <div className="space-y-4 text-gray-600">
               <div>
                 <h4 className="font-medium mb-2">Travaux à fort retour sur investissement</h4>
@@ -193,13 +190,11 @@ export default function VentePage() {
       content: (
         <div className="space-y-6">
           <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-xl font-semibold mb-4">Guide des diagnostics immobiliers 2024</h3>
             <div className="space-y-4 text-gray-600">
               <div>
                 <h4 className="font-medium mb-2">Le Dossier de Diagnostic Technique (DDT) obligatoire</h4>
                 <p>Pour toute vente immobilière en 2024, vous devez fournir un DDT contenant les diagnostics suivants :</p>
-                
-                <div className="overflow-x-auto mt-4">
+                <div className="overflow-x-auto">
                   <table className="min-w-full border-collapse">
                     <thead>
                       <tr className="bg-purple-50">

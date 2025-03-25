@@ -27,7 +27,6 @@ export default function AchatPage() {
       content: (
         <div className="space-y-6">
           <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-xl font-semibold mb-4 text-gray-800">Neuf ou ancien : quel choix pour votre investissement ?</h3>
             <div className="space-y-4 text-gray-600">
               <p>Opter pour un bien neuf ou ancien est une décision majeure qui influence votre projet immobilier à long terme. Chaque option présente des avantages et inconvénients spécifiques qu'il convient d'analyser selon vos priorités.</p>
               
@@ -56,7 +55,7 @@ export default function AchatPage() {
               <div className="grid md:grid-cols-2 gap-6 mt-6">
                 {/* Tableau Ancien */}
                 <div className="bg-gray-50 rounded-lg shadow p-6">
-                  <h3 className="text-xl font-semibold mb-4 text-gray-800">Achat dans l'ancien</h3>
+                  <h4 className="text-lg font-semibold mb-4 text-gray-800">Achat dans l'ancien</h4>
                   <div className="space-y-3">
                     <div className="flex justify-between border-b pb-2">
                       <span>Prix d'achat</span>
@@ -87,7 +86,7 @@ export default function AchatPage() {
 
                 {/* Tableau Neuf */}
                 <div className="bg-gray-50 rounded-lg shadow p-6">
-                  <h3 className="text-xl font-semibold mb-4 text-gray-800">Achat dans le neuf</h3>
+                  <h4 className="text-lg font-semibold mb-4 text-gray-800">Achat dans le neuf</h4>
                   <div className="space-y-3">
                     <div className="flex justify-between border-b pb-2">
                       <span>Prix d'achat</span>
@@ -147,7 +146,6 @@ export default function AchatPage() {
       content: (
         <div className="space-y-6">
           <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-xl font-semibold mb-4 text-gray-800">Bien définir son secteur géographique</h3>
             <div className="space-y-4 text-gray-600">
               <p>Le choix du secteur géographique est l'une des décisions les plus cruciales dans un projet d'achat immobilier. Il détermine non seulement votre qualité de vie au quotidien, mais aussi la valeur et l'évolution de votre patrimoine à long terme.</p>
           
@@ -223,14 +221,13 @@ export default function AchatPage() {
     },
     {
       id: 'estimation',
-      title: 'Quelles sont les conditions pour acheter un bien immobilier ?',
+      title: 'Les conditions essentielles pour acheter un bien immobilier',
       description: 'Acheter un bien immobilier nécessite de remplir plusieurs conditions essentielles.',
       icon: '💰',
       color: 'bg-green-100 text-green-600',
       content: (
         <div className="space-y-6">
           <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-xl font-semibold mb-4 text-gray-800">Les conditions essentielles pour acheter un bien immobilier</h3>
             <div className="space-y-4 text-gray-600">
               <p>Acheter un bien immobilier représente souvent l'investissement le plus important d'une vie. Pour réussir cette démarche, plusieurs conditions doivent être réunies afin de sécuriser votre projet et d'obtenir le financement nécessaire.</p>
 
@@ -315,14 +312,13 @@ export default function AchatPage() {
     },
     {
       id: 'travaux-avant-vente',
-      title: "Comment bien se comporter lors de la visite d'un bien immobilier ?",
+      title: "Comment optimiser vos visites de biens immobiliers",
       description: "La visite d'un bien immobilier est une étape clé dans le processus d'achat.",
       icon: '🔨',
       color: 'bg-yellow-100 text-yellow-600',
       content: (
         <div className="space-y-6">
           <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-xl font-semibold mb-4 text-gray-800">Comment optimiser vos visites de biens immobiliers</h3>
             <div className="space-y-4 text-gray-600">
               <p>La visite d'un bien immobilier est une étape déterminante dans le processus d'achat. Elle vous permet de vérifier si la réalité correspond à l'annonce et de détecter d'éventuels problèmes qui pourraient affecter votre décision ou servir de base à une négociation.</p>
 
@@ -417,14 +413,13 @@ export default function AchatPage() {
     },
     {
       id: 'diagnostics',
-      title: 'Diagnostics immobilier, que faire !',
-      description: 'Guide complet sur les diagnostics, commment lire un diagnostic.',
+      title: 'Les diagnostics immobiliers : guide complet pour les acheteurs',
+      description: 'Guide complet sur les diagnostics, comment lire un diagnostic et évaluer leur impact.',
       icon: '📋',
       color: 'bg-purple-100 text-purple-600',
       content: (
         <div className="space-y-6">
           <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-xl font-semibold mb-4 text-gray-800">Les diagnostics immobiliers : guide complet pour les acheteurs</h3>
             <div className="space-y-4 text-gray-600">
               <p>Les diagnostics techniques constituent un dossier obligatoire que le vendeur doit fournir à l'acheteur. Savoir les interpréter vous permet d'évaluer l'état réel du bien et d'anticiper d'éventuels travaux ou négociations.</p>
 
