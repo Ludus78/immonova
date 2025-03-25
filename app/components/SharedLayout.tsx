@@ -2,9 +2,10 @@
 
 import Link from 'next/link';
 import { ReactNode } from 'react';
-import { useSession, signOut } from 'next-auth/react';
 import Footer from './Footer';
 import ChatWidget from './ChatWidget';
+import {useKindeBrowserClient} from "@kinde-oss/kinde-auth-nextjs";
+import {RegisterLink, LoginLink, LogoutLink} from "@kinde-oss/kinde-auth-nextjs/components";
 import { XMarkIcon, UserIcon, ArrowRightOnRectangleIcon, PlusCircleIcon } from '@heroicons/react/24/outline';
 
 interface SharedLayoutProps {
@@ -12,7 +13,7 @@ interface SharedLayoutProps {
 }
 
 export default function SharedLayout({ children }: SharedLayoutProps) {
-  const { data: session } = useSession();
+  const {isAuthenticated} = useKindeBrowserClient();
 
   return (
     <div className="flex flex-col min-h-screen overflow-y-auto bg-[#eef6ff] text-black">
@@ -38,28 +39,16 @@ export default function SharedLayout({ children }: SharedLayoutProps) {
             {/* Le lien Contact a été supprimé */}
           </nav>
           
-          {session ? (
-            <div className="flex items-center gap-4">
-              <Link 
-                href="/profil"
-                className="text-gray-700 hover:text-primary-700"
-              >
-                {session.user?.name}
-              </Link>
-              <button 
-                onClick={() => signOut()}
-                className="border-2 border-primary-700 text-primary-700 px-6 py-2 rounded-full font-medium hover:bg-primary-50 transition-all duration-300"
-              >
-                Déconnexion
-              </button>
-            </div>
+           {isAuthenticated ? (
+           <>
+            <Link href="/dashboard">Dashboard</Link>
+            <LogoutLink>Déconnexion</LogoutLink>
+           </>
           ) : (
-            <Link 
-              href="/connexion"
-              className="border-2 border-primary-700 text-primary-700 px-6 py-2 rounded-full font-medium hover:bg-primary-50 transition-all duration-300"
-            >
-              Connexion
-            </Link>
+         <>
+         <LoginLink>Connexion</LoginLink>
+         <RegisterLink>Inscription</RegisterLink>
+         </>   
           )}
         </div>
       </header>
@@ -79,7 +68,7 @@ export default function SharedLayout({ children }: SharedLayoutProps) {
 }
 
 const MobileMenu = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (isOpen: boolean) => void }) => {
-  const { data: session } = useSession();
+  const {isAuthenticated} = useKindeBrowserClient();
   
   if (!isOpen) return null;
   
@@ -105,7 +94,7 @@ const MobileMenu = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (isOpen
           
           <div className="mt-6">
             <nav className="grid gap-y-4">
-              {session ? (
+              {isAuthenticated ? (
                 <>
                   <Link
                     href="/profil"
@@ -117,7 +106,6 @@ const MobileMenu = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (isOpen
                   </Link>
                   <button
                     onClick={() => {
-                      signOut({ callbackUrl: '/' });
                       setIsOpen(false);
                     }}
                     className="-m-3 flex items-center rounded-md p-3 hover:bg-gray-50"

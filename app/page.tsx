@@ -3,12 +3,10 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import EmailPopup from './components/EmailPopup';
 
 export default function Home() {
-  const { data: session } = useSession();
   const router = useRouter();
   const [showEmailPopup, setShowEmailPopup] = useState(false);
   const [targetCalculator, setTargetCalculator] = useState<{
@@ -17,14 +15,9 @@ export default function Home() {
   }>({ name: '', path: '' });
 
   const handleCalculatorClick = (calculatorName: string, path: string) => {
-    if (session?.user) {
-      // Si l'utilisateur est connecté, redirection directe
-      router.push(path);
-    } else {
-      // Sinon, afficher le popup
-      setTargetCalculator({ name: calculatorName, path });
-      setShowEmailPopup(true);
-    }
+    router.push(path);
+    setTargetCalculator({ name: calculatorName, path });
+    setShowEmailPopup(true);
   };
 
   const handleEmailSubmit = async (email: string, acceptNewsletter: boolean) => {
