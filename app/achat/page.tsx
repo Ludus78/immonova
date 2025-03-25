@@ -26,81 +26,114 @@ export default function AchatPage() {
       color: 'bg-red-100 text-red-600',
       content: (
         <div className="space-y-6">
-          <h2 className="text-lg text-gray-800">Opter pour un bien neuf permet de bénéficier d'un logement aux normes actuelles, avec une meilleure performance énergétique et des frais de notaire réduits. De plus, certains dispositifs fiscaux comme le PTZ (Prêt à Taux Zéro) peuvent faciliter l'achat. En revanche, les prix sont plus élevés et les délais de livraison peuvent s'étendre sur plusieurs mois. À l'inverse, l'achat dans l'ancien offr un prix au mètre carré plus attractif et un charme architectural, avec la possibilité d'emménager rapidement. Toutefois, il peut impliquer des travaux de rénovation et une isolation moins performante.(base de calcul : 100k €)</h2>
-          
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* Tableau Ancien */}
-            <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-xl font-semibold mb-4 text-gray-800">Achat dans l'ancien</h3>
-              <div className="space-y-3">
-                <div className="flex justify-between border-b pb-2">
-                  <span>Prix d'achat</span>
-                  <span className="font-medium">100 000 €</span>
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <h3 className="text-xl font-semibold mb-4 text-gray-800">Neuf ou ancien : quel choix pour votre investissement ?</h3>
+            <div className="space-y-4 text-gray-600">
+              <p>Opter pour un bien neuf ou ancien est une décision majeure qui influence votre projet immobilier à long terme. Chaque option présente des avantages et inconvénients spécifiques qu'il convient d'analyser selon vos priorités.</p>
+              
+              <div>
+                <h4 className="font-medium mb-2 text-blue-700">Les avantages du neuf</h4>
+                <ul className="ml-6 mt-2 space-y-1">
+                  <li>• <strong>Performance énergétique optimale</strong> (normes RT2020)</li>
+                  <li>• <strong>Frais de notaire réduits</strong> (2-3% contre 7-8% dans l'ancien)</li>
+                  <li>• <strong>Garanties constructeur</strong> (décennale, biennale, etc.)</li>
+                  <li>• <strong>Dispositifs fiscaux avantageux</strong> (PTZ, Pinel sous conditions)</li>
+                  <li>• <strong>Aucuns travaux à prévoir</strong> à court et moyen terme</li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 className="font-medium mb-2 text-blue-700">Les avantages de l'ancien</h4>
+                <ul className="ml-6 mt-2 space-y-1">
+                  <li>• <strong>Prix au m² généralement plus attractif</strong></li>
+                  <li>• <strong>Localisation souvent plus centrale</strong> (quartiers établis)</li>
+                  <li>• <strong>Charme architectural</strong> et cachet du bâti ancien</li>
+                  <li>• <strong>Disponibilité immédiate</strong> sans délai de construction</li>
+                  <li>• <strong>Potentiel de plus-value</strong> après rénovation</li>
+                </ul>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6 mt-6">
+                {/* Tableau Ancien */}
+                <div className="bg-gray-50 rounded-lg shadow p-6">
+                  <h3 className="text-xl font-semibold mb-4 text-gray-800">Achat dans l'ancien</h3>
+                  <div className="space-y-3">
+                    <div className="flex justify-between border-b pb-2">
+                      <span>Prix d'achat</span>
+                      <span className="font-medium">100 000 €</span>
+                    </div>
+                    <div className="flex justify-between border-b pb-2">
+                      <span>Frais de notaire</span>
+                      <span className="font-medium">7-8% (≈ 7 500 €)</span>
+                    </div>
+                    <div className="flex justify-between border-b pb-2">
+                      <span>Travaux potentiels</span>
+                      <span className="font-medium">≈ 15 000 €</span>
+                    </div>
+                    <div className="flex justify-between border-b pb-2">
+                      <span>DPE</span>
+                      <span className="font-medium">Variable (A à G)</span>
+                    </div>
+                    <div className="flex justify-between border-b pb-2">
+                      <span>Charges de copropriété</span>
+                      <span className="font-medium">≈ 250 €/mois</span>
+                    </div>
+                    <div className="flex justify-between font-bold text-blue-700">
+                      <span>Total approximatif</span>
+                      <span>122 500 €</span>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex justify-between border-b pb-2">
-                  <span>Frais de notaire</span>
-                  <span className="font-medium">7-8% du prix</span>
-                </div>
-                <div className="flex justify-between border-b pb-2">
-                  <span>Travaux potentiels</span>
-                  <span className="font-medium">En moyenne 15 000€</span>
-                </div>
-                <div className="flex justify-between border-b pb-2">
-                  <span>DPE</span>
-                  <span className="font-medium">de A à G</span>
-                </div>
-                <div className="flex justify-between border-b pb-2">
-                  <span>Charges de copropriété</span>
-                  <span className="font-medium">En moyenne 250€/mois</span>
-                </div>
-                <div className="flex justify-between border-b pb-2">
-                  <span>Total</span>
-                  <span className="font-medium">123 000 €</span>
+
+                {/* Tableau Neuf */}
+                <div className="bg-gray-50 rounded-lg shadow p-6">
+                  <h3 className="text-xl font-semibold mb-4 text-gray-800">Achat dans le neuf</h3>
+                  <div className="space-y-3">
+                    <div className="flex justify-between border-b pb-2">
+                      <span>Prix d'achat</span>
+                      <span className="font-medium">100 000 €</span>
+                    </div>
+                    <div className="flex justify-between border-b pb-2">
+                      <span>Frais de notaire</span>
+                      <span className="font-medium">2-3% (≈ 2 500 €)</span>
+                    </div>
+                    <div className="flex justify-between border-b pb-2">
+                      <span>Travaux</span>
+                      <span className="font-medium">Non nécessaires</span>
+                    </div>
+                    <div className="flex justify-between border-b pb-2">
+                      <span>DPE</span>
+                      <span className="font-medium">A ou B</span>
+                    </div>
+                    <div className="flex justify-between border-b pb-2">
+                      <span>Charges de copropriété</span>
+                      <span className="font-medium">≈ 100 €/mois</span>
+                    </div>
+                    <div className="flex justify-between font-bold text-blue-700">
+                      <span>Total approximatif</span>
+                      <span>102 500 €</span>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Tableau Neuf */}
-            <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-xl font-semibold mb-4 text-gray-800">Achat dans le neuf</h3>
-              <div className="space-y-3">
-                <div className="flex justify-between border-b pb-2">
-                  <span>Prix d'achat</span>
-                  <span className="font-medium">100 000 €</span>
-                </div>
-                <div className="flex justify-between border-b pb-2">
-                  <span>Frais de notaire</span>
-                  <span className="font-medium">2-3% du prix</span>
-                </div>
-                <div className="flex justify-between border-b pb-2">
-                  <span>Travaux</span>
-                  <span className="font-medium">Non nécessaires</span>
-                </div>
-                <div className="flex justify-between border-b pb-2">
-                  <span>DPE</span>
-                  <span className="font-medium">A ou B</span>
-                </div>
-                <div className="flex justify-between border-b pb-2">
-                  <span>Charges de copropriété</span>
-                  <span className="font-medium">En moyenne 100€/mois</span>
-                </div>
-                <div className="flex justify-between border-b pb-2">
-                  <span>Total</span>
-                  <span className="font-medium">103 000 €</span>
-                </div>
+              <div className="bg-blue-50 p-4 rounded-lg mt-6">
+                <p className="text-sm text-blue-800">
+                  <strong>Point d'attention :</strong> Dans le contexte actuel, la performance énergétique est devenue un critère majeur de valorisation immobilière. Les logements neufs bénéficient d'un avantage certain, mais certains biens anciens rénovés peuvent également offrir d'excellentes performances.
+                </p>
+              </div>
+
+              <div className="mt-8 text-center">
+                <a 
+                  href="https://www.service-public.fr/particuliers/vosdroits/F10871" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Vérifier mon éligibilité au PTZ
+                </a>
               </div>
             </div>
-          </div>
-
-          <div className="mt-8 text-center">
-            <a 
-              href="https://www.service-public.fr/particuliers/vosdroits/F10871" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              Vérifier mon éligibilité au PTZ
-            </a>
           </div>
         </div>
       )
@@ -113,57 +146,76 @@ export default function AchatPage() {
       color: 'bg-blue-100 text-blue-600',
       content: (
         <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-gray-800">Comment bien définir son secteur géographique pour un achat immobilier ?</h2>
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <h3 className="text-xl font-semibold mb-4 text-gray-800">Bien définir son secteur géographique</h3>
+            <div className="space-y-4 text-gray-600">
+              <p>Le choix du secteur géographique est l'une des décisions les plus cruciales dans un projet d'achat immobilier. Il détermine non seulement votre qualité de vie au quotidien, mais aussi la valeur et l'évolution de votre patrimoine à long terme.</p>
           
-          <div className="prose max-w-none">
-            <h3><strong>1. Définir ses besoins et priorités</strong></h3>
-            <p>{'\u00A0'}</p>
-            <p>Avant de choisir un secteur, il est important d'identifier vos critères essentiels :</p>
-            <ul>
-                <li><strong>Cadre de vie :</strong> Préférez-vous un environnement urbain, périurbain ou rural ?</li>
-                <li><strong>Proximité des commodités :</strong> Écoles, commerces, transports en commun, espaces verts, services médicaux…</li>
-                <li><strong>Temps de trajet :</strong> Quelle distance êtes-vous prêt à parcourir pour aller au travail ou aux activités ?</li>
-                <li><strong>Budget :</strong> Certains quartiers sont plus accessibles que d'autres selon votre budget d'achat.</li>
-            </ul>
-            <p>{'\u00A0'}</p>
-            <h3><strong>2. Étudier le marché immobilier local</strong></h3>
-            <p>{'\u00A0'}</p>
-            <p>Une fois vos priorités définies, il est crucial d'analyser le marché du secteur qui vous intéresse :</p>
-            <ul>
-                <li><strong>Prix au m² :</strong> Comparez les prix entre différents quartiers et villes.</li>
-                <li><strong>Évolution du marché :</strong> Certains secteurs sont en pleine expansion et peuvent offrir un bon potentiel d'investissement.</li>
-                <li><strong>Taux de demande :</strong> Un quartier très recherché peut signifier une plus-value à long terme, mais aussi une concurrence plus forte.</li>
-            </ul>
-            <p>{'\u00A0'}</p>
-            <h3><strong>3. Explorer le quartier sur le terrain</strong></h3>
-            <p>{'\u00A0'}</p>
-            <p>Une visite sur place permet de se faire une idée réelle du cadre de vie :</p>
-            <ul>
-                <li><strong>Tester les trajets :</strong> Essayez le parcours domicile-travail aux heures de pointe.</li>
-                <li><strong>Observer l'ambiance :</strong> Le quartier est-il calme, dynamique, familial ?</li>
-                <li><strong>Vérifier les infrastructures :</strong> Écoles, transports, commerces, loisirs…</li>
-            </ul>
-            <p>{'\u00A0'}</p>
-            <h3><strong>4. Anticiper l'avenir du quartier</strong></h3>
-            <p>{'\u00A0'}</p>
-            <p>Consultez les projets d'urbanisme :</p>
-            <ul>
-                <li>Nouvelles infrastructures de transport.</li>
-                <li>Développements immobiliers et urbains.</li>
-                <li>Évolutions des équipements publics.</li>
-            </ul>
-            <p>{'\u00A0'}</p>
-            <h3><strong>5. Comparer plusieurs secteurs</strong></h3>
-            <p>{'\u00A0'}</p>
-            <p>Avoir plusieurs options permet de faire le meilleur choix. Comparez les avantages et inconvénients de chaque zone avant de vous engager.</p>
+              <div>
+                <h4 className="font-medium mb-2 text-blue-700">1. Définir ses besoins et priorités</h4>
+                <p>Avant de choisir un secteur, identifiez vos critères essentiels :</p>
+                <ul className="ml-6 mt-2 space-y-1">
+                  <li>• <strong>Cadre de vie :</strong> urbain, périurbain ou rural selon votre style de vie</li>
+                  <li>• <strong>Proximité des commodités :</strong> écoles, commerces, transports, services médicaux</li>
+                  <li>• <strong>Temps de trajet domicile-travail :</strong> définir un temps maximal acceptable</li>
+                  <li>• <strong>Budget disponible :</strong> les prix varient considérablement selon les secteurs</li>
+                  <li>• <strong>Sécurité du quartier :</strong> consultez les statistiques locales</li>
+                </ul>
+              </div>
             
-            <h2>Conclusion</h2>
-            <p>Choisir un bon secteur géographique est une étape clé dans votre projet immobilier. Prenez le temps d'analyser vos besoins, de visiter les quartiers et d'étudier le marché pour faire un choix éclairé.</p>
-
-            <div className="bg-blue-50 p-4 rounded-lg mt-6">
-              <p className="text-sm text-blue-800">
-                <strong>Conseil d'expert :</strong> Un bien proposé à un prix de départ manifestement surévalué se déconsidère et devient invendable. N'hésitez pas à consulter les notes de conjoncture immobilière publiées régulièrement par les notaires de France pour avoir une bonne idée de l'état du marché.
-              </p>
+              <div>
+                <h4 className="font-medium mb-2 text-blue-700">2. Étudier le marché immobilier local</h4>
+                <p>Analysez en profondeur le marché du secteur qui vous intéresse :</p>
+                <ul className="ml-6 mt-2 space-y-1">
+                  <li>• <strong>Prix au m² :</strong> comparez les prix entre différents quartiers</li>
+                  <li>• <strong>Évolution des prix :</strong> consultez les historiques sur 5-10 ans</li>
+                  <li>• <strong>Taux de demande :</strong> délais de vente moyens dans le secteur</li>
+                  <li>• <strong>Projets d'urbanisme :</strong> futurs aménagements qui valoriseront le quartier</li>
+                  <li>• <strong>Fiscalité locale :</strong> niveaux des taxes foncières et d'habitation</li>
+                </ul>
+              </div>
+            
+              <div>
+                <h4 className="font-medium mb-2 text-blue-700">3. Explorer le quartier sur le terrain</h4>
+                <p>Une visite approfondie est indispensable avant tout engagement :</p>
+                <ul className="ml-6 mt-2 space-y-1">
+                  <li>• <strong>Visites à différentes heures :</strong> matin, soirée, week-end</li>
+                  <li>• <strong>Test des trajets quotidiens :</strong> aux heures de pointe</li>
+                  <li>• <strong>Rencontre avec les habitants :</strong> pour connaître l'ambiance réelle</li>
+                  <li>• <strong>Vérification des nuisances :</strong> bruit, pollution, circulation</li>
+                  <li>• <strong>Potentiel d'évolution :</strong> signes de dynamisme ou de déclin</li>
+                </ul>
+              </div>
+            
+              <div className="bg-blue-50 p-4 rounded-lg mt-6">
+                <p className="text-sm text-blue-800">
+                  <strong>Conseil pratique :</strong> Les secteurs en développement avec l'arrivée prochaine de nouvelles infrastructures de transport ou de nouveaux services publics offrent souvent un excellent potentiel de valorisation. Renseignez-vous auprès de la mairie sur les projets d'urbanisme à 5-10 ans.
+                </p>
+              </div>
+            
+              <div className="mt-4">
+                <h4 className="font-medium mb-2 text-blue-700">Outils pour votre recherche</h4>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <a 
+                    href="https://www.meilleursagents.com/prix-immobilier/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-colors"
+                  >
+                    <h5 className="font-medium text-indigo-700">Carte des prix immobiliers</h5>
+                    <p className="text-sm text-gray-600">Consultez les prix au m² par quartier</p>
+                  </a>
+                  <a 
+                    href="https://www.data.gouv.fr/fr/pages/donnees-geographiques/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-colors"
+                  >
+                    <h5 className="font-medium text-indigo-700">Données géographiques</h5>
+                    <p className="text-sm text-gray-600">Accédez aux statistiques locales détaillées</p>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -177,47 +229,88 @@ export default function AchatPage() {
       color: 'bg-green-100 text-green-600',
       content: (
         <div className="space-y-6">
-  <div className="prose max-w-none">
-    <h3>1. Avoir une capacité financière suffisante</h3>
-    <p>Pour acheter un bien immobilier, il est essentiel d'avoir une bonne situation financière :</p>
-    <ul>
-      <li><strong>Apport personnel :</strong> Généralement entre 10 et 20 % du prix du bien.</li>
-      <li><strong>Capacité d'endettement :</strong> Le taux d'endettement ne doit pas dépasser 35 % des revenus.</li>
-      <li><strong>Situation stable :</strong> Un CDI ou une activité pérenne est souvent requis.</li>
-    </ul>
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <h3 className="text-xl font-semibold mb-4 text-gray-800">Les conditions essentielles pour acheter un bien immobilier</h3>
+            <div className="space-y-4 text-gray-600">
+              <p>Acheter un bien immobilier représente souvent l'investissement le plus important d'une vie. Pour réussir cette démarche, plusieurs conditions doivent être réunies afin de sécuriser votre projet et d'obtenir le financement nécessaire.</p>
 
-    <h3>2. Obtenir un financement</h3>
-    <p>Un prêt immobilier est souvent nécessaire pour finaliser l'achat :</p>
-    <ul>
-      <li>Comparer les offres de crédit pour trouver les meilleures conditions.</li>
-      <li>Préparer un dossier solide avec justificatifs de revenus et relevés bancaires.</li>
-      <li>Anticiper les frais annexes : notaire, agence, travaux éventuels.</li>
-    </ul>
+              <div>
+                <h4 className="font-medium mb-2 text-blue-700">1. Capacité financière solide</h4>
+                <p>La base de tout projet immobilier repose sur une situation financière adaptée :</p>
+                <ul className="ml-6 mt-2 space-y-1">
+                  <li>• <strong>Apport personnel</strong> : idéalement 10 à 20% du prix d'achat (les banques sont plus exigeantes depuis 2022)</li>
+                  <li>• <strong>Taux d'endettement maîtrisé</strong> : maximum 35% des revenus (incluant toutes vos charges de crédit)</li>
+                  <li>• <strong>Stabilité professionnelle</strong> : CDI confirmé ou activité indépendante pérenne avec au moins 2-3 ans d'historique</li>
+                  <li>• <strong>Épargne de précaution</strong> : réserve financière pour les imprévus post-acquisition</li>
+                  <li>• <strong>Absence d'incidents bancaires</strong> : pas d'inscription au FICP ou de retards de paiement</li>
+                </ul>
+              </div>
 
-    <h3>3. Choisir un bien adapté</h3>
-    <p>Le choix du bien doit répondre à plusieurs critères :</p>
-    <ul>
-      <li>Définir ses besoins : type de bien, localisation, superficie.</li>
-      <li>Visiter plusieurs biens pour comparer les options.</li>
-      <li>Vérifier l'état du bien : DPE, amiante, travaux nécessaires.</li>
-    </ul>
+              <div>
+                <h4 className="font-medium mb-2 text-blue-700">2. Financement optimisé</h4>
+                <p>L'obtention d'un crédit immobilier aux meilleures conditions est déterminante :</p>
+                <ul className="ml-6 mt-2 space-y-1">
+                  <li>• <strong>Comparaison des offres</strong> : consulter plusieurs établissements bancaires</li>
+                  <li>• <strong>Assurance emprunteur</strong> : possibilité de délégation pour réduire les coûts</li>
+                  <li>• <strong>Aides disponibles</strong> : PTZ, prêt Action Logement, prêts régionaux...</li>
+                  <li>• <strong>Frais annexes anticipés</strong> : notaire (7-8% dans l'ancien, 2-3% dans le neuf), garantie, dossier</li>
+                  <li>• <strong>Taux d'intérêt négocié</strong> : souvent possible en fonction de votre profil</li>
+                </ul>
+              </div>
 
-    <h3>4. Passer par les étapes administratives</h3>
-    <p>Plusieurs démarches légales sont nécessaires :</p>
-    <ul>
-      <li>Signer un compromis ou une promesse de vente.</li>
-      <li>Obtenir un accord bancaire et respecter le délai de réflexion de 10 jours.</li>
-      <li>Signer l'acte authentique chez le notaire pour officialiser l'achat.</li>
-    </ul>
+              <div className="bg-green-50 p-4 rounded-lg mt-4 mb-4">
+                <p className="text-sm text-green-800">
+                  <strong>Planifier son budget</strong>
+                </p>
+                <div className="mt-2 grid grid-cols-2 gap-2 text-sm">
+                  <div className="bg-white p-3 rounded">
+                    <p className="font-medium">Prix d'achat</p>
+                    <p>Prix du bien + frais de notaire</p>
+                  </div>
+                  <div className="bg-white p-3 rounded">
+                    <p className="font-medium">Budget travaux</p>
+                    <p>Prévoir 5-15% du prix pour la rénovation</p>
+                  </div>
+                  <div className="bg-white p-3 rounded">
+                    <p className="font-medium">Frais de déménagement</p>
+                    <p>Entre 800€ et 2000€ selon le volume</p>
+                  </div>
+                  <div className="bg-white p-3 rounded">
+                    <p className="font-medium">Réserve d'urgence</p>
+                    <p>3-6 mois de mensualités recommandés</p>
+                  </div>
+                </div>
+              </div>
 
-    <div className="bg-blue-50 p-4 rounded-lg mt-6">
-      <p className="text-sm text-blue-800">
-        <strong>Bon à savoir :</strong> Il est recommandé de se faire accompagner par un professionnel de l'immobilier pour sécuriser son achat et éviter les erreurs.
-      </p>
-    </div>
-  </div>
-</div>
+              <div>
+                <h4 className="font-medium mb-2 text-blue-700">3. Procédures administratives maîtrisées</h4>
+                <p>L'achat immobilier suit un parcours administratif précis :</p>
+                <ul className="ml-6 mt-2 space-y-1">
+                  <li>• <strong>Compromis/promesse de vente</strong> : engagement juridique avec conditions suspensives</li>
+                  <li>• <strong>Délai de rétractation légal</strong> : 10 jours incompressibles après signature</li>
+                  <li>• <strong>Demande de prêt</strong> : à soumettre dès la signature du compromis</li>
+                  <li>• <strong>Validation des conditions suspensives</strong> : financement, urbanisme, état du bien</li>
+                  <li>• <strong>Acte authentique</strong> : signé chez le notaire pour finaliser la vente</li>
+                </ul>
+              </div>
 
+              <div className="bg-blue-50 p-4 rounded-lg mt-6">
+                <p className="text-sm text-blue-800">
+                  <strong>Point important :</strong> Depuis 2022, les conditions d'octroi des crédits se sont durcies. Le Haut Conseil de Stabilité Financière (HCSF) impose aux banques de respecter un taux d'endettement maximal de 35% et une durée de prêt limitée à 25 ans (27 ans pour les biens neufs). Anticipez ces contraintes dans votre projet.
+                </p>
+              </div>
+
+              <div className="mt-8 text-center">
+                <a 
+                  href="/calculette"
+                  className="inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition-colors"
+                >
+                  Estimer votre capacité d'emprunt
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       )
     },
     {
@@ -228,28 +321,95 @@ export default function AchatPage() {
       color: 'bg-yellow-100 text-yellow-600',
       content: (
         <div className="space-y-6">
-  <h2 className="text-2xl font-bold text-gray-800">Comment bien se comporter lors de la visite d'un bien immobilier ?</h2>
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <h3 className="text-xl font-semibold mb-4 text-gray-800">Comment optimiser vos visites de biens immobiliers</h3>
+            <div className="space-y-4 text-gray-600">
+              <p>La visite d'un bien immobilier est une étape déterminante dans le processus d'achat. Elle vous permet de vérifier si la réalité correspond à l'annonce et de détecter d'éventuels problèmes qui pourraient affecter votre décision ou servir de base à une négociation.</p>
 
-  <div className="prose max-w-none">
-    <h3>1. Se préparer avant la visite</h3>
-    <p>Avant même de visiter un bien, il est important d'arriver bien préparé :</p>
-    <ul>
-      <li><strong>Analyser l'annonce en détail :</strong> Vérifiez la surface, l'emplacement, les charges et les éventuels travaux mentionnés.</li>
-      <li><strong>Lister les critères essentiels :</strong> Définissez vos besoins en termes de nombre de pièces, exposition, transports à proximité, etc.</li>
-      <li><strong>Prévoir les bonnes questions :</strong> Renseignez-vous sur l'état du bien, le voisinage, la copropriété et les frais annexes.</li>
-    </ul>
+              <div>
+                <h4 className="font-medium mb-2 text-blue-700">1. Préparation avant la visite</h4>
+                <p>Une bonne préparation est essentielle pour une visite efficace :</p>
+                <ul className="ml-6 mt-2 space-y-1">
+                  <li>• <strong>Checklist personnalisée</strong> : préparez une liste des points importants à vérifier</li>
+                  <li>• <strong>Questions ciblées</strong> : sur l'historique du bien, les travaux, le voisinage, les charges</li>
+                  <li>• <strong>Outils pratiques</strong> : mètre, appareil photo (avec autorisation), boussole pour l'orientation</li>
+                  <li>• <strong>Documents à demander</strong> : diagnostics techniques, charges de copropriété, taxe foncière</li>
+                  <li>• <strong>Accompagnement utile</strong> : venez avec un proche pour un second avis objectif</li>
+                </ul>
+              </div>
 
-    <h3>2. Adopter une attitude observatrice</h3>
-    <p>Lors de la visite, il est essentiel d'être attentif aux moindres détails :</p>
-    <ul>
-      <li><strong>Vérifier l'état général :</strong> Examinez les murs, sols, plafonds et installations électriques.</li>
-      <li><strong>Tester les équipements :</strong> Ouvrez les robinets, allumez les lumières et vérifiez les fenêtres.</li>
-      <li><strong>Évaluer l'isolation :</strong> Vérifiez l'état des murs, des fenêtres et des portes.</li>
-            </ul>
-            <div className="bg-yellow-50 p-4 rounded-lg mt-6">
-              <p className="text-sm text-yellow-800">
-                <strong>Conseil pratique :</strong> Dans le contexte actuel, les travaux d'amélioration énergétique sont souvent les plus rentables. Un bien avec un bon DPE se vend plus rapidement et à un meilleur prix, d'autant plus avec les nouvelles restrictions pour la location des logements énergivores (classes F et G).
-              </p>
+              <div>
+                <h4 className="font-medium mb-2 text-blue-700">2. Que vérifier pendant la visite</h4>
+                <p>Soyez méthodique et attentif à ces éléments clés :</p>
+                <div className="grid md:grid-cols-2 gap-4 mt-3">
+                  <div className="bg-gray-50 p-3 rounded">
+                    <h5 className="font-medium text-sm text-gray-700 mb-2">Structure et gros œuvre</h5>
+                    <ul className="text-sm space-y-1">
+                      <li>• Fissures sur les murs porteurs</li>
+                      <li>• Traces d'humidité ou moisissures</li>
+                      <li>• État de la toiture et charpente</li>
+                      <li>• Isolation thermique et phonique</li>
+                    </ul>
+                  </div>
+                  <div className="bg-gray-50 p-3 rounded">
+                    <h5 className="font-medium text-sm text-gray-700 mb-2">Installations techniques</h5>
+                    <ul className="text-sm space-y-1">
+                      <li>• Système de chauffage et âge</li>
+                      <li>• Tableau électrique et conformité</li>
+                      <li>• Plomberie (pression, fuites)</li>
+                      <li>• VMC et aération des pièces</li>
+                    </ul>
+                  </div>
+                  <div className="bg-gray-50 p-3 rounded">
+                    <h5 className="font-medium text-sm text-gray-700 mb-2">Confort et environnement</h5>
+                    <ul className="text-sm space-y-1">
+                      <li>• Luminosité naturelle</li>
+                      <li>• Nuisances sonores extérieures</li>
+                      <li>• Voisinage immédiat</li>
+                      <li>• Exposition et ensoleillement</li>
+                    </ul>
+                  </div>
+                  <div className="bg-gray-50 p-3 rounded">
+                    <h5 className="font-medium text-sm text-gray-700 mb-2">Aspects pratiques</h5>
+                    <ul className="text-sm space-y-1">
+                      <li>• Rangements disponibles</li>
+                      <li>• État des menuiseries</li>
+                      <li>• Disposition des pièces</li>
+                      <li>• Connexion internet/fibre</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h4 className="font-medium mb-2 text-blue-700">3. Questions essentielles à poser</h4>
+                <ul className="ml-6 mt-2 space-y-1">
+                  <li>• <strong>Raison de la vente</strong> : peut révéler des informations importantes</li>
+                  <li>• <strong>Durée sur le marché</strong> : un bien en vente depuis longtemps peut cacher des problèmes</li>
+                  <li>• <strong>Travaux récents et à prévoir</strong> : pour évaluer les investissements futurs</li>
+                  <li>• <strong>Vie du quartier</strong> : commerces, écoles, transports, projets urbains</li>
+                  <li>• <strong>Charges précises</strong> : montant exact, ce qu'elles incluent, historique des augmentations</li>
+                </ul>
+              </div>
+
+              <div className="bg-yellow-50 p-4 rounded-lg mt-6">
+                <p className="text-sm text-yellow-800">
+                  <strong>Conseil pratique :</strong> N'hésitez pas à revenir visiter le bien à différentes heures de la journée pour évaluer l'ensoleillement, le bruit et l'ambiance du quartier. Une seconde visite est souvent plus révélatrice que la première, car vous serez plus attentif aux détails.
+                </p>
+              </div>
+
+              <div className="mt-4">
+                <h4 className="font-medium mb-2 text-blue-700">Notre modèle de checklist de visite</h4>
+                <div className="text-center mt-3">
+                  <a 
+                    href="#" 
+                    onClick={(e) => {e.preventDefault(); alert('Cette fonctionnalité sera disponible prochainement')}}
+                    className="inline-block bg-indigo-100 text-indigo-700 px-6 py-2 rounded-lg hover:bg-indigo-200 transition-colors"
+                  >
+                    Télécharger la checklist complète (PDF)
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -263,94 +423,118 @@ export default function AchatPage() {
       color: 'bg-purple-100 text-purple-600',
       content: (
         <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-gray-800">Guide des diagnostics immobiliers 2025</h2>
-          
-          <div className="prose max-w-none">
-            <h3>Le Dossier de Diagnostic Technique (DDT) obligatoire</h3>
-            <p>Pour toute vente immobilière en 2024, vous devez fournir un DDT contenant les diagnostics suivants :</p>
-            
-            <div className="overflow-x-auto">
-              <table className="min-w-full border-collapse">
-                <thead>
-                  <tr className="bg-purple-50">
-                    <th className="border p-2 text-left">Diagnostic</th>
-                    <th className="border p-2 text-left">Concerne</th>
-                    <th className="border p-2 text-left">Validité</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="border p-2">DPE</td>
-                    <td className="border p-2">Tous les logements &gt;50m²</td>
-                    <td className="border p-2">10 ans</td>
-                  </tr>
-                  <tr>
-                    <td className="border p-2">Audit énergétique</td>
-                    <td className="border p-2">Logements classés E, F ou G</td>
-                    <td className="border p-2">5 ans</td>
-                  </tr>
-                  <tr>
-                    <td className="border p-2">Plomb (CREP)</td>
-                    <td className="border p-2">Logements avant 1949</td>
-                    <td className="border p-2">1 an ou illimité si négatif</td>
-                  </tr>
-                  <tr>
-                    <td className="border p-2">Amiante</td>
-                    <td className="border p-2">Permis avant 1997</td>
-                    <td className="border p-2">Illimité si négatif</td>
-                  </tr>
-                  <tr>
-                    <td className="border p-2">Électricité</td>
-                    <td className="border p-2">Installation &gt; 15 ans</td>
-                    <td className="border p-2">3 ans</td>
-                  </tr>
-                  <tr>
-                    <td className="border p-2">Gaz</td>
-                    <td className="border p-2">Installation &gt; 15 ans</td>
-                    <td className="border p-2">3 ans</td>
-                  </tr>
-                  <tr>
-                    <td className="border p-2">Termites</td>
-                    <td className="border p-2">Zones à risque</td>
-                    <td className="border p-2">6 mois</td>
-                  </tr>
-                  <tr>
-                    <td className="border p-2">État des risques</td>
-                    <td className="border p-2">Zones à risques</td>
-                    <td className="border p-2">6 mois</td>
-                  </tr>
-                  <tr>
-                    <td className="border p-2">Diagnostic bruit</td>
-                    <td className="border p-2">Proximité aéroports</td>
-                    <td className="border p-2">Illimité</td>
-                  </tr>
-                  <tr>
-                    <td className="border p-2">Assainissement</td>
-                    <td className="border p-2">Installation non collective</td>
-                    <td className="border p-2">3 ans</td>
-                  </tr>
-                  <tr>
-                    <td className="border p-2">Carnet d'Information du Logement</td>
-                    <td className="border p-2">Logements avec travaux depuis 2023</td>
-                    <td className="border p-2">Permanent</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <h3 className="text-xl font-semibold mb-4 text-gray-800">Les diagnostics immobiliers : guide complet pour les acheteurs</h3>
+            <div className="space-y-4 text-gray-600">
+              <p>Les diagnostics techniques constituent un dossier obligatoire que le vendeur doit fournir à l'acheteur. Savoir les interpréter vous permet d'évaluer l'état réel du bien et d'anticiper d'éventuels travaux ou négociations.</p>
 
-            <h3 className="mt-6">Points essentiels à retenir</h3>
-            <ul>
-              <li>Les diagnostics doivent être réalisés par un <strong>diagnostiqueur certifié</strong></li>
-              <li>Les frais sont à la charge du <strong>vendeur</strong></li>
-              <li>Le coût total se situe entre <strong>200€ et 800€</strong> selon le bien</li>
-              <li>L'absence de diagnostics peut entraîner <strong>l'annulation de la vente</strong></li>
-              <li>Depuis 2024, le DPE a fait l'objet d'une révision particulière pour les <strong>petites surfaces</strong></li>
-            </ul>
+              <div className="flex justify-between items-center bg-indigo-50 p-3 rounded-lg">
+                <span className="font-medium text-indigo-700">Diagnostic</span>
+                <span className="text-sm text-indigo-600">Obligatoire depuis 2024</span>
+              </div>
 
-            <div className="bg-purple-50 p-4 rounded-lg mt-6">
-              <p className="text-sm text-purple-800">
-                <strong>Actualité 2024 :</strong> Depuis le 1er janvier 2025, il n'est plus possible de louer un logement classé G au DPE, et cette restriction s'étendra aux classes F en 2028 puis E en 2034. Cette nouvelle réglementation a un impact direct sur la valeur des biens et doit être prise en compte dans toute transaction immobilière.
-              </p>
+              <div>
+                <h4 className="font-medium mb-2 text-blue-700">Diagnostics prioritaires à analyser</h4>
+                <div className="overflow-x-auto">
+                  <table className="min-w-full border-collapse">
+                    <thead>
+                      <tr className="bg-gray-50">
+                        <th className="border p-2 text-left">Diagnostic</th>
+                        <th className="border p-2 text-left">Points d'attention</th>
+                        <th className="border p-2 text-left">Impact sur votre achat</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="border p-2">
+                          <span className="font-medium">DPE</span><br/>
+                          <span className="text-xs">(Validité : 10 ans)</span>
+                        </td>
+                        <td className="border p-2">
+                          <ul className="text-sm space-y-1">
+                            <li>• Classes A à G (A = excellent)</li>
+                            <li>• Consommation énergétique</li>
+                            <li>• Émissions de gaz à effet de serre</li>
+                          </ul>
+                        </td>
+                        <td className="border p-2 text-sm">
+                          <span className="text-red-600 font-medium">Fort</span> - Les logements classés F et G perdent en valeur et seront interdits à la location d'ici 2028
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="border p-2">
+                          <span className="font-medium">Électricité</span><br/>
+                          <span className="text-xs">(Validité : 3 ans)</span>
+                        </td>
+                        <td className="border p-2">
+                          <ul className="text-sm space-y-1">
+                            <li>• Conformité de l'installation</li>
+                            <li>• Anomalies identifiées</li>
+                            <li>• Risques pour la sécurité</li>
+                          </ul>
+                        </td>
+                        <td className="border p-2 text-sm">
+                          <span className="text-orange-600 font-medium">Modéré à fort</span> - Une installation non conforme nécessite une mise aux normes parfois coûteuse
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="border p-2">
+                          <span className="font-medium">Amiante</span><br/>
+                          <span className="text-xs">(Illimité si négatif)</span>
+                        </td>
+                        <td className="border p-2">
+                          <ul className="text-sm space-y-1">
+                            <li>• Présence de matériaux amiantés</li>
+                            <li>• État de conservation</li>
+                            <li>• Préconisations de travaux</li>
+                          </ul>
+                        </td>
+                        <td className="border p-2 text-sm">
+                          <span className="text-red-600 font-medium">Fort</span> - Le désamiantage est très coûteux et peut rendre certains travaux impossibles
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div>
+                <h4 className="font-medium mb-2 text-blue-700">Impact des diagnostics sur le prix de vente</h4>
+                <p className="mb-2">Les résultats des diagnostics peuvent justifier une négociation du prix :</p>
+                <ul className="ml-6 space-y-1">
+                  <li>• <strong>DPE F ou G</strong> : décote de 10 à 20% selon les régions</li>
+                  <li>• <strong>Installation électrique vétuste</strong> : 5 000 à 15 000€ de travaux à prévoir</li>
+                  <li>• <strong>Présence d'amiante</strong> : impact variable selon localisation et volume</li>
+                  <li>• <strong>Plomb détecté</strong> : coût de traitement ou encapsulage à anticiper</li>
+                  <li>• <strong>Termites</strong> : travaux potentiellement importants sur la structure</li>
+                </ul>
+              </div>
+
+              <div className="bg-purple-50 p-4 rounded-lg mt-6">
+                <p className="text-sm text-purple-800">
+                  <strong>Ce qui change en 2024-2025 :</strong> À partir du 1er janvier 2025, la location des logements classés G au DPE sera interdite. Cette interdiction s'étendra aux logements F en 2028 puis E en 2034. Pour les acheteurs investisseurs, un DPE défavorable peut donc rendre un bien inexploitable à moyen terme sans rénovation énergétique.
+                </p>
+              </div>
+              
+              <div>
+                <h4 className="font-medium mb-2 text-blue-700">Comment utiliser les diagnostics</h4>
+                <ul className="ml-6 mt-2 space-y-1">
+                  <li>• <strong>Demandez les diagnostics avant la visite</strong> quand c'est possible</li>
+                  <li>• <strong>Vérifiez leur validité</strong> (date de réalisation)</li>
+                  <li>• <strong>Consultez un professionnel</strong> pour estimer les coûts de remise aux normes</li>
+                  <li>• <strong>Intégrez ces éléments dans votre offre</strong> et utilisez-les comme levier de négociation</li>
+                  <li>• <strong>Prévoyez une condition suspensive</strong> dans le compromis pour des diagnostics manquants</li>
+                </ul>
+              </div>
+
+              <div className="text-center mt-6">
+                <a 
+                  href="/diagnostics" 
+                  className="inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition-colors"
+                >
+                  En savoir plus sur les diagnostics
+                </a>
+              </div>
             </div>
           </div>
         </div>
