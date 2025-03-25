@@ -25,3 +25,17 @@ model Contact {
     budget      Int?
     message     String?
 }
+
+model NewsArticle {
+    id          String    @id @default(cuid())
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime? @updatedAt
+    title       String
+    excerpt     String
+    content     String?
+    category    String
+    authorName  String?
+    publishedAt DateTime  @default(now())
+    imageUrl    String?
+    isPublished Boolean   @default(true)
+}
