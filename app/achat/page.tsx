@@ -412,10 +412,10 @@ export default function AchatPage() {
             <span className="font-semibold text-lg">Calculer votre budget</span>
           </button>
         </div>
-        <p className="text-gray-600 mt-2">Découvrez nos conseils et guides pour réussir votre projet d'achat immobilier</p>
+        <p className="text-gray-600 mt-2">Découvrez nos conseils et stratégies pour réussir votre projet d'achat immobilier</p>
       </div>
 
-      <div className="grid gap-6">
+      <div className="grid gap-6 mb-8">
         {articles.map((article) => (
           <div 
             key={article.id}
@@ -423,8 +423,8 @@ export default function AchatPage() {
             className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow cursor-pointer"
           >
             <div className="flex items-start gap-4">
-              <div className={`w-12 h-12 ${article.color} rounded-full flex items-center justify-center text-2xl`}>
-                {article.icon}
+              <div className={`w-12 h-12 ${article.color} rounded-full flex items-center justify-center`}>
+                <span className="text-2xl">{article.icon}</span>
               </div>
               <div>
                 <h2 className="text-xl font-semibold text-gray-800 mb-2">{article.title}</h2>

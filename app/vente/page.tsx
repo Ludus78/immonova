@@ -312,7 +312,7 @@ export default function VentePage() {
             className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow cursor-pointer"
           >
             <div className="flex items-start gap-4">
-              <div className={`w-12 h-12 bg-${article.color.split('-')[1]}-100 rounded-full flex items-center justify-center text-2xl`}>
+              <div className={`w-12 h-12 ${article.color} rounded-full flex items-center justify-center text-white`}>
                 {article.icon}
               </div>
               <div>
