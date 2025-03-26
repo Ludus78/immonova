@@ -5,9 +5,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import EmailPopup from './components/EmailPopup';
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
 export default function Home() {
   const router = useRouter();
+  const { isAuthenticated } = useKindeBrowserClient();
   const [showEmailPopup, setShowEmailPopup] = useState(false);
   const [targetCalculator, setTargetCalculator] = useState<{
     name: string;
@@ -15,7 +17,13 @@ export default function Home() {
   }>({ name: '', path: '' });
 
   const handleCalculatorClick = (calculatorName: string, path: string) => {
-    router.push(path);
+    // Si l'utilisateur est connecté, rediriger directement
+    if (isAuthenticated) {
+      router.push(path);
+      return;
+    }
+    
+    // Sinon, afficher le popup d'email
     setTargetCalculator({ name: calculatorName, path });
     setShowEmailPopup(true);
   };
