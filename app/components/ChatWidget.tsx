@@ -84,17 +84,17 @@ export default function ChatWidget() {
                 throw new Error(`Erreur HTTP: ${response.status}`);
             }
 
-            // Gérer le cas où la réponse n'est pas au format attendu
-            const data = await response.json().catch(() => {
-                throw new Error("Format de réponse invalide");
-            });
+            const data = await response.json();
 
-            if (typeof data !== 'string' && !data.error) {
+            // Gérer le nouveau format de réponse
+            let responseContent;
+            if (data.error) {
+                responseContent = data.error;
+            } else if (data.response) {
+                responseContent = data.response;
+            } else {
                 throw new Error("Format de réponse inattendu");
             }
-
-            const responseContent = typeof data === 'string' ? data : 
-                                    data.error ? `Erreur: ${data.error}` : "Réponse indisponible";
 
             setMessages(prev => [...prev, { 
                 content: responseContent, 

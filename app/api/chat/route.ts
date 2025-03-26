@@ -25,14 +25,14 @@ export async function POST(request: Request) {
     const { message } = await request.json();
     
     if (!message || typeof message !== 'string') {
-      return Response.json("Je n'ai pas compris votre question. Pourriez-vous la reformuler ?", { status: 200 });
+      return Response.json({ error: "Je n'ai pas compris votre question. Pourriez-vous la reformuler ?" }, { status: 200 });
     }
     
     console.log("Message reçu:", message);
 
     if (!process.env.CLAUDE_API_KEY) {
       console.warn("Clé API Claude non configurée, utilisation d'une réponse de secours");
-      return Response.json(getFallbackResponse(message), { status: 200 });
+      return Response.json({ error: getFallbackResponse(message) }, { status: 200 });
     }
 
     try {
@@ -45,19 +45,23 @@ export async function POST(request: Request) {
         ]
       });
 
+      if (!response || !response.content || !Array.isArray(response.content)) {
+        throw new Error('Format de réponse invalide');
+      }
+
       const textContent = response.content.find(content => content.type === 'text')?.text;
       if (!textContent) {
         throw new Error('Pas de contenu textuel dans la réponse');
       }
 
-      return Response.json(textContent, { status: 200 });
+      return Response.json({ response: textContent }, { status: 200 });
     } catch (apiError) {
       console.error("Erreur API Claude:", apiError);
-      return Response.json(getFallbackResponse(message), { status: 200 });
+      return Response.json({ error: getFallbackResponse(message) }, { status: 200 });
     }
   } catch (error) {
     console.error("Erreur générale dans l'API chat:", error);
-    return Response.json(fallbackResponses.default, { status: 200 });
+    return Response.json({ error: fallbackResponses.default }, { status: 200 });
   }
 }
 
