@@ -55,23 +55,67 @@ export default function ChatWidget() {
         setIsLoading(true);
         setInputValue("");
 
+        // Définir un timeout pour éviter une attente infinie en cas de problème
+        const timeoutId = setTimeout(() => {
+            if (isLoading) {
+                setIsLoading(false);
+                setMessages(prev => [...prev, { 
+                    content: "Désolé, la réponse prend trop de temps. Veuillez réessayer dans quelques instants.", 
+                    isUser: false,
+                    timestamp: Date.now()
+                }]);
+            }
+        }, 15000); // 15 secondes de timeout
+
         try {
+            const controller = new AbortController();
+            const signal = controller.signal;
+            
             const response = await fetch("/api/chat", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: userMessage })
+                body: JSON.stringify({ message: userMessage }),
+                signal
             });
 
-            const data = await response.json();
+            clearTimeout(timeoutId); // Annuler le timeout si la réponse arrive à temps
+
+            if (!response.ok) {
+                throw new Error(`Erreur HTTP: ${response.status}`);
+            }
+
+            // Gérer le cas où la réponse n'est pas au format attendu
+            const data = await response.json().catch(() => {
+                throw new Error("Format de réponse invalide");
+            });
+
+            if (typeof data !== 'string' && !data.error) {
+                throw new Error("Format de réponse inattendu");
+            }
+
+            const responseContent = typeof data === 'string' ? data : 
+                                    data.error ? `Erreur: ${data.error}` : "Réponse indisponible";
+
             setMessages(prev => [...prev, { 
-                content: data, 
+                content: responseContent, 
                 isUser: false,
                 timestamp: Date.now()
             }]);
         } catch (error) {
             console.error("Error:", error);
+            clearTimeout(timeoutId); // Annuler le timeout en cas d'erreur
+            
+            // Message d'erreur plus convivial selon le type d'erreur
+            let errorMessage = "Désolé, une erreur s'est produite. Veuillez réessayer.";
+            
+            if (error instanceof TypeError && error.message.includes('fetch')) {
+                errorMessage = "Impossible de se connecter au serveur. Vérifiez votre connexion internet.";
+            } else if (error instanceof Error && error.name === "AbortError") {
+                errorMessage = "La requête a été annulée car elle prenait trop de temps.";
+            }
+            
             setMessages(prev => [...prev, { 
-                content: "Désolé, une erreur s'est produite. Veuillez réessayer.", 
+                content: errorMessage, 
                 isUser: false,
                 timestamp: Date.now()
             }]);
