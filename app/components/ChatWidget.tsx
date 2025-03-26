@@ -106,8 +106,13 @@ export default function ChatWidget() {
 
             // Vérifier si la réponse est identique à la dernière réponse
             const lastMessage = messages[messages.length - 1];
-            if (lastMessage && !lastMessage.isUser && lastMessage.content === responseContent) {
-                responseContent = "Je ne peux pas répéter la même réponse. Pourriez-vous reformuler votre question différemment ?";
+            if (lastMessage && 
+                !lastMessage.isUser && 
+                lastMessage.content === responseContent &&
+                !responseContent.includes("Je suis spécialisé dans l'immobilier") &&
+                !responseContent.includes("Je peux vous aider") &&
+                !responseContent.includes("Je suis votre assistant immobilier")) {
+                responseContent = "Je vois que vous reformulez votre question. Je vais essayer d'être plus précis : " + responseContent;
             }
 
             setMessages(prev => [...prev, { 

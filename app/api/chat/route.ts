@@ -9,15 +9,32 @@ const fallbackResponses = {
   default: "Je suis désolé, je rencontre actuellement des difficultés techniques. Veuillez réessayer dans quelques instants ou contacter notre équipe pour obtenir de l'aide.",
   
   // Réponses par mots-clés
-  prix: "Les prix immobiliers varient selon la localisation, la taille et l'état du bien. En 2024, le prix moyen en France est d'environ 3400€/m² pour un appartement.",
+  prix: "Les prix immobiliers varient selon la localisation, la taille et l'état du bien. En 2024, le prix moyen en France est d'environ 3400€/m² pour un appartement. Les prix peuvent varier significativement selon les régions, allant de 2000€/m² dans certaines zones rurales à plus de 10000€/m² à Paris.",
   
-  achat: "Pour acheter un bien immobilier, commencez par définir votre budget, obtenez une pré-approbation de prêt, visitez plusieurs biens, et faites une offre avec l'aide d'un professionnel.",
+  achat: "Pour acheter un bien immobilier, voici les étapes principales : 1) Définir votre budget et obtenir un accord de prêt, 2) Rechercher des biens correspondant à vos critères, 3) Visiter et comparer les biens, 4) Faire une offre d'achat, 5) Signer le compromis de vente, 6) Obtenir votre prêt définitif, 7) Signer l'acte authentique chez le notaire.",
   
-  vente: "Pour vendre votre bien, estimez son prix correctement, préparez-le pour les visites, rassemblez les diagnostics obligatoires, et envisagez l'aide d'un agent immobilier pour la commercialisation.",
+  vente: "Pour vendre votre bien : 1) Estimez le prix avec précision, 2) Rassemblez les diagnostics obligatoires (DPE, amiante, etc.), 3) Préparez le bien pour les visites, 4) Choisissez votre stratégie de commercialisation (agent immobilier ou vente directe), 5) Négociez les offres, 6) Signez le compromis puis l'acte de vente.",
   
-  locatif: "L'investissement locatif permet de générer des revenus réguliers et de se constituer un patrimoine. La rentabilité moyenne se situe entre 3% et 7% selon la localisation et le type de bien.",
+  locatif: "L'investissement locatif offre plusieurs avantages : revenus réguliers (3-7% de rentabilité moyenne), avantages fiscaux (LMNP, Pinel, etc.), constitution d'un patrimoine. Points clés : choix de l'emplacement, calcul précis de la rentabilité, gestion locative, respect des obligations légales.",
   
-  ptz: "Le Prêt à Taux Zéro (PTZ) est un prêt sans intérêts pour l'achat d'un premier logement neuf ou à rénover. Il est soumis à des conditions de ressources et varie selon la zone géographique."
+  ptz: "Le Prêt à Taux Zéro (PTZ) en 2024 : 1) Réservé aux primo-accédants, 2) Montant jusqu'à 40% du prix dans le neuf, 3) Plafonds de ressources selon la zone, 4) Différé de remboursement possible, 5) Durée de 20 à 25 ans selon les revenus. Conditions et zones éligibles à vérifier.",
+
+  notaire: "Les frais de notaire comprennent : 1) Droits de mutation : 5.09% à 5.89% selon les départements pour l'ancien, 2-3% pour le neuf, 2) Émoluments du notaire : environ 0.814% du prix, 3) Frais divers : 400-700€ pour les formalités administratives. Total : 7-8% pour l'ancien, 2-3% pour le neuf.",
+
+  diagnostic: "Les diagnostics immobiliers obligatoires sont : 1) DPE (performance énergétique), 2) Amiante (avant 1997), 3) Plomb (avant 1949), 4) Électricité et gaz (+ de 15 ans), 5) Termites (zones à risque), 6) État des risques naturels, 7) Assainissement, 8) Superficie Carrez. Validité variable selon le diagnostic.",
+
+  financement: "Le financement immobilier comprend : 1) Apport personnel recommandé (10-20%), 2) Prêt principal sur 20-25 ans, 3) Prêts complémentaires possibles (PTZ, Action Logement, etc.), 4) Assurance emprunteur obligatoire, 5) Taux d'endettement limité à 35%. Comparez plusieurs banques pour optimiser votre financement.",
+
+  fiscalite: "La fiscalité immobilière inclut : 1) Taxe foncière, 2) Taxe d'habitation (résidences secondaires), 3) Plus-values immobilières, 4) Revenus locatifs (régimes micro-foncier ou réel), 5) Dispositifs de défiscalisation (Pinel, LMNP, Denormandie). Consultez un expert pour optimiser votre situation.",
+
+  copropriete: "La copropriété implique : 1) Charges communes (entretien, gardiennage, etc.), 2) Règlement de copropriété à respecter, 3) Assemblées générales annuelles, 4) Syndic pour la gestion, 5) Fonds de travaux obligatoire, 6) Quote-part des parties communes. Vérifiez la santé financière de la copropriété avant d'acheter.",
+
+  renovation: "Pour rénover un bien : 1) Définissez votre budget et vos objectifs, 2) Faites établir des devis détaillés, 3) Vérifiez les autorisations nécessaires (permis, déclaration), 4) Choisissez des artisans qualifiés (RGE pour les aides), 5) Profitez des aides disponibles (MaPrimeRénov, CEE, etc.).",
+
+  // Nouvelles réponses
+  fai: "Les Frais d'Agence Immobilière (FAI) sont généralement : 1) Pour une vente : 4% à 7% du prix du bien, 2) Pour une location : 1 mois de loyer hors charges pour le locataire (zones tendues), jusqu'à 1 mois pour le propriétaire, 3) Négociables selon le bien et la prestation, 4) Inclus dans le prix affiché 'FAI' ou 'honoraires inclus'. Les honoraires doivent être affichés clairement et sont encadrés par la loi.",
+
+  documents: "Les documents essentiels pour une vente immobilière sont : 1) Titre de propriété, 2) Diagnostics techniques obligatoires (DPE, amiante, plomb, etc.), 3) Trois dernières assemblées générales et règlement si copropriété, 4) Plans et métrages, 5) Compromis/promesse de vente, 6) Attestation de surface habitable/Carrez, 7) État hypothécaire, 8) Justificatifs des travaux réalisés. Le notaire vérifiera tous ces documents avant la vente."
 };
 
 // Système de récupération pour les questions hors sujet
@@ -29,10 +46,48 @@ const recoveryResponses = [
 
 // Mots-clés liés à l'immobilier
 const realEstateKeywords = [
-  'immobilier', 'maison', 'appartement', 'achat', 'vente', 'location',
-  'prix', 'prêt', 'investissement', 'bien', 'propriété', 'logement',
-  'rénovation', 'décoration', 'diagnostic', 'frais', 'notaire', 'agent',
-  'visite', 'offre', 'contrat', 'bail', 'loyer', 'charges', 'copropriété'
+  // Termes généraux
+  'immobilier', 'maison', 'appartement', 'bien', 'propriété', 'logement', 'habitation',
+  
+  // Transaction
+  'achat', 'vente', 'location', 'prix', 'coût', 'tarif', 'estimation', 'offre', 'compromis',
+  'négociation', 'commission', 'mandat', 'agence', 'agent', 'honoraires',
+  
+  // Finance
+  'prêt', 'crédit', 'taux', 'mensualité', 'apport', 'hypothèque', 'assurance', 'emprunt',
+  'banque', 'financement', 'ptz', 'endettement', 'revenus', 'épargne',
+  
+  // Technique
+  'surface', 'mètre', 'carrez', 'diagnostic', 'dpe', 'travaux', 'rénovation', 'isolation',
+  'chauffage', 'électricité', 'plomberie', 'amiante', 'plomb', 'termites',
+  
+  // Juridique
+  'notaire', 'frais', 'acte', 'cadastre', 'bail', 'contrat', 'loi', 'règlement',
+  'copropriété', 'syndic', 'charges', 'assemblée', 'quote-part',
+  
+  // Fiscalité
+  'impôt', 'taxe', 'foncier', 'plus-value', 'défiscalisation', 'pinel', 'denormandie',
+  'lmnp', 'revenus', 'charges', 'déduction',
+  
+  // Construction
+  'neuf', 'ancien', 'construction', 'vefa', 'promoteur', 'constructeur', 'terrain',
+  'permis', 'urbanisme', 'plan', 'architecte',
+  
+  // Caractéristiques
+  'pièce', 'chambre', 'salon', 'cuisine', 'salle', 'garage', 'jardin', 'balcon',
+  'terrasse', 'cave', 'parking', 'étage', 'ascenseur', 'exposition',
+  
+  // Localisation
+  'quartier', 'ville', 'commune', 'secteur', 'zone', 'emplacement', 'environnement',
+  'voisinage', 'proximité', 'transport', 'école', 'commerce',
+
+  // Frais et honoraires
+  'fai', 'frais', 'honoraires', 'commission', 'agence', 'agent', 'négociation',
+  'pourcentage', 'rémunération', 'facture', 'paiement', 'règlement',
+
+  // Documents
+  'document', 'papier', 'dossier', 'titre', 'propriété', 'compromis', 'promesse',
+  'attestation', 'diagnostic', 'plan', 'métrage', 'acte', 'contrat', 'bail',
 ];
 
 // Fonction pour vérifier si une question est liée à l'immobilier
@@ -133,25 +188,107 @@ export async function POST(request: Request) {
 function getFallbackResponse(message: string): string {
   const lowerMessage = message.toLowerCase();
   
-  if (lowerMessage.includes('prix') || lowerMessage.includes('coût') || lowerMessage.includes('tarif')) {
+  // Vérification des mots-clés par catégorie
+  if (lowerMessage.includes('notaire') || lowerMessage.includes('frais de notaire')) {
+    return fallbackResponses.notaire;
+  }
+  
+  if (lowerMessage.includes('fai') || 
+      lowerMessage.includes('frais d\'agence') || 
+      lowerMessage.includes('frais dagence') ||
+      lowerMessage.includes('honoraires agence') ||
+      (lowerMessage.includes('frais') && lowerMessage.includes('agent'))) {
+    return fallbackResponses.fai;
+  }
+
+  if (lowerMessage.includes('document') || 
+      lowerMessage.includes('papier') || 
+      lowerMessage.includes('dossier') ||
+      (lowerMessage.includes('doc') && (lowerMessage.includes('vente') || lowerMessage.includes('achat'))) ||
+      lowerMessage.includes('titre de propriété') ||
+      lowerMessage.includes('compromis')) {
+    return fallbackResponses.documents;
+  }
+  
+  if (lowerMessage.includes('diagnostic') || 
+      lowerMessage.includes('dpe') || 
+      lowerMessage.includes('amiante') || 
+      lowerMessage.includes('plomb') || 
+      lowerMessage.includes('termites')) {
+    return fallbackResponses.diagnostic;
+  }
+  
+  if (lowerMessage.includes('prix') || 
+      lowerMessage.includes('coût') || 
+      lowerMessage.includes('tarif') || 
+      lowerMessage.includes('estimation')) {
     return fallbackResponses.prix;
   }
   
-  if (lowerMessage.includes('achat') || lowerMessage.includes('acheter') || lowerMessage.includes('acquérir')) {
+  if (lowerMessage.includes('achat') || 
+      lowerMessage.includes('acheter') || 
+      lowerMessage.includes('acquérir') || 
+      lowerMessage.includes('compromis')) {
     return fallbackResponses.achat;
   }
   
-  if (lowerMessage.includes('vente') || lowerMessage.includes('vendre')) {
+  if (lowerMessage.includes('vente') || 
+      lowerMessage.includes('vendre') || 
+      lowerMessage.includes('mandat')) {
     return fallbackResponses.vente;
   }
   
-  if (lowerMessage.includes('locatif') || lowerMessage.includes('location') || lowerMessage.includes('louer')) {
+  if (lowerMessage.includes('locatif') || 
+      lowerMessage.includes('location') || 
+      lowerMessage.includes('louer') || 
+      lowerMessage.includes('bail') || 
+      lowerMessage.includes('loyer')) {
     return fallbackResponses.locatif;
   }
   
-  if (lowerMessage.includes('ptz') || lowerMessage.includes('prêt à taux zéro')) {
+  if (lowerMessage.includes('ptz') || 
+      lowerMessage.includes('prêt à taux zéro')) {
     return fallbackResponses.ptz;
   }
   
-  return "Je comprends votre question sur l'immobilier, mais je ne peux pas y répondre pour le moment. Pourriez-vous la reformuler ou me poser une question sur un autre aspect de l'immobilier ?";
+  if (lowerMessage.includes('financement') || 
+      lowerMessage.includes('prêt') || 
+      lowerMessage.includes('crédit') || 
+      lowerMessage.includes('banque') || 
+      lowerMessage.includes('emprunt') || 
+      lowerMessage.includes('taux')) {
+    return fallbackResponses.financement;
+  }
+  
+  if (lowerMessage.includes('fiscalité') || 
+      lowerMessage.includes('impôt') || 
+      lowerMessage.includes('taxe') || 
+      lowerMessage.includes('plus-value') || 
+      lowerMessage.includes('défiscalisation') || 
+      lowerMessage.includes('pinel')) {
+    return fallbackResponses.fiscalite;
+  }
+  
+  if (lowerMessage.includes('copropriété') || 
+      lowerMessage.includes('syndic') || 
+      lowerMessage.includes('charges') || 
+      lowerMessage.includes('assemblée') || 
+      lowerMessage.includes('quote-part')) {
+    return fallbackResponses.copropriete;
+  }
+  
+  if (lowerMessage.includes('rénovation') || 
+      lowerMessage.includes('travaux') || 
+      lowerMessage.includes('isolation') || 
+      lowerMessage.includes('chauffage') || 
+      lowerMessage.includes('électricité')) {
+    return fallbackResponses.renovation;
+  }
+  
+  // Si aucun mot-clé spécifique n'est trouvé mais que la question est liée à l'immobilier
+  if (isRealEstateRelated(message)) {
+    return "Je comprends votre question sur l'immobilier. Pour vous donner une réponse plus précise, pourriez-vous me donner plus de détails ou reformuler votre question ?";
+  }
+  
+  return "Je suis spécialisé dans l'immobilier. Pour mieux vous aider, pourriez-vous me poser une question plus spécifique sur l'achat, la vente, la location, le financement ou tout autre aspect de l'immobilier ?";
 }
