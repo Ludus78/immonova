@@ -74,7 +74,10 @@ export default function ChatWidget() {
             const response = await fetch("/api/chat", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: userMessage }),
+                body: JSON.stringify({ 
+                    message: userMessage,
+                    history: messages.map(msg => msg.content)
+                }),
                 signal
             });
 
@@ -94,6 +97,17 @@ export default function ChatWidget() {
                 responseContent = data.response;
             } else {
                 throw new Error("Format de réponse inattendu");
+            }
+
+            // Vérifier si la réponse est vide ou trop courte
+            if (!responseContent || responseContent.length < 10) {
+                throw new Error("Réponse invalide");
+            }
+
+            // Vérifier si la réponse est identique à la dernière réponse
+            const lastMessage = messages[messages.length - 1];
+            if (lastMessage && !lastMessage.isUser && lastMessage.content === responseContent) {
+                responseContent = "Je ne peux pas répéter la même réponse. Pourriez-vous reformuler votre question différemment ?";
             }
 
             setMessages(prev => [...prev, { 

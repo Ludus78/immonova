@@ -20,9 +20,40 @@ const fallbackResponses = {
   ptz: "Le Prêt à Taux Zéro (PTZ) est un prêt sans intérêts pour l'achat d'un premier logement neuf ou à rénover. Il est soumis à des conditions de ressources et varie selon la zone géographique."
 };
 
+// Système de récupération pour les questions hors sujet
+const recoveryResponses = [
+  "Je suis spécialisé dans l'immobilier. Pourriez-vous me poser une question sur ce sujet ?",
+  "Je peux vous aider avec toutes vos questions sur l'immobilier. Que souhaitez-vous savoir ?",
+  "Je suis votre assistant immobilier. Comment puis-je vous aider avec votre projet immobilier ?"
+];
+
+// Mots-clés liés à l'immobilier
+const realEstateKeywords = [
+  'immobilier', 'maison', 'appartement', 'achat', 'vente', 'location',
+  'prix', 'prêt', 'investissement', 'bien', 'propriété', 'logement',
+  'rénovation', 'décoration', 'diagnostic', 'frais', 'notaire', 'agent',
+  'visite', 'offre', 'contrat', 'bail', 'loyer', 'charges', 'copropriété'
+];
+
+// Fonction pour vérifier si une question est liée à l'immobilier
+function isRealEstateRelated(message: string): boolean {
+  const lowerMessage = message.toLowerCase();
+  return realEstateKeywords.some(keyword => lowerMessage.includes(keyword));
+}
+
+// Fonction pour détecter les questions hors sujet répétées
+function isRepeatedOffTopic(history: string[]): boolean {
+  if (history.length < 2) return false;
+  
+  const lastTwoMessages = history.slice(-2);
+  const isOffTopic = lastTwoMessages.every(msg => !isRealEstateRelated(msg));
+  
+  return isOffTopic;
+}
+
 export async function POST(request: Request) {
   try {
-    const { message } = await request.json();
+    const { message, history = [] } = await request.json();
     
     if (!message || typeof message !== 'string') {
       return Response.json({ 
@@ -32,6 +63,24 @@ export async function POST(request: Request) {
     }
     
     console.log("Message reçu:", message);
+    console.log("Historique:", history);
+
+    // Vérifier si la question est liée à l'immobilier
+    if (!isRealEstateRelated(message)) {
+      // Si c'est une question hors sujet répétée, donner une réponse plus ferme
+      if (isRepeatedOffTopic(history)) {
+        return Response.json({ 
+          success: true,
+          response: "Je suis un assistant spécialisé dans l'immobilier. Je ne peux répondre qu'aux questions liées à ce domaine. Pourriez-vous me poser une question sur l'immobilier ?"
+        }, { status: 200 });
+      }
+      
+      const randomResponse = recoveryResponses[Math.floor(Math.random() * recoveryResponses.length)];
+      return Response.json({ 
+        success: true,
+        response: randomResponse
+      }, { status: 200 });
+    }
 
     if (!process.env.CLAUDE_API_KEY) {
       console.warn("Clé API Claude non configurée, utilisation d'une réponse de secours");
@@ -45,7 +94,7 @@ export async function POST(request: Request) {
       const response = await anthropic.messages.create({
         model: "claude-3-5-sonnet-20240620",
         max_tokens: 1500,
-        system: "Tu es un assistant Français spécialisé en immobilier. Tu apportes des réponses précises, professionnelles et utiles sur tous les sujets liés à l'immobilier en France (achat, vente, location, investissement, financement, réglementation, etc.). Tu es poli et concis. Si tu ne peux pas répondre à une question, dis-le honnêtement.",
+        system: "Tu es un assistant Français spécialisé en immobilier. Tu apportes des réponses précises, professionnelles et utiles sur tous les sujets liés à l'immobilier en France (achat, vente, location, investissement, financement, réglementation, etc.). Tu es poli et concis. Si tu ne peux pas répondre à une question, dis-le honnêtement. Reste toujours dans le domaine de l'immobilier. Ne réponds jamais aux questions hors sujet.",
         messages: [
           {"role": "user", "content": message}
         ]
@@ -104,5 +153,5 @@ function getFallbackResponse(message: string): string {
     return fallbackResponses.ptz;
   }
   
-  return "Je comprends votre question, mais je ne peux pas y répondre pour le moment. Pourriez-vous la reformuler ou me poser une question sur un autre aspect de l'immobilier ?";
+  return "Je comprends votre question sur l'immobilier, mais je ne peux pas y répondre pour le moment. Pourriez-vous la reformuler ou me poser une question sur un autre aspect de l'immobilier ?";
 }
