@@ -25,21 +25,27 @@ export async function POST(request: Request) {
     const { message } = await request.json();
     
     if (!message || typeof message !== 'string') {
-      return Response.json({ error: "Je n'ai pas compris votre question. Pourriez-vous la reformuler ?" }, { status: 200 });
+      return Response.json({ 
+        success: false,
+        error: "Je n'ai pas compris votre question. Pourriez-vous la reformuler ?" 
+      }, { status: 200 });
     }
     
     console.log("Message reçu:", message);
 
     if (!process.env.CLAUDE_API_KEY) {
       console.warn("Clé API Claude non configurée, utilisation d'une réponse de secours");
-      return Response.json({ error: getFallbackResponse(message) }, { status: 200 });
+      return Response.json({ 
+        success: true,
+        response: getFallbackResponse(message)
+      }, { status: 200 });
     }
 
     try {
       const response = await anthropic.messages.create({
         model: "claude-3-5-sonnet-20240620",
         max_tokens: 1500,
-        system: "Tu es un assistant Français spécialisé en immobilier. Tu apportes des réponses précises, professionnelles et utiles sur tous les sujets liés à l'immobilier en France (achat, vente, location, investissement, financement, réglementation, etc.). Tu es poli et concis.",
+        system: "Tu es un assistant Français spécialisé en immobilier. Tu apportes des réponses précises, professionnelles et utiles sur tous les sujets liés à l'immobilier en France (achat, vente, location, investissement, financement, réglementation, etc.). Tu es poli et concis. Si tu ne peux pas répondre à une question, dis-le honnêtement.",
         messages: [
           {"role": "user", "content": message}
         ]
@@ -54,14 +60,23 @@ export async function POST(request: Request) {
         throw new Error('Pas de contenu textuel dans la réponse');
       }
 
-      return Response.json({ response: textContent }, { status: 200 });
+      return Response.json({ 
+        success: true,
+        response: textContent 
+      }, { status: 200 });
     } catch (apiError) {
       console.error("Erreur API Claude:", apiError);
-      return Response.json({ error: getFallbackResponse(message) }, { status: 200 });
+      return Response.json({ 
+        success: true,
+        response: getFallbackResponse(message)
+      }, { status: 200 });
     }
   } catch (error) {
     console.error("Erreur générale dans l'API chat:", error);
-    return Response.json({ error: fallbackResponses.default }, { status: 200 });
+    return Response.json({ 
+      success: false,
+      error: fallbackResponses.default 
+    }, { status: 200 });
   }
 }
 
@@ -89,5 +104,5 @@ function getFallbackResponse(message: string): string {
     return fallbackResponses.ptz;
   }
   
-  return fallbackResponses.default;
+  return "Je comprends votre question, mais je ne peux pas y répondre pour le moment. Pourriez-vous la reformuler ou me poser une question sur un autre aspect de l'immobilier ?";
 }

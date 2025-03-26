@@ -88,7 +88,7 @@ export default function ChatWidget() {
 
             // Gérer le nouveau format de réponse
             let responseContent;
-            if (data.error) {
+            if (!data.success) {
                 responseContent = data.error;
             } else if (data.response) {
                 responseContent = data.response;
