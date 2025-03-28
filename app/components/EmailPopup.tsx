@@ -15,13 +15,22 @@ export default function EmailPopup({ isOpen, onClose, onSubmit, targetCalculator
   const [error, setError] = useState('');
   const [acceptNewsletter, setAcceptNewsletter] = useState(true);
 
+  // Réinitialiser l'erreur lorsque l'utilisateur modifie l'email
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+    if (error) setError('');
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
 
+    // Trim l'email pour éviter les espaces
+    const trimmedEmail = email.trim();
+
     // Validation de l'email
-    const emailValidation = validateEmail(email);
+    const emailValidation = validateEmail(trimmedEmail);
     if (!emailValidation.isValid) {
       setError(emailValidation.message || "Adresse email invalide");
       setIsLoading(false);
@@ -29,9 +38,10 @@ export default function EmailPopup({ isOpen, onClose, onSubmit, targetCalculator
     }
 
     try {
-      await onSubmit(email, acceptNewsletter);
+      await onSubmit(trimmedEmail, acceptNewsletter);
       onClose();
     } catch (err) {
+      console.error("Erreur lors de la soumission:", err);
       setError('Une erreur est survenue. Veuillez réessayer.');
     } finally {
       setIsLoading(false);
@@ -67,8 +77,8 @@ export default function EmailPopup({ isOpen, onClose, onSubmit, targetCalculator
           </p>
 
           {error && (
-            <div className="mb-4 p-3 bg-red-50 rounded-lg">
-              <p className="text-sm text-red-600">
+            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-sm text-red-600 font-medium">
                 {error}
               </p>
             </div>
@@ -79,10 +89,12 @@ export default function EmailPopup({ isOpen, onClose, onSubmit, targetCalculator
               <input
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Votre email professionnel"
+                onChange={handleEmailChange}
+                placeholder="Votre email"
                 required
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                aria-invalid={!!error}
+                aria-describedby={error ? "email-error" : undefined}
               />
             </div>
 
