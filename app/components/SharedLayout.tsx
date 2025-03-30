@@ -47,7 +47,7 @@ export default function SharedLayout({ children }: SharedLayoutProps) {
             >
               Dashboard
             </Link>
-            <LogoutLink postLogoutRedirectURL="/" className="px-4 py-2 border border-primary-600 rounded-lg font-medium text-primary-700 hover:bg-primary-50 transition-all">
+            <LogoutLink className="px-4 py-2 border border-primary-600 rounded-lg font-medium text-primary-700 hover:bg-primary-50 transition-all">
               Déconnexion
             </LogoutLink>
            </div>
@@ -116,7 +116,6 @@ const MobileMenu = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (isOpen
                     <span className="ml-3 text-base font-medium text-gray-900">Mon Profil</span>
                   </Link>
                   <LogoutLink
-                    postLogoutRedirectURL="/"
                     className="-m-3 flex items-center rounded-md p-3 hover:bg-gray-50"
                   >
                     <ArrowRightOnRectangleIcon className="h-6 w-6 flex-shrink-0 text-primary-600" aria-hidden="true" />
