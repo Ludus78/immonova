@@ -51,40 +51,40 @@ export default function Dashboard() {
     <div className="bg-gray-50 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header du dashboard */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 bg-gradient-to-r from-primary-600 to-primary-500 p-6 rounded-lg shadow-lg text-white">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">
+            <h1 className="text-3xl font-bold">
               Bienvenue, {user?.given_name || 'utilisateur'}
             </h1>
-            <p className="text-gray-600 mt-1">
+            <p className="mt-2 text-primary-100">
               Votre espace personnel ImmoNova
             </p>
           </div>
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
+          <div className="flex items-center gap-4 mt-4 sm:mt-0">
+            <div className="w-16 h-16 rounded-full bg-white p-1 shadow-md flex items-center justify-center">
               {user?.picture ? (
                 <Image
                   src={user.picture}
                   alt="Avatar"
-                  width={48}
-                  height={48}
+                  width={60}
+                  height={60}
                   className="rounded-full"
                 />
               ) : (
-                <UserIcon className="h-6 w-6 text-primary-600" />
+                <UserIcon className="h-8 w-8 text-primary-600" />
               )}
             </div>
           </div>
         </div>
 
         {/* Calculatrices et outils */}
-        <div className="bg-white shadow rounded-lg mb-8 p-6">
+        <div className="bg-white shadow rounded-lg mb-8 p-6 border-t-4 border-primary-600">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">Calculatrices et outils</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {availableTools.map((tool) => (
-              <div key={tool.id} className="bg-gray-50 rounded-lg p-6 hover:shadow-md transition-all duration-300">
+              <div key={tool.id} className="bg-gradient-to-br from-gray-50 to-white rounded-lg p-6 hover:shadow-lg transition-all duration-300 border border-gray-200 hover:border-primary-300 transform hover:-translate-y-1">
                 <div className="flex items-center mb-4">
-                  <div className={`w-12 h-12 ${tool.color} rounded-lg flex items-center justify-center mr-4`}>
+                  <div className={`w-12 h-12 ${tool.color} rounded-lg flex items-center justify-center mr-4 shadow-md`}>
                     {tool.icon}
                   </div>
                   <h3 className="font-semibold text-gray-900">{tool.title}</h3>
@@ -92,10 +92,10 @@ export default function Dashboard() {
                 <p className="text-gray-600 text-sm mb-4">{tool.description}</p>
                 <Link
                   href={tool.href}
-                  className="text-primary-600 hover:text-primary-800 font-medium text-sm flex items-center"
+                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-md shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
                 >
                   Utiliser maintenant
-                  <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </Link>
@@ -105,13 +105,13 @@ export default function Dashboard() {
         </div>
 
         {/* Ressources utiles */}
-        <div className="bg-white shadow rounded-lg p-6">
+        <div className="bg-white shadow rounded-lg p-6 border-t-4 border-primary-600">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">Ressources utiles</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {usefulResources.map((resource) => (
-              <div key={resource.id} className="border border-gray-200 rounded-lg p-6 hover:border-primary-200 hover:bg-gray-50 transition-all duration-300">
+              <div key={resource.id} className="bg-gradient-to-br from-gray-50 to-white rounded-lg p-6 hover:shadow-lg transition-all duration-300 border border-gray-200 hover:border-primary-300 transform hover:-translate-y-1">
                 <div className="flex items-center mb-4">
-                  <div className="p-2 bg-primary-50 rounded-lg mr-3">
+                  <div className="p-3 bg-primary-100 rounded-lg mr-3 shadow-sm">
                     {resource.icon}
                   </div>
                   <h3 className="font-semibold text-gray-900">{resource.title}</h3>
@@ -119,10 +119,10 @@ export default function Dashboard() {
                 <p className="text-gray-600 text-sm mb-4">{resource.description}</p>
                 <Link
                   href={resource.href}
-                  className="text-primary-600 hover:text-primary-800 font-medium text-sm flex items-center"
+                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-primary-700 bg-primary-100 rounded-md hover:bg-primary-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
                 >
                   Consulter
-                  <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </Link>
