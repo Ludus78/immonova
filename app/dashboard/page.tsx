@@ -9,7 +9,8 @@ import {
   UserIcon, 
   CalculatorIcon, 
   ChartBarIcon,
-  NewspaperIcon
+  NewspaperIcon,
+  DocumentTextIcon
 } from '@heroicons/react/24/outline';
 
 export default function Dashboard() {
@@ -20,31 +21,6 @@ export default function Dashboard() {
     { id: 1, title: 'Calculer achat', href: '/calculette', icon: <CalculatorIcon className="h-6 w-6 text-white" />, color: 'bg-primary-600', description: 'Calculez votre capacité d\'emprunt et simulez votre achat immobilier' },
     { id: 2, title: 'Simuler locatif', href: '/calculette-locative', icon: <ChartBarIcon className="h-6 w-6 text-white" />, color: 'bg-green-600', description: 'Évaluez la rentabilité de votre investissement locatif' },
     { id: 3, title: 'Calculer viager', href: '/calculette-viager', icon: <CalculatorIcon className="h-6 w-6 text-white" />, color: 'bg-amber-600', description: 'Estimez les modalités de votre investissement en viager' },
-  ];
-
-  // Ressources utiles
-  const usefulResources = [
-    { 
-      id: 1, 
-      title: 'Guide achat immobilier', 
-      href: '/achat', 
-      icon: <HomeIcon className="h-6 w-6 text-primary-600" />,
-      description: 'Découvrez les étapes clés pour réussir votre achat immobilier'
-    },
-    { 
-      id: 2, 
-      title: 'Actualités immobilières', 
-      href: '/actualites', 
-      icon: <NewspaperIcon className="h-6 w-6 text-primary-600" />,
-      description: 'Restez informé des dernières tendances du marché immobilier'
-    },
-    { 
-      id: 3, 
-      title: 'Documents essentiels', 
-      href: '/documents', 
-      icon: <NewspaperIcon className="h-6 w-6 text-primary-600" />,
-      description: 'Accédez aux documents nécessaires pour vos démarches immobilières'
-    }
   ];
 
   return (
@@ -77,6 +53,42 @@ export default function Dashboard() {
           </div>
         </div>
 
+        {/* Actualités immobilières - Section mise en avant */}
+        <div className="bg-white shadow rounded-lg mb-8 p-6 border-t-4 border-primary-600">
+          <h2 className="text-xl font-semibold text-gray-800 mb-4">Actualités immobilières</h2>
+          <div className="flex flex-col md:flex-row items-center gap-6 mb-4">
+            <div className="w-full md:w-1/3 h-64 relative rounded-lg overflow-hidden shadow-md">
+              <Image 
+                src="/images/news-prices.svg" 
+                alt="Tendances des prix" 
+                fill 
+                style={{objectFit: 'cover'}} 
+                className="transform hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
+                <div className="p-4 text-white">
+                  <h3 className="font-bold text-lg">Marché immobilier 2025</h3>
+                  <p className="text-sm">Une baisse des prix qui s'atténue</p>
+                </div>
+              </div>
+            </div>
+            <div className="w-full md:w-2/3 flex flex-col gap-4">
+              <p className="text-gray-700">
+                Restez informé des dernières tendances du marché immobilier avec nos analyses détaillées. Nos experts décryptent pour vous l'évolution des prix, les nouvelles mesures gouvernementales et les prévisions du secteur.
+              </p>
+              <Link
+                href="/actualites"
+                className="inline-flex items-center self-start px-6 py-3 text-sm font-medium text-white bg-primary-600 rounded-md shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+              >
+                Consulter les actualités
+                <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+        </div>
+
         {/* Calculatrices et outils */}
         <div className="bg-white shadow rounded-lg mb-8 p-6 border-t-4 border-primary-600">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">Calculatrices et outils</h2>
@@ -104,30 +116,28 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Ressources utiles */}
+        {/* Documents essentiels - Section en bas */}
         <div className="bg-white shadow rounded-lg p-6 border-t-4 border-primary-600">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">Ressources utiles</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {usefulResources.map((resource) => (
-              <div key={resource.id} className="bg-gradient-to-br from-gray-50 to-white rounded-lg p-6 hover:shadow-lg transition-all duration-300 border border-gray-200 hover:border-primary-300 transform hover:-translate-y-1">
-                <div className="flex items-center mb-4">
-                  <div className="p-3 bg-primary-100 rounded-lg mr-3 shadow-sm">
-                    {resource.icon}
-                  </div>
-                  <h3 className="font-semibold text-gray-900">{resource.title}</h3>
+          <h2 className="text-xl font-semibold text-gray-800 mb-4">Documents essentiels</h2>
+          <div className="flex flex-col md:flex-row gap-6 items-center">
+            <div className="bg-gradient-to-br from-gray-50 to-white rounded-lg p-6 hover:shadow-lg transition-all duration-300 border border-gray-200 hover:border-primary-300 transform hover:-translate-y-1 w-full">
+              <div className="flex items-center mb-4">
+                <div className="p-3 bg-primary-100 rounded-lg mr-3 shadow-sm">
+                  <DocumentTextIcon className="h-6 w-6 text-primary-600" />
                 </div>
-                <p className="text-gray-600 text-sm mb-4">{resource.description}</p>
-                <Link
-                  href={resource.href}
-                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-primary-700 bg-primary-100 rounded-md hover:bg-primary-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
-                >
-                  Consulter
-                  <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </Link>
+                <h3 className="font-semibold text-gray-900">Documents essentiels</h3>
               </div>
-            ))}
+              <p className="text-gray-600 text-sm mb-4">Accédez aux documents nécessaires pour vos démarches immobilières, incluant modèles de contrats, guides juridiques et fiches pratiques.</p>
+              <Link
+                href="/documents"
+                className="inline-flex items-center px-4 py-2 text-sm font-medium text-primary-700 bg-primary-100 rounded-md hover:bg-primary-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+              >
+                Consulter
+                <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
