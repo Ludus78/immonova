@@ -25,7 +25,7 @@ export default function QuiSuisJe() {
             <div className="p-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Ludovic DENIS</h2>
               <p className="text-md text-gray-600 mb-4">
-                Expert immobilier avec une solide expérience en transaction, conseil et financement
+                Expert immobilier avec une solide expérience en conseil, transaction et financement
               </p>
               <p className="text-gray-700">
                 Riche d'une expérience de plus de 10 ans dans différentes facettes du secteur immobilier, je mets mon expertise 
@@ -58,12 +58,7 @@ export default function QuiSuisJe() {
               
               <div className="bg-primary-50 p-6 rounded-lg">
                 <h3 className="font-semibold text-primary-700 mb-2">Gestion locative</h3>
-                <p className="text-gray-700">Mon expérience inclut également la gestion de biens locatifs, me donnant une perspective unique sur la rentabilité des investissements immobiliers.</p>
-              </div>
-              
-              <div className="bg-primary-50 p-6 rounded-lg">
-                <h3 className="font-semibold text-primary-700 mb-2">Conseil en travaux</h3>
-                <p className="text-gray-700">J'ai également développé une expertise dans l'estimation et la coordination de travaux, essentielle pour valoriser un bien immobilier.</p>
+                <p className="text-gray-700">Au fil des années, j’ai développé une expertise pratique dans le domaine immobilier en achetant et rénovant entièrement deux biens de A à Z. De la recherche du bien idéal aux travaux de rénovation en passant par la gestion des coûts et des prestataires, j’ai acquis une solide expérience sur chaque étape du processus. J’ai appris à évaluer le potentiel d’un bien, à optimiser son aménagement et à gérer les imprévus liés aux chantiers.</p>
               </div>
             </div>
           </div>
@@ -74,7 +69,7 @@ export default function QuiSuisJe() {
               <h3 className="text-xl font-semibold text-primary-700">Tradition et innovation</h3>
             </div>
             <p className="text-gray-700 mb-4">
-              Issu d'une famille active dans l'immobilier, j'ai travaillé pendant 2 ans avec mon père qui gère un patrimoine 
+              Issu d'une famille active dans l'immobilier, j'ai travaillé pendant plusieurs années avec mon père qui gère un patrimoine 
               immobilier familial et exerce en tant que courtier en travaux. Cette collaboration m'a permis d'acquérir une 
               vision globale et pratique du secteur, alliant tradition familiale et approches modernes. Cette double 
               perspective nourrit aujourd'hui ma pratique professionnelle et les conseils que je prodigue.
