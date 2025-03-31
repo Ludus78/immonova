@@ -8,7 +8,12 @@ const nextConfig = {
   // Utiliser index.tsx comme page principale au lieu de page.tsx
   trailingSlash: true,
   images: {
-    domains: ['lh3.googleusercontent.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
   env: {
     // Configurer dynamiquement les URLs Kinde pour résoudre les problèmes de State

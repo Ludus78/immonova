@@ -1,5 +1,11 @@
-import Image from 'next/image';
+import { Metadata } from 'next';
 import Link from 'next/link';
+import ProfileImage from '../components/ProfileImage';
+
+export const metadata: Metadata = {
+  title: 'Qui suis-je ? | Immonova',
+  description: 'Expert immobilier avec plus de 10 ans d\'expérience dans le secteur',
+};
 
 export default function QuiSuisJe() {
   return (
@@ -16,11 +22,8 @@ export default function QuiSuisJe() {
         {/* Photo et introduction */}
         <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-12">
           <div className="md:flex">
-            <div className="md:flex-shrink-0 flex items-center justify-center bg-primary-100 md:w-48">
-              {/* Remplacer par une vraie photo si disponible */}
-              <div className="h-32 w-32 rounded-full bg-primary-600 flex items-center justify-center text-white text-2xl font-bold">
-                LD
-              </div>
+            <div className="md:flex-shrink-0 flex items-center justify-center bg-primary-50 md:w-64 p-6">
+              <ProfileImage />
             </div>
             <div className="p-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Ludovic DENIS</h2>
@@ -58,7 +61,7 @@ export default function QuiSuisJe() {
               
               <div className="bg-primary-50 p-6 rounded-lg">
                 <h3 className="font-semibold text-primary-700 mb-2">Gestion locative</h3>
-                <p className="text-gray-700">Au fil des années, j’ai développé une expertise pratique dans le domaine immobilier en achetant et rénovant entièrement deux biens de A à Z. De la recherche du bien idéal aux travaux de rénovation en passant par la gestion des coûts et des prestataires, j’ai acquis une solide expérience sur chaque étape du processus. J’ai appris à évaluer le potentiel d’un bien, à optimiser son aménagement et à gérer les imprévus liés aux chantiers.</p>
+                <p className="text-gray-700">Au fil des années, j'ai développé une expertise pratique dans le domaine immobilier en achetant et rénovant entièrement deux biens de A à Z. De la recherche du bien idéal aux travaux de rénovation en passant par la gestion des coûts et des prestataires, j'ai acquis une solide expérience sur chaque étape du processus. J'ai appris à évaluer le potentiel d'un bien, à optimiser son aménagement et à gérer les imprévus liés aux chantiers.</p>
               </div>
             </div>
           </div>
