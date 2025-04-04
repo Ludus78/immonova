@@ -22,7 +22,7 @@ export default withAuth(
   {
     // Configuration de l'authentification
     callbacks: {
-      authorized: async ({ token }) => {
+      authorized: async ({ token }: { token: any }) => {
         console.log('Middleware - Token vérifié:', !!token);
         return !!token;
       },
