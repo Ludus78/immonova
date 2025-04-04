@@ -115,7 +115,7 @@ export default function Home() {
               </div>
               <div className="mt-6">
                 <button
-                  onClick={() => handleCalculatorClick("Achat", "/calculette")}
+                  onClick={() => handleCalculatorClick("Achat", "/calculateurs")}
                   className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
                 >
                   Utiliser la calculette

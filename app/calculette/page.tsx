@@ -4,310 +4,334 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useDefaultRate } from '../hooks/useMarketRates';
 
-export default function Calculette() {
-  const [revenuMensuel, setRevenuMensuel] = useState<number>(0);
-  const [revenuConjoint, setRevenuConjoint] = useState<number>(0);
-  const [apport, setApport] = useState<number>(0);
-  const [duree, setDuree] = useState<number>(25);
-  // Récupérer le taux du marché via le hook, avec une valeur par défaut de 3.5%
-  const tauxMarche = useDefaultRate('acheter', duree, 3.5);
-  const [tauxInteret, setTauxInteret] = useState<number>(tauxMarche);
+export default function CalculetteAchat() {
+  // Paramètres d'entrée de l'achat
+  const [prixAchat, setPrixAchat] = useState<number>(300000);
   const [fraisNotaire, setFraisNotaire] = useState<number>(8);
-  const [fraisAgence, setFraisAgence] = useState<number>(5);
+  const [fraisAgence, setFraisAgence] = useState<number>(4);
   const [fraisDossier, setFraisDossier] = useState<number>(1000);
-  const [fraisTravaux, setFraisTravaux] = useState<number>(0);
+  const [apport, setApport] = useState<number>(30000);
+  const [revenusMensuels, setRevenusMensuels] = useState<number>(3500);
+  const [chargesMensuelles, setChargesMensuelles] = useState<number>(1000);
+  const [estPrimoAccedant, setEstPrimoAccedant] = useState<boolean>(true);
+  
+  // Paramètres du financement
+  const [duree, setDuree] = useState<number>(25);
+  // Récupérer le taux du marché via le hook, avec une valeur par défaut de 4%
+  const tauxMarche = useDefaultRate('achat', duree, 4.0);
+  const [tauxInteret, setTauxInteret] = useState<number>(tauxMarche);
+  const [tauxAssurance, setTauxAssurance] = useState<number>(0.34);
   
   // Mettre à jour le taux d'intérêt quand la durée change
   useEffect(() => {
     setTauxInteret(tauxMarche);
   }, [tauxMarche]);
   
-  // Calculer le montant empruntable
-  const capaciteEmprunt = () => {
-    const revenuTotal = revenuMensuel + revenuConjoint;
-    const mensualiteMax = revenuTotal * 0.35; // 35% des revenus maximum
-    
-    // Formule: M = P * [r(1+r)^n] / [(1+r)^n - 1]
-    // M = mensualité, P = principal (montant emprunté), r = taux d'intérêt mensuel, n = nombre de mensualités
-    const tauxMensuel = tauxInteret / 100 / 12;
-    const nombreMensualites = duree * 12;
-    
-    const numerateur = tauxMensuel * Math.pow(1 + tauxMensuel, nombreMensualites);
-    const denominateur = Math.pow(1 + tauxMensuel, nombreMensualites) - 1;
-    
-    // Résoudre P = M * [(1+r)^n - 1] / [r(1+r)^n]
-    const montantEmpruntable = mensualiteMax * (denominateur / numerateur);
-    
-    return Math.round(montantEmpruntable);
-  };
-  
-  // Calculer le budget total incluant l'apport
-  const budgetTotal = capaciteEmprunt() + apport;
-  
-  // Calculer le prix d'achat maximum (hors frais)
-  const prixAchatMax = () => {
-    const fraisTotauxPourcentage = fraisNotaire + fraisAgence;
-    const fraisTotaux = (budgetTotal * fraisTotauxPourcentage / 100) + fraisDossier + fraisTravaux;
-    return Math.round(budgetTotal - fraisTotaux);
-  };
-  
-  // Calculer les frais annexes
-  const calculerFrais = () => {
-    const fraisNotaireValeur = prixAchatMax() * fraisNotaire / 100;
-    const fraisAgenceValeur = prixAchatMax() * fraisAgence / 100;
+  // Calculs des coûts totaux de l'achat
+  const calculerCoutTotal = () => {
+    const fraisNotaireValeur = prixAchat * fraisNotaire / 100;
+    const fraisAgenceValeur = prixAchat * fraisAgence / 100;
+    const total = prixAchat + fraisNotaireValeur + fraisAgenceValeur + fraisDossier;
     
     return {
-      notaire: Math.round(fraisNotaireValeur),
-      agence: Math.round(fraisAgenceValeur),
-      dossier: fraisDossier,
-      travaux: fraisTravaux,
-      total: Math.round(fraisNotaireValeur + fraisAgenceValeur + fraisDossier + fraisTravaux)
+      fraisNotaire: Math.round(fraisNotaireValeur),
+      fraisAgence: Math.round(fraisAgenceValeur),
+      fraisDossier: fraisDossier,
+      totalProjet: Math.round(total)
     };
   };
   
-  const frais = calculerFrais();
-  const mensualite = () => {
+  const coutProjet = calculerCoutTotal();
+  
+  // Calcul du montant à emprunter
+  const montantEmprunt = coutProjet.totalProjet - apport;
+  
+  // Calcul de la mensualité du prêt (avec assurance)
+  const calculerMensualite = () => {
     const tauxMensuel = tauxInteret / 100 / 12;
     const nombreMensualites = duree * 12;
-    const emprunt = capaciteEmprunt();
     
-    const numerateur = tauxMensuel * Math.pow(1 + tauxMensuel, nombreMensualites);
-    const denominateur = Math.pow(1 + tauxMensuel, nombreMensualites) - 1;
+    // Calcul de la mensualité hors assurance
+    let mensualiteHorsAssurance;
+    if (tauxMensuel === 0) {
+      mensualiteHorsAssurance = montantEmprunt / nombreMensualites;
+    } else {
+      const numerateur = tauxMensuel * Math.pow(1 + tauxMensuel, nombreMensualites);
+      const denominateur = Math.pow(1 + tauxMensuel, nombreMensualites) - 1;
+      mensualiteHorsAssurance = montantEmprunt * (numerateur / denominateur);
+    }
     
-    return Math.round(emprunt * (numerateur / denominateur));
+    // Calcul de l'assurance mensuelle
+    const assuranceMensuelle = (montantEmprunt * (tauxAssurance / 100)) / 12;
+    
+    return {
+      total: Math.round(mensualiteHorsAssurance + assuranceMensuelle),
+      assurance: Math.round(assuranceMensuelle),
+      horAssurance: Math.round(mensualiteHorsAssurance)
+    };
   };
+  
+  const mensualites = calculerMensualite();
+  
+  // Calcul du taux d'endettement
+  const tauxEndettement = (mensualites.total / revenusMensuels) * 100;
+  
+  // Calcul du reste à vivre
+  const resteAVivre = revenusMensuels - mensualites.total - chargesMensuelles;
+  
+  // Calcul du coût total du crédit
+  const coutTotalCredit = (mensualites.total * duree * 12) - montantEmprunt;
+  
+  // Calcul du PTZ (Prêt à Taux Zéro) si primo-accédant
+  const calculerPTZ = () => {
+    if (!estPrimoAccedant) return 0;
+    const plafondPTZ = 100000; // Exemple de plafond
+    return Math.min(prixAchat * 0.4, plafondPTZ);
+  };
+  
+  const montantPTZ = calculerPTZ();
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <h1 className="text-2xl font-bold mb-6 text-indigo-700">Calculette d'achat immobilier</h1>
-      <p className="text-gray-600 mb-6">
-        Estimez votre capacité d'emprunt et le prix maximum d'un bien immobilier en fonction de vos revenus et des frais annexes.
-      </p>
-      
-      <div className="grid md:grid-cols-2 gap-8">
-        <div>
-          <h2 className="text-xl font-semibold mb-4 text-gray-800">Vos revenus</h2>
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Votre revenu mensuel net (€)
-              </label>
-              <input
-                type="number"
-                value={revenuMensuel || ''}
-                onChange={(e) => setRevenuMensuel(Number(e.target.value))}
-                className="w-full p-2 border border-gray-300 rounded focus:ring focus:ring-indigo-200 focus:border-indigo-500"
-              />
-            </div>
-            
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Revenu du conjoint mensuel net (€)
-              </label>
-              <input
-                type="number"
-                value={revenuConjoint || ''}
-                onChange={(e) => setRevenuConjoint(Number(e.target.value))}
-                className="w-full p-2 border border-gray-300 rounded focus:ring focus:ring-indigo-200 focus:border-indigo-500"
-              />
-            </div>
-            
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Apport personnel (€)
-              </label>
-              <input
-                type="number"
-                value={apport || ''}
-                onChange={(e) => setApport(Number(e.target.value))}
-                className="w-full p-2 border border-gray-300 rounded focus:ring focus:ring-indigo-200 focus:border-indigo-500"
-              />
-            </div>
-          </div>
-          
-          <h2 className="text-xl font-semibold mt-6 mb-4 text-gray-800">Conditions du prêt</h2>
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Durée du prêt (années)
-              </label>
-              <input
-                type="range"
-                min="5"
-                max="30"
-                step="1"
-                value={duree}
-                onChange={(e) => setDuree(Number(e.target.value))}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-              />
-              <div className="flex justify-between text-xs text-gray-500 mt-1">
-                <span>5 ans</span>
-                <span>{duree} ans</span>
-                <span>30 ans</span>
-              </div>
-            </div>
-            
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Taux d'intérêt (%)
-              </label>
-              <div className="flex flex-col space-y-2">
-                <div className="bg-gray-50 p-2 rounded border border-gray-200 text-sm text-gray-600">
-                  Taux du marché actuel: {tauxMarche.toFixed(2)}%
-                </div>
-                <div className="flex items-center space-x-2">
-                  <input
-                    type="number"
-                    step="0.01"
-                    min="0.1"
-                    max="15"
-                    value={tauxInteret}
-                    onChange={(e) => setTauxInteret(Number(e.target.value))}
-                    className="flex-1 p-2 border border-gray-300 rounded focus:ring focus:ring-indigo-200 focus:border-indigo-500"
-                  />
-                  <button 
-                    type="button" 
-                    onClick={() => setTauxInteret(tauxMarche)}
-                    className="p-2 bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200 text-sm"
-                  >
-                    Réinitialiser
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <h2 className="text-xl font-semibold mt-6 mb-4 text-gray-800">Frais annexes</h2>
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Frais de notaire (%)
-              </label>
-              <input
-                type="number"
-                step="0.1"
-                min="0"
-                value={fraisNotaire}
-                onChange={(e) => setFraisNotaire(Number(e.target.value))}
-                className="w-full p-2 border border-gray-300 rounded focus:ring focus:ring-indigo-200 focus:border-indigo-500"
-              />
-            </div>
-            
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Frais d'agence (%)
-              </label>
-              <input
-                type="number"
-                step="0.1"
-                min="0"
-                value={fraisAgence}
-                onChange={(e) => setFraisAgence(Number(e.target.value))}
-                className="w-full p-2 border border-gray-300 rounded focus:ring focus:ring-indigo-200 focus:border-indigo-500"
-              />
-            </div>
-            
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Frais de dossier bancaire (€)
-              </label>
-              <input
-                type="number"
-                value={fraisDossier}
-                onChange={(e) => setFraisDossier(Number(e.target.value))}
-                className="w-full p-2 border border-gray-300 rounded focus:ring focus:ring-indigo-200 focus:border-indigo-500"
-              />
-            </div>
-            
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Budget travaux (€)
-              </label>
-              <input
-                type="number"
-                value={fraisTravaux}
-                onChange={(e) => setFraisTravaux(Number(e.target.value))}
-                className="w-full p-2 border border-gray-300 rounded focus:ring focus:ring-indigo-200 focus:border-indigo-500"
-              />
-            </div>
-          </div>
+    <div className="min-h-screen bg-gray-50 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900">Calculette de prêt immobilier</h1>
+          <p className="mt-2 text-gray-600">
+            Simulez votre capacité d'emprunt et estimez vos mensualités
+          </p>
         </div>
-        
-        <div className="bg-gray-50 p-6 rounded-lg">
-          <h2 className="text-xl font-semibold mb-6 text-indigo-700">Résultats</h2>
-          
-          <div className="space-y-6">
-            <div>
-              <h3 className="font-medium text-gray-700 mb-2">Budget total</h3>
-              <div className="text-3xl font-bold text-indigo-700">
-                {new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(budgetTotal)}
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Panneau de configuration */}
+          <div className="lg:col-span-1">
+            <div className="bg-white rounded-lg shadow p-6 space-y-6">
+              <div>
+                <h2 className="text-lg font-semibold text-gray-900 mb-4">Votre projet</h2>
+                
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Prix d'achat (€)
+                    </label>
+                    <input
+                      type="number"
+                      value={prixAchat}
+                      onChange={(e) => setPrixAchat(Number(e.target.value))}
+                      className="w-full p-2 border border-gray-300 rounded focus:ring focus:ring-indigo-200"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Apport personnel (€)
+                    </label>
+                    <input
+                      type="number"
+                      value={apport}
+                      onChange={(e) => setApport(Number(e.target.value))}
+                      className="w-full p-2 border border-gray-300 rounded focus:ring focus:ring-indigo-200"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Revenus mensuels nets (€)
+                    </label>
+                    <input
+                      type="number"
+                      value={revenusMensuels}
+                      onChange={(e) => setRevenusMensuels(Number(e.target.value))}
+                      className="w-full p-2 border border-gray-300 rounded focus:ring focus:ring-indigo-200"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Charges mensuelles (€)
+                    </label>
+                    <input
+                      type="number"
+                      value={chargesMensuelles}
+                      onChange={(e) => setChargesMensuelles(Number(e.target.value))}
+                      className="w-full p-2 border border-gray-300 rounded focus:ring focus:ring-indigo-200"
+                    />
+                  </div>
+                </div>
               </div>
-              <p className="text-sm text-gray-500 mt-1">
-                Capacité d'emprunt + apport personnel
-              </p>
-            </div>
-            
-            <div>
-              <h3 className="font-medium text-gray-700 mb-2">Prix d'achat maximum</h3>
-              <div className="text-3xl font-bold text-green-600">
-                {new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(prixAchatMax())}
+
+              <div>
+                <h2 className="text-lg font-semibold text-gray-900 mb-4">Paramètres du prêt</h2>
+                
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Durée du prêt (années)
+                    </label>
+                    <input
+                      type="range"
+                      min="5"
+                      max="30"
+                      value={duree}
+                      onChange={(e) => setDuree(Number(e.target.value))}
+                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                    />
+                    <div className="text-sm text-gray-600 mt-1">{duree} ans</div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Taux d'intérêt (%)
+                    </label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      value={tauxInteret}
+                      onChange={(e) => setTauxInteret(Number(e.target.value))}
+                      className="w-full p-2 border border-gray-300 rounded focus:ring focus:ring-indigo-200"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Taux d'assurance (%)
+                    </label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={tauxAssurance}
+                      onChange={(e) => setTauxAssurance(Number(e.target.value))}
+                      className="w-full p-2 border border-gray-300 rounded focus:ring focus:ring-indigo-200"
+                    />
+                  </div>
+
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={estPrimoAccedant}
+                      onChange={(e) => setEstPrimoAccedant(e.target.checked)}
+                      className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                    />
+                    <label className="ml-2 block text-sm text-gray-700">
+                      Primo-accédant (PTZ)
+                    </label>
+                  </div>
+                </div>
               </div>
-              <p className="text-sm text-gray-500 mt-1">
-                Budget total - frais annexes
-              </p>
             </div>
-            
-            <div>
-              <h3 className="font-medium text-gray-700 mb-2">Mensualité estimée</h3>
-              <div className="text-2xl font-bold text-indigo-600">
-                {new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(mensualite())}
-              </div>
-              <p className="text-sm text-gray-500 mt-1">
-                Sur {duree} ans à {tauxInteret.toFixed(2)}%
-              </p>
-            </div>
-            
-            <div className="border-t border-gray-200 pt-4 mt-4">
-              <h3 className="font-medium text-gray-700 mb-3">Détail des frais annexes</h3>
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Frais de notaire</span>
-                  <span>{new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(frais.notaire)}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Frais d'agence</span>
-                  <span>{new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(frais.agence)}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Frais de dossier</span>
-                  <span>{new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(frais.dossier)}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Budget travaux</span>
-                  <span>{new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(frais.travaux)}</span>
-                </div>
-                <div className="flex justify-between font-semibold pt-2 border-t border-gray-200">
-                  <span>Total des frais</span>
-                  <span>{new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(frais.total)}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div className="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-100">
-            <h3 className="font-medium text-blue-700 mb-2">Conseil ImmoNova</h3>
-            <p className="text-sm text-blue-600">
-              Avec vos revenus actuels, vous pouvez envisager l'achat d'un bien jusqu'à {new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(prixAchatMax())}. N'hésitez pas à consulter nos experts pour optimiser votre recherche immobilière.
-            </p>
           </div>
 
-          <div className="mt-8 text-center space-y-4">
-            <Link href="/calculette-locative" className="block text-indigo-600 hover:text-indigo-800 font-medium">
-              Essayez notre calculette d'investissement locatif →
-            </Link>
-            <Link href="/calculette-viager" className="block text-indigo-600 hover:text-indigo-800 font-medium">
-              Découvrez notre calculette d'investissement en viager →
-            </Link>
+          {/* Résultats */}
+          <div className="lg:col-span-2 space-y-6">
+            {/* Résumé principal */}
+            <div className="bg-white rounded-lg shadow p-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="text-center">
+                  <div className="text-sm font-medium text-gray-500">Mensualité totale</div>
+                  <div className="mt-1 text-3xl font-semibold text-indigo-600">
+                    {mensualites.total}€
+                  </div>
+                  <div className="mt-1 text-xs text-gray-500">dont {mensualites.assurance}€ d'assurance</div>
+                </div>
+
+                <div className="text-center">
+                  <div className="text-sm font-medium text-gray-500">Taux d'endettement</div>
+                  <div className="mt-1 text-3xl font-semibold text-indigo-600">
+                    {Math.round(tauxEndettement)}%
+                  </div>
+                  <div className="mt-1 text-xs text-gray-500">
+                    {tauxEndettement <= 35 ? 'Acceptable' : 'Trop élevé'}
+                  </div>
+                </div>
+
+                <div className="text-center">
+                  <div className="text-sm font-medium text-gray-500">Reste à vivre</div>
+                  <div className="mt-1 text-3xl font-semibold text-indigo-600">
+                    {Math.round(resteAVivre)}€
+                  </div>
+                  <div className="mt-1 text-xs text-gray-500">par mois</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Détails du financement */}
+            <div className="bg-white rounded-lg shadow p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Détails du financement</h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h4 className="text-sm font-medium text-gray-500 mb-2">Coût du projet</h4>
+                  <table className="w-full text-sm">
+                    <tbody>
+                      <tr>
+                        <td className="py-1 text-gray-600">Prix d'achat</td>
+                        <td className="py-1 text-right font-medium">{prixAchat.toLocaleString()}€</td>
+                      </tr>
+                      <tr>
+                        <td className="py-1 text-gray-600">Frais de notaire</td>
+                        <td className="py-1 text-right font-medium">{coutProjet.fraisNotaire.toLocaleString()}€</td>
+                      </tr>
+                      <tr>
+                        <td className="py-1 text-gray-600">Frais d'agence</td>
+                        <td className="py-1 text-right font-medium">{coutProjet.fraisAgence.toLocaleString()}€</td>
+                      </tr>
+                      <tr>
+                        <td className="py-1 text-gray-600">Frais de dossier</td>
+                        <td className="py-1 text-right font-medium">{fraisDossier.toLocaleString()}€</td>
+                      </tr>
+                      <tr className="border-t">
+                        <td className="py-2 font-medium">Total</td>
+                        <td className="py-2 text-right font-medium">{coutProjet.totalProjet.toLocaleString()}€</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div>
+                  <h4 className="text-sm font-medium text-gray-500 mb-2">Plan de financement</h4>
+                  <table className="w-full text-sm">
+                    <tbody>
+                      <tr>
+                        <td className="py-1 text-gray-600">Apport personnel</td>
+                        <td className="py-1 text-right font-medium">{apport.toLocaleString()}€</td>
+                      </tr>
+                      {estPrimoAccedant && (
+                        <tr>
+                          <td className="py-1 text-gray-600">PTZ</td>
+                          <td className="py-1 text-right font-medium">{montantPTZ.toLocaleString()}€</td>
+                        </tr>
+                      )}
+                      <tr>
+                        <td className="py-1 text-gray-600">Montant emprunté</td>
+                        <td className="py-1 text-right font-medium">{montantEmprunt.toLocaleString()}€</td>
+                      </tr>
+                      <tr>
+                        <td className="py-1 text-gray-600">Coût total du crédit</td>
+                        <td className="py-1 text-right font-medium">{coutTotalCredit.toLocaleString()}€</td>
+                      </tr>
+                      <tr className="border-t">
+                        <td className="py-2 font-medium">Coût total du projet</td>
+                        <td className="py-2 text-right font-medium">
+                          {(montantEmprunt + coutTotalCredit + apport).toLocaleString()}€
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            {/* Liens vers les autres calculettes */}
+            <div className="mt-8 text-center space-y-4">
+              <Link href="/calculateurs/pret" className="block text-indigo-600 hover:text-indigo-800 font-medium">
+                Essayer la version avancée →
+              </Link>
+              <Link href="/calculette-locative" className="block text-indigo-600 hover:text-indigo-800 font-medium">
+                Voir aussi notre calculette d'investissement locatif →
+              </Link>
+              <Link href="/calculette-viager" className="block text-indigo-600 hover:text-indigo-800 font-medium">
+                Découvrez notre calculette d'investissement en viager →
+              </Link>
+            </div>
           </div>
         </div>
       </div>
