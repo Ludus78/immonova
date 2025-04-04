@@ -4,7 +4,7 @@ import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
 
 interface CalculatorActionsProps {
-  calculatorType: 'achat' | 'locatif' | 'viager';
+  calculatorType: 'achat' | 'locatif' | 'viager' | 'pret';
   calculatorRef: React.RefObject<HTMLDivElement>;
 }
 
