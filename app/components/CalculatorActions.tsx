@@ -60,9 +60,16 @@ export default function CalculatorActions({ calculatorType, calculatorRef }: Cal
 
   const handleSave = async () => {
     if (!isAuthenticated) {
+      console.log('Utilisateur non authentifié');
       alert('Veuillez vous connecter pour sauvegarder votre simulation.');
       return;
     }
+
+    console.log('Tentative de sauvegarde avec:', {
+      type: calculatorType,
+      url: window.location.href,
+      userId: user?.id
+    });
 
     try {
       const response = await fetch('/api/simulations/save', {
@@ -76,13 +83,20 @@ export default function CalculatorActions({ calculatorType, calculatorRef }: Cal
         }),
       });
 
+      console.log('Réponse du serveur:', {
+        status: response.status,
+        ok: response.ok
+      });
+
       if (response.ok) {
         alert('Simulation sauvegardée avec succès ! Vous pouvez la retrouver dans votre tableau de bord.');
       } else {
-        throw new Error('Erreur lors de la sauvegarde');
+        const errorData = await response.text();
+        console.error('Erreur serveur:', errorData);
+        throw new Error(`Erreur lors de la sauvegarde: ${errorData}`);
       }
     } catch (error) {
-      console.error('Erreur lors de la sauvegarde:', error);
+      console.error('Erreur détaillée:', error);
       alert('Une erreur est survenue lors de la sauvegarde. Veuillez réessayer.');
     }
   };
