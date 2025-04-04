@@ -39,3 +39,15 @@ model NewsArticle {
     imageUrl    String?
     isPublished Boolean   @default(true)
 }
+
+model User {
+    id              String    @id @default(cuid())
+    createdAt       DateTime  @default(now())
+    updatedAt       DateTime? @updatedAt
+    email           String    @unique
+    password        String?
+    resetToken      String?   @unique
+    resetTokenExp   DateTime?
+    name            String?
+    role            String    @default("user")
+}

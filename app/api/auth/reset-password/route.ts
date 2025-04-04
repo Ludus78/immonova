@@ -40,7 +40,7 @@ export async function POST(request: Request) {
         where: { id: user.id },
         data: {
           resetToken,
-          resetTokenExpiry,
+          resetTokenExp: resetTokenExpiry,
         },
       });
 

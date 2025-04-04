@@ -18,7 +18,7 @@ export default function CalculetteAchat() {
   // Paramètres du financement
   const [duree, setDuree] = useState<number>(25);
   // Récupérer le taux du marché via le hook, avec une valeur par défaut de 4%
-  const tauxMarche = useDefaultRate('achat', duree, 4.0);
+  const tauxMarche = useDefaultRate('acheter', duree, 4.0);
   const [tauxInteret, setTauxInteret] = useState<number>(tauxMarche);
   const [tauxAssurance, setTauxAssurance] = useState<number>(0.34);
   
