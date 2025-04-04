@@ -1,10 +1,13 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useDefaultRate } from '../hooks/useMarketRates';
+import CalculatorActions from '../components/CalculatorActions';
 
 export default function CalculetteViager() {
+  const calculatorRef = useRef<HTMLDivElement>(null);
+  
   // Paramètres du bien
   const [prixValeurTotale, setPrixValeurTotale] = useState<number>(200000);
   const [fraisNotaire, setFraisNotaire] = useState<number>(8);
@@ -112,7 +115,7 @@ export default function CalculetteViager() {
   const renteAnnuelleIndexee = renteMensuelle * 12 * (1 + inflation / 100);
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
+    <div ref={calculatorRef} className="bg-white rounded-lg shadow-md p-6">
       <h1 className="text-2xl font-bold mb-2 text-indigo-700">Calculette d'investissement en viager</h1>
       <p className="text-gray-600 mb-6">
         Estimez la rentabilité de votre investissement en viager en tenant compte des spécificités de ce type d'investissement.
@@ -424,6 +427,8 @@ export default function CalculetteViager() {
           </div>
         </div>
       </div>
+      
+      <CalculatorActions calculatorType="viager" calculatorRef={calculatorRef} />
     </div>
   );
 } 

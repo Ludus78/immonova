@@ -40,6 +40,17 @@ model NewsArticle {
     isPublished Boolean   @default(true)
 }
 
+model Simulation {
+  id        String   @id @default(cuid())
+  type      String
+  url       String
+  date      DateTime
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model User {
     id              String    @id @default(cuid())
     createdAt       DateTime  @default(now())
@@ -50,4 +61,5 @@ model User {
     resetTokenExp   DateTime?
     name            String?
     role            String    @default("user")
+    simulations     Simulation[]
 }

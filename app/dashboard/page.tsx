@@ -4,13 +4,15 @@ import { useState } from 'react';
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import Image from 'next/image';
 import Link from 'next/link';
+import SavedSimulations from '../components/dashboard/SavedSimulations';
 import { 
   HomeIcon, 
   UserIcon, 
   CalculatorIcon, 
   ChartBarIcon,
   NewspaperIcon,
-  DocumentTextIcon
+  DocumentTextIcon,
+  BookmarkIcon
 } from '@heroicons/react/24/outline';
 
 export default function Dashboard() {
@@ -114,6 +116,15 @@ export default function Dashboard() {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Simulations sauvegardées */}
+        <div className="bg-white shadow rounded-lg mb-8 p-6 border-t-4 border-primary-600">
+          <div className="flex items-center mb-4">
+            <BookmarkIcon className="h-6 w-6 text-primary-600 mr-2" />
+            <h2 className="text-xl font-semibold text-gray-800">Simulations sauvegardées</h2>
+          </div>
+          <SavedSimulations />
         </div>
 
         {/* Documents essentiels - Section en bas */}

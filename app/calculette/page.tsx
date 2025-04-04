@@ -1,10 +1,14 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useDefaultRate } from '../hooks/useMarketRates';
+import CalculatorActions from '../components/CalculatorActions';
+import { formatNumber } from '../utils/formatters';
 
 export default function CalculetteAchat() {
+  const calculatorRef = useRef<HTMLDivElement>(null);
+  
   // Paramètres d'entrée de l'achat
   const [prixAchat, setPrixAchat] = useState<number>(300000);
   const [fraisNotaire, setFraisNotaire] = useState<number>(8);
@@ -71,11 +75,9 @@ export default function CalculetteAchat() {
   const coutTotalCredit = (mensualites.total * duree * 12) - montantEmprunt;
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <h1 className="text-2xl font-bold mb-2 text-indigo-700">Calculette de prêt immobilier</h1>
-      <p className="text-gray-600 mb-6">
-        Simulez votre capacité d'emprunt et estimez vos mensualités pour votre projet d'achat.
-      </p>
+    <div ref={calculatorRef} className="max-w-4xl mx-auto p-6">
+      <h1 className="text-3xl font-bold mb-2">Simulateur de prêt immobilier</h1>
+      <p className="text-gray-600 mb-8">Calculez votre capacité d'emprunt et simulez votre prêt immobilier en quelques clics</p>
       
       <div className="grid md:grid-cols-2 gap-8">
         <div>
@@ -194,8 +196,8 @@ export default function CalculetteAchat() {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <p className="text-sm text-gray-600">Mensualité totale</p>
-                <p className="text-2xl font-bold text-indigo-600">{mensualites.total} €</p>
-                <p className="text-xs text-gray-500">dont {mensualites.assurance} € d'assurance</p>
+                <p className="text-2xl font-bold text-indigo-600">{formatNumber(mensualites.total)} €</p>
+                <p className="text-xs text-gray-500">dont {formatNumber(mensualites.assurance)} € d'assurance</p>
               </div>
               <div>
                 <p className="text-sm text-gray-600">Taux d'endettement</p>
@@ -214,23 +216,23 @@ export default function CalculetteAchat() {
                   <tbody>
                     <tr>
                       <td className="py-1 text-gray-600">Prix d'achat</td>
-                      <td className="py-1 text-right font-medium">{prixAchat.toLocaleString()} €</td>
+                      <td className="py-1 text-right font-medium">{formatNumber(prixAchat)} €</td>
                     </tr>
                     <tr>
                       <td className="py-1 text-gray-600">Frais de notaire</td>
-                      <td className="py-1 text-right font-medium">{coutProjet.fraisNotaire.toLocaleString()} €</td>
+                      <td className="py-1 text-right font-medium">{formatNumber(coutProjet.fraisNotaire)} €</td>
                     </tr>
                     <tr>
                       <td className="py-1 text-gray-600">Frais d'agence</td>
-                      <td className="py-1 text-right font-medium">{coutProjet.fraisAgence.toLocaleString()} €</td>
+                      <td className="py-1 text-right font-medium">{formatNumber(coutProjet.fraisAgence)} €</td>
                     </tr>
                     <tr>
                       <td className="py-1 text-gray-600">Frais de dossier</td>
-                      <td className="py-1 text-right font-medium">{fraisDossier.toLocaleString()} €</td>
+                      <td className="py-1 text-right font-medium">{formatNumber(fraisDossier)} €</td>
                     </tr>
                     <tr className="border-t">
                       <td className="py-2 font-medium">Total</td>
-                      <td className="py-2 text-right font-medium">{coutProjet.totalProjet.toLocaleString()} €</td>
+                      <td className="py-2 text-right font-medium">{formatNumber(coutProjet.totalProjet)} €</td>
                     </tr>
                   </tbody>
                 </table>
@@ -242,19 +244,15 @@ export default function CalculetteAchat() {
                   <tbody>
                     <tr>
                       <td className="py-1 text-gray-600">Revenus mensuels</td>
-                      <td className="py-1 text-right font-medium">{revenusMensuels.toLocaleString()} €</td>
+                      <td className="py-1 text-right font-medium">{formatNumber(revenusMensuels)} €</td>
                     </tr>
                     <tr>
                       <td className="py-1 text-gray-600">Charges mensuelles</td>
-                      <td className="py-1 text-right font-medium">{chargesMensuelles.toLocaleString()} €</td>
+                      <td className="py-1 text-right font-medium">{formatNumber(chargesMensuelles)} €</td>
                     </tr>
                     <tr>
-                      <td className="py-1 text-gray-600">Mensualité crédit</td>
-                      <td className="py-1 text-right font-medium">{mensualites.total.toLocaleString()} €</td>
-                    </tr>
-                    <tr className="border-t">
-                      <td className="py-2 font-medium">Reste à vivre</td>
-                      <td className="py-2 text-right font-medium">{Math.round(resteAVivre).toLocaleString()} €</td>
+                      <td className="py-1 text-gray-600">Reste à vivre</td>
+                      <td className="py-1 text-right font-medium">{formatNumber(resteAVivre)} €</td>
                     </tr>
                   </tbody>
                 </table>
@@ -276,6 +274,8 @@ export default function CalculetteAchat() {
           </div>
         </div>
       </div>
+
+      <CalculatorActions calculatorType="achat" calculatorRef={calculatorRef} />
     </div>
   );
 } 

@@ -1,10 +1,13 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useDefaultRate } from '../hooks/useMarketRates';
+import CalculatorActions from '../components/CalculatorActions';
 
 export default function CalculetteLocative() {
+  const calculatorRef = useRef<HTMLDivElement>(null);
+  
   // Paramètres d'entrée de l'investissement
   const [prixAchat, setPrixAchat] = useState<number>(200000);
   const [fraisNotaire, setFraisNotaire] = useState<number>(8);
@@ -109,7 +112,7 @@ export default function CalculetteLocative() {
   const rendementNet = ((revenuLocatifAnnuel - chargesAnnuelles - mensualitePret * 12) / apport) * 100;
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
+    <div ref={calculatorRef} className="bg-white rounded-lg shadow-md p-6">
       <h1 className="text-2xl font-bold mb-2 text-indigo-700">Calculette d'investissement locatif</h1>
       <p className="text-gray-600 mb-6">
         Estimez la rentabilité et le cash-flow de votre futur investissement locatif.
@@ -455,6 +458,8 @@ export default function CalculetteLocative() {
           </div>
         </div>
       </div>
+      
+      <CalculatorActions calculatorType="locatif" calculatorRef={calculatorRef} />
     </div>
   );
 } 

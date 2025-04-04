@@ -1,9 +1,11 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Tab } from '@headlessui/react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
+import CalculatorActions from '../../components/CalculatorActions';
+import { formatNumber } from '../../utils/formatters';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -51,6 +53,7 @@ interface LoanDetails {
 }
 
 export default function LoanCalculator() {
+  const calculatorRef = useRef<HTMLDivElement>(null);
   // États pour les entrées utilisateur
   const [purchasePrice, setPurchasePrice] = useState(200000);
   const [downPayment, setDownPayment] = useState(20000);
@@ -156,7 +159,7 @@ export default function LoanCalculator() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div ref={calculatorRef} className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Simulateur de prêt immobilier</h1>
@@ -187,7 +190,7 @@ export default function LoanCalculator() {
                     className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
                   />
                   <span className="ml-2 w-24 text-sm text-gray-600">
-                    {purchasePrice.toLocaleString()}€
+                    {formatNumber(purchasePrice)} €
                   </span>
                 </div>
               </div>
@@ -208,7 +211,7 @@ export default function LoanCalculator() {
                     className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
                   />
                   <span className="ml-2 w-24 text-sm text-gray-600">
-                    {downPayment.toLocaleString()}€
+                    {formatNumber(downPayment)} €
                   </span>
                 </div>
               </div>
@@ -271,7 +274,7 @@ export default function LoanCalculator() {
                     className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
                   />
                   <span className="ml-2 w-24 text-sm text-gray-600">
-                    {monthlyIncome.toLocaleString()}€
+                    {formatNumber(monthlyIncome)}€
                   </span>
                 </div>
               </div>
@@ -304,7 +307,7 @@ export default function LoanCalculator() {
                 <div className="text-center">
                   <div className="text-sm font-medium text-gray-500">Mensualité</div>
                   <div className="mt-1 text-3xl font-semibold text-primary-600">
-                    {Math.round(loanDetails.monthlyPayment).toLocaleString()}€
+                    {formatNumber(loanDetails.monthlyPayment)} €
                   </div>
                   <div className="mt-1 text-xs text-gray-500">Assurance incluse</div>
                 </div>
@@ -320,7 +323,7 @@ export default function LoanCalculator() {
                 <div className="text-center">
                   <div className="text-sm font-medium text-gray-500">Reste à vivre</div>
                   <div className="mt-1 text-3xl font-semibold text-primary-600">
-                    {Math.round(loanDetails.remainingForLife).toLocaleString()}€
+                    {formatNumber(loanDetails.remainingForLife)}€
                   </div>
                   <div className="mt-1 text-xs text-gray-500">Par mois</div>
                 </div>
@@ -386,7 +389,7 @@ export default function LoanCalculator() {
                             {item.label}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-900">
-                            {item.value.toLocaleString()}€
+                            {formatNumber(item.value)}€
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-900">
                             {Math.round((item.value / (purchasePrice + loanDetails.notaryFees + loanDetails.totalInterest)) * 100)}%
@@ -399,20 +402,9 @@ export default function LoanCalculator() {
               )}
             </div>
 
-            {/* Actions */}
-            <div className="flex space-x-4">
-              <button className="flex items-center px-4 py-2 border border-primary-600 rounded-md text-primary-600 hover:bg-primary-50">
-                <DocumentTextIcon className="h-5 w-5 mr-2" />
-                Exporter PDF
-              </button>
-              <button className="flex items-center px-4 py-2 border border-primary-600 rounded-md text-primary-600 hover:bg-primary-50">
-                <ShareIcon className="h-5 w-5 mr-2" />
-                Partager
-              </button>
-              <button className="flex items-center px-4 py-2 border border-primary-600 rounded-md text-primary-600 hover:bg-primary-50">
-                <BookmarkIcon className="h-5 w-5 mr-2" />
-                Sauvegarder
-              </button>
+            {/* Supprimer les boutons personnalisés redondants */}
+            <div className="mt-4">
+              <CalculatorActions calculatorType="pret" calculatorRef={calculatorRef} />
             </div>
           </div>
         </div>
