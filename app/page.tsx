@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import EmailPopup from './components/EmailPopup';
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import CalculatorPopup from './components/CalculatorPopup';
 
 export default function Home() {
   const router = useRouter();
@@ -56,6 +57,7 @@ export default function Home() {
 
   return (
     <>
+      <CalculatorPopup />
       {/* Hero Section */}
       <div className="relative h-[300px] bg-gray-900">
         {/* Image de fond avec un overlay sombre */}
