@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const defaultMetadata: Metadata = {
-  metadataBase: new URL('https://immonova.fr'),
+  metadataBase: new URL('https://immonova.org'),
   title: {
     default: 'Immonova - Votre Expert Immobilier à Paris',
     template: '%s | Immonova'
@@ -19,7 +19,7 @@ export const defaultMetadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'fr_FR',
-    url: 'https://immonova.fr',
+    url: 'https://immonova.org',
     siteName: 'Immonova',
     title: 'Immonova - Votre Expert Immobilier à Paris',
     description: 'Immonova, votre expert immobilier à Paris. Estimation gratuite, accompagnement personnalisé pour l\'achat et la vente de biens immobiliers.',
@@ -51,5 +51,8 @@ export const defaultMetadata: Metadata = {
   },
   verification: {
     google: 'votre-code-de-verification-google',
+  },
+  alternates: {
+    canonical: 'https://immonova.org',
   },
 } 

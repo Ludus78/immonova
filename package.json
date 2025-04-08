@@ -4,12 +4,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "postbuild": "next-sitemap",
+    "postbuild": "next-sitemap && cp public/robots.txt out/robots.txt",
     "dev": "next dev",
     "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky"
+    "prepare": "husky",
+    "export": "next export"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
