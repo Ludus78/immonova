@@ -62,4 +62,24 @@ model User {
     name            String?
     role            String    @default("user")
     simulations     Simulation[]
+    properties      RealEstate[]
+}
+
+model RealEstate {
+  id          String    @id @default(cuid())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime? @updatedAt
+  title       String
+  description String
+  price       Float
+  location    String
+  type        String    // apartment, house, etc.
+  status      String    // for sale, sold, etc.
+  area        Float     // in square meters
+  rooms       Int
+  bedrooms    Int
+  bathrooms   Int
+  imageUrl    String?
+  ownerId     String
+  owner       User      @relation(fields: [ownerId], references: [id])
 }

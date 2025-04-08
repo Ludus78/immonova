@@ -2,11 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 import SharedLayout from "./components/SharedLayout";
 import { PostHogProvider } from "./components/PostHogProvider";
+import { defaultMetadata } from "./metadata";
 
-export const metadata: Metadata = {
-  title: "ImmoNova - Votre partenaire immobilier",
-  description: "ImmoNova vous accompagne dans tous vos projets immobiliers",
-};
+export const metadata: Metadata = defaultMetadata;
 
 export default function RootLayout({
   children,

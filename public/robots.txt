@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://immonova.fr/sitemap.xml 
