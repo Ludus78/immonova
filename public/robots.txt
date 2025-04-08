@@ -1,6 +1,8 @@
 # *
 User-agent: *
 Allow: /
+Disallow: /api/*
+Disallow: /dashboard/*
 
 # Host
 Host: https://immonova.org
