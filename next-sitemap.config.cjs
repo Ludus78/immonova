@@ -1,8 +1,9 @@
-export default {
+/** @type {import('next-sitemap').IConfig} */
+module.exports = {
     siteUrl: 'https://immonova.org',
     generateRobotsTxt: true,
     sitemapSize: 5000,
-    exclude: ['/api/*'],
+    exclude: ['/api/*', '/dashboard/*'],
     robotsTxtOptions: {
         policies: [
             {
