@@ -6,7 +6,16 @@ module.exports = {
     exclude: ['/api/*', '/dashboard/*'],
     changefreq: 'daily',
     priority: 0.7,
-    autoLastmod: true,
+    autoLastmod: false,
+    transform: (config, url) => {
+        return {
+            loc: url,
+            changefreq: config.changefreq,
+            priority: config.priority,
+            lastmod: new Date().toISOString(),
+            alternateRefs: config.alternateRefs ?? [],
+        }
+    },
     generateIndexSitemap: true,
     robotsTxtOptions: {
         policies: [
@@ -16,9 +25,7 @@ module.exports = {
                 disallow: ['/api/*', '/dashboard/*'],
             },
         ],
-        additionalSitemaps: [
-            'https://immonova.org/sitemap.xml',
-        ],
+        additionalSitemaps: [],
     },
     // Configuration pour la génération des fichiers
     outDir: 'public',
