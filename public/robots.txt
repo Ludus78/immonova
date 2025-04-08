@@ -1,3 +1,9 @@
+# *
 User-agent: *
 Allow: /
-Sitemap: https://immonova.fr/sitemap.xml 
+
+# Host
+Host: https://immonova.org
+
+# Sitemaps
+Sitemap: https://immonova.org/sitemap.xml

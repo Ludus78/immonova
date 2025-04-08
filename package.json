@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "postbuild": "next-sitemap",
     "dev": "next dev",
     "build": "prisma generate && next build",
     "start": "next start",
@@ -25,6 +26,7 @@
     "jspdf": "^3.0.1",
     "next": "^15.2.3",
     "next-auth": "^4.24.11",
+    "next-sitemap": "^4.2.3",
     "nodemailer": "^6.10.0",
     "openai": "^4.89.0",
     "posthog-js": "^1.232.6",
@@ -58,4 +60,6 @@
     "not op_mini all",
     "last 2 versions"
   ]
+  
 }
+
