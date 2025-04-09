@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "postbuild": "next-sitemap --config next-sitemap.config.cjs",
+    "postbuild": "next-sitemap --config next-sitemap.config.cjs && node scripts/fix-sitemap-dates.js",
     "dev": "next dev",
     "build": "prisma generate && next build",
     "start": "next start",

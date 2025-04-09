@@ -49,9 +49,6 @@ export const defaultMetadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: 'votre-code-de-verification-google',
-  },
   alternates: {
     canonical: 'https://immonova.org',
   },
