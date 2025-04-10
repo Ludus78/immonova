@@ -92,9 +92,9 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Calculatrices et outils */}
+        {/* Calculatrices */}
         <div className="bg-white shadow rounded-lg mb-6 p-6 border-t-4 border-primary-600">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">Calculatrices et outils</h2>
+          <h2 className="text-xl font-semibold text-gray-800 mb-4">Calculettes</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {availableTools.map((tool) => (
               <div key={tool.id} className="bg-gradient-to-br from-gray-50 to-white rounded-lg p-6 hover:shadow-lg transition-all duration-300 border border-gray-200 hover:border-primary-300 transform hover:-translate-y-1">
