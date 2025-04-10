@@ -28,8 +28,8 @@ export default function Dashboard() {
   return (
     <div className="bg-gray-50 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header du dashboard */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 bg-gradient-to-r from-primary-600 to-primary-500 p-6 rounded-lg shadow-lg text-white">
+        {/* Header du dashboard - Réduction du padding vertical */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 bg-gradient-to-r from-primary-600 to-primary-500 p-4 rounded-lg shadow-lg text-white">
           <div>
             <h1 className="text-3xl font-bold">
               Bienvenue, {user?.given_name || 'utilisateur'}
@@ -55,11 +55,12 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Actualités immobilières - Section mise en avant */}
-        <div className="bg-white shadow rounded-lg mb-8 p-6 border-t-4 border-primary-600">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">Actualités immobilières</h2>
-          <div className="flex flex-col md:flex-row items-center gap-6 mb-4">
-            <div className="w-full md:w-1/3 h-64 relative rounded-lg overflow-hidden shadow-md">
+        {/* Actualités immobilières - Réduction de la marge inférieure, padding, hauteur image et gaps */}
+        <div className="bg-white shadow rounded-lg mb-6 p-4 border-t-4 border-primary-600">
+          <h2 className="text-xl font-semibold text-gray-800 mb-2">Actualités immobilières</h2>
+          <div className="flex flex-col md:flex-row items-center gap-4 mb-2">
+            {/* Image Section - Hauteur réduite davantage */}
+            <div className="w-full md:w-1/3 h-32 relative rounded-lg overflow-hidden shadow-md">
               <Image 
                 src="/images/news-prices.svg" 
                 alt="Tendances des prix" 
@@ -68,22 +69,22 @@ export default function Dashboard() {
                 className="transform hover:scale-105 transition-transform duration-300"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
-                <div className="p-4 text-white">
-                  <h3 className="font-bold text-lg">Marché immobilier 2025</h3>
-                  <p className="text-sm">Une baisse des prix qui s'atténue</p>
+                <div className="p-3 text-white">
+                  <h3 className="font-bold text-md">Marché immobilier 2025</h3>
+                  <p className="text-xs">Une baisse des prix qui s'atténue</p>
                 </div>
               </div>
             </div>
-            <div className="w-full md:w-2/3 flex flex-col gap-4">
-              <p className="text-gray-700">
+            <div className="w-full md:w-2/3 flex flex-col gap-3">
+              <p className="text-gray-600 text-sm">
                 Restez informé des dernières tendances du marché immobilier avec nos analyses détaillées. Nos experts décryptent pour vous l'évolution des prix, les nouvelles mesures gouvernementales et les prévisions du secteur.
               </p>
               <Link
                 href="/actualites"
-                className="inline-flex items-center self-start px-6 py-3 text-sm font-medium text-white bg-primary-600 rounded-md shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+                className="inline-flex items-center self-start px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-md shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
               >
                 Consulter les actualités
-                <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </Link>
@@ -92,7 +93,7 @@ export default function Dashboard() {
         </div>
 
         {/* Calculatrices et outils */}
-        <div className="bg-white shadow rounded-lg mb-8 p-6 border-t-4 border-primary-600">
+        <div className="bg-white shadow rounded-lg mb-6 p-6 border-t-4 border-primary-600">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">Calculatrices et outils</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {availableTools.map((tool) => (
@@ -119,7 +120,7 @@ export default function Dashboard() {
         </div>
 
         {/* Simulations sauvegardées */}
-        <div className="bg-white shadow rounded-lg mb-8 p-6 border-t-4 border-primary-600">
+        <div className="bg-white shadow rounded-lg mb-6 p-6 border-t-4 border-primary-600">
           <div className="flex items-center mb-4">
             <BookmarkIcon className="h-6 w-6 text-primary-600 mr-2" />
             <h2 className="text-xl font-semibold text-gray-800">Simulations sauvegardées</h2>
